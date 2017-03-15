@@ -108,6 +108,11 @@ function createHtml() {
         .pipe(browserSync.stream());
 }
 
+function images() {
+    return gulp.src(['src/img/**/*','src/img/*'])
+        .pipe(gulp.dest('dist/img'));
+}
+
 gulp.task('html', function () {
     createHtml();
 });
@@ -116,7 +121,11 @@ gulp.task('styles', ['html'], function () {
     return stylusCompile();
 });
 
-gulp.task('vendor', ['styles'], function () {
+gulp.task('images', ['styles'], function () {
+    return images();
+});
+
+gulp.task('vendor', ['images'], function () {
     return vendor();
 });
 
@@ -153,8 +162,9 @@ gulp.task('default', ['browserSync'], function () {
     });
 
     gulp.watch([
-        './src/css/*.**'
+        './src/img/**/*'
     ], function () {
-        styles();
+        images();
     });
+
 });

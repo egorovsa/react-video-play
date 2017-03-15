@@ -4,8 +4,10 @@ export interface Props {
     played: boolean,
     duration: number,
     currentTime: number,
-    playStop: (adv?) => void,
-    changeCurrentTime: (value: number) => void
+    mute: boolean,
+    handlerPlayStop: (adv?) => void,
+    handlerChangeCurrentTime: (value: number) => void,
+    handlerToggleSound: () => void
 }
 
 export interface State {
@@ -21,12 +23,8 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 
     }
 
-    private handlerSeekBarChange = (e): void => {
-        this.props.changeCurrentTime(e.target.value);
-    };
-
-    private handlerPlayPause = (): void => {
-        this.props.playStop();
+    private handlerChangeSeekBar = (e): void => {
+        this.props.handlerChangeCurrentTime(e.target.value);
     };
 
     private drawSeekBar(): JSX.Element {
@@ -38,7 +36,31 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
                     max={this.props.duration}
                     step="0.1"
                     value={this.props.currentTime}
-                    onChange={this.handlerSeekBarChange}
+                    onChange={this.handlerChangeSeekBar}
+                />
+            </div>
+        )
+    }
+
+    private drawSoundsIcon(): JSX.Element {
+        return (
+            <div
+                className={this.props.mute ? "sound-icon mute" :"sound-icon" }
+                onClick={this.props.handlerToggleSound}
+            />
+        )
+    }
+
+    private drawSoundBar(): JSX.Element {
+        return (
+            <div className="sound-range">
+                <input
+                    type="range"
+                    min="0"
+                    max={this.props.duration}
+                    step="0.1"
+                    value={this.props.currentTime}
+                    onChange={this.handlerChangeSeekBar}
                 />
             </div>
         )
@@ -46,9 +68,10 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 
     private drawPlayPause(): JSX.Element {
         return (
-            <div className="play-pause-block">
-                <button onClick={this.handlerPlayPause} className={this.props.played? 'played':''}>1</button>
-            </div>
+            <div
+                onClick={this.props.handlerPlayStop}
+                className={this.props.played? 'play-pause-block':'play-pause-block played'}
+            />
         );
     }
 
@@ -57,6 +80,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
             <div className="ui-video-player-controls">
                 {this.drawPlayPause()}
                 {this.drawSeekBar()}
+                {this.drawSoundsIcon()}
             </div>
         );
     }

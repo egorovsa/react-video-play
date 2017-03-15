@@ -1,6 +1,6 @@
-@import "./ui-input-range.styl"
+$controls-height = 25px
 
-$controls-height = 30px
+@import "./ui-input-range.styl"
 
 .ui-video-player-component
 	box-shadow 1px 1px 25px rgba(255, 0, 0, 0.08)
@@ -11,21 +11,69 @@ $controls-height = 30px
 		position absolute
 		width 100%
 		height $controls-height
-		bottom 0px
+		bottom 4px
 		left 0
 		box-sizing border-box
-		padding 0 15px
+		padding 0 15px 0 0px
 
 		.play-pause-block
 			width $controls-height
 			float left
 			display inline-block
+			cursor pointer
+			position relative
+			height 100%
+			text-align center
+
+			&:before
+				content: '';
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				background-size: 24px;
+				background-repeat: no-repeat;
+				background-position center
+				left 0
+				top 0
+				background-image: url(/img/play.svg);
+
+			&.played
+				&:before
+					background-image: url(/img/pause.svg);
+					background-size 10px
 
 		.seek-block
 			width calc(80% - 30px)
+			float left
 			display inline-block
+			box-sizing border-box
+			padding-right 5px
 
-		.sounds-block
+		.sound-icon
+			width 30px
+			height 100%
+			float left
+			display inline-block
+			position relative
+			cursor pointer
+
+			&:before
+				content: '';
+				width: 100%;
+				height: 100%;
+				left 0
+				top 0
+				position: absolute;
+				background-size: 15px;
+				background-repeat: no-repeat;
+				background-position center
+				background-image: url(/img/sound.svg);
+
+			&.mute
+				&.before
+					background-image: url(/img/mute.svg);
+
+		.sound-range
 			width calc(20% - 30px)
 
 		.fullscreen-block

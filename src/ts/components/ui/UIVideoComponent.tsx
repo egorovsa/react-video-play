@@ -40,7 +40,9 @@ export class UIVideoComponent extends React.Component<Props, State> {
     static defaultProps: Props = {} as Props;
 
     private player: HTMLVideoElement;
-    private playerContainer;
+    private playerContainer: HTMLDivElement;
+    private interval: any = null;
+
 
     componentDidMount() {
         this.events();
@@ -48,8 +50,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
     private events(): void {
         if (this.player) {
-            this.player.addEventListener('playing', () => {
-                setInterval(() => {
+            this.player.addEventListener('play', () => {
+                this.interval = setInterval(() => {
                     this.setState({
                         currentTime: +this.player.currentTime
                     } as State);
@@ -105,6 +107,15 @@ export class UIVideoComponent extends React.Component<Props, State> {
         )
     }
 
+    private handlerSoundsToggler = (): void => {
+        console.log('handlerSoundsToggler');
+        if (this.player.muted) {
+            this.player.muted = false;
+        } else {
+            this.player.muted = true;
+        }
+    };
+
     private handlerPlayStop = (adv?): void => {
         if (this.player.paused) {
             this.player.play();
@@ -116,6 +127,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
             }
         } else {
             this.player.pause();
+
+            clearInterval(this.interval);
 
             if (adv) {
                 this.setState({
@@ -149,10 +162,12 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
                 <UIVideoControlsComponent
                     played={this.player? this.player.paused : true}
+                    mute={this.player? this.player.muted:true}
                     duration={this.state.duration}
                     currentTime={this.state.currentTime}
-                    playStop={this.handlerPlayStop}
-                    changeCurrentTime={this.handlerSeekBarChange}
+                    handlerPlayStop={this.handlerPlayStop}
+                    handlerChangeCurrentTime={this.handlerSeekBarChange}
+                    handlerToggleSound={this.handlerSoundsToggler}
                 />
             </div>
         );
