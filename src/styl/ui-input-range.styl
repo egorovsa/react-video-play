@@ -1,4 +1,6 @@
-$track-color = #ff0000
+$track-color = #000
+
+
 $thumb-color = #000
 
 $thumb-radius = 12px
@@ -11,7 +13,7 @@ $thumb-border-width = 2px
 $thumb-border-color = #f1d500
 
 $track-width = 100%
-$track-height = 8px
+$track-height = 4px
 $track-shadow-size = 1px
 $track-shadow-blur = 1px
 $track-shadow-color = rgba(0, 0, 0, .2)
@@ -41,6 +43,8 @@ thumb()
 	width $thumb-width
 
 .ui-video-player-controls
+	width 100%
+
 	input[type='range']
 		-webkit-appearance none
 		margin ($thumb-height / 2) 0
@@ -60,15 +64,15 @@ thumb()
 
 		&::-webkit-slider-runnable-track
 			track()
-			shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color)
+			//shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color)
 			background $track-color
 			border $track-border-width solid $track-border-color
 			border-radius $track-radius
 
 		&::-webkit-slider-thumb
-			thumb()
-			-webkit-appearance none
-			margin-top -5px
+			//thumb()
+			//-webkit-appearance none
+			margin-top -7px
 			//margin-top (-$track-border-width * 2 + $track-height) / 2 - ($thumb-height / 2)
 
 		&::-moz-range-track

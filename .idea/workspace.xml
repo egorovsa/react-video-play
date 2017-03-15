@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2d3434d-ae22-42c7-ab04-379beaec8f5b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styl/style.styl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styl/ui-html5-video.styl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styl/ui-input-range.styl" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/css/style.css" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ts/components/ui/UIVideoControlsComponent.tsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/components/layouts/main-layout.tsx" afterPath="$PROJECT_DIR$/src/ts/components/layouts/main-layout.tsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styl/ui-html5-video.styl" afterPath="$PROJECT_DIR$/src/styl/ui-html5-video.styl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styl/ui-input-range.styl" afterPath="$PROJECT_DIR$/src/styl/ui-input-range.styl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx" afterPath="$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,8 +27,8 @@
       <file leaf-file-name="ui-html5-video.styl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/styl/ui-html5-video.styl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+            <state relative-caret-position="324">
+              <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -42,8 +37,20 @@
       <file leaf-file-name="UIVideoComponent.tsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="120" column="39" lean-forward="true" selection-start-line="120" selection-start-column="39" selection-end-line="120" selection-end-column="39" />
+            <state relative-caret-position="1453">
+              <caret line="155" column="16" lean-forward="false" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UIVideoControlsComponent.tsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ts/components/ui/UIVideoControlsComponent.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -52,8 +59,8 @@
       <file leaf-file-name="ui-input-range.styl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/styl/ui-input-range.styl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="86">
+              <caret line="74" column="25" lean-forward="false" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -124,6 +131,8 @@
       <find>router</find>
       <find>drawSeekBar</find>
       <find>!default</find>
+      <find>$track-color</find>
+      <find>set</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -160,8 +169,9 @@
         <option value="$PROJECT_DIR$/src/css/style.css" />
         <option value="$PROJECT_DIR$/src/styl/style.styl" />
         <option value="$PROJECT_DIR$/src/ts/components/layouts/main-layout.tsx" />
-        <option value="$PROJECT_DIR$/src/styl/ui-input-range.styl" />
         <option value="$PROJECT_DIR$/src/styl/ui-html5-video.styl" />
+        <option value="$PROJECT_DIR$/src/styl/ui-input-range.styl" />
+        <option value="$PROJECT_DIR$/src/ts/components/ui/UIVideoControlsComponent.tsx" />
         <option value="$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx" />
       </list>
     </option>
@@ -349,8 +359,8 @@
       <recent name="$PROJECT_DIR$/src/ts/components/layouts" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/styl" />
       <recent name="$PROJECT_DIR$/src/ts/components/ui" />
+      <recent name="$PROJECT_DIR$/src/styl" />
       <recent name="$PROJECT_DIR$/src/ts/components/common" />
       <recent name="$PROJECT_DIR$/src/ts/components/pages" />
       <recent name="$PROJECT_DIR$/src/ts/components/layouts" />
@@ -431,7 +441,7 @@
       <workItem from="1484034565682" duration="2493000" />
       <workItem from="1485199037453" duration="382000" />
       <workItem from="1489556822939" duration="3465000" />
-      <workItem from="1489570203076" duration="8144000" />
+      <workItem from="1489570203076" duration="10743000" />
     </task>
     <task id="LOCAL-00001" summary="remove old css">
       <created>1489566603290</created>
@@ -440,11 +450,18 @@
       <option name="project" value="LOCAL" />
       <updated>1489566603295</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="stylus&#10;seek bar init">
+      <created>1489581568785</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1489581568785</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39638000" />
+    <option name="totallyTimeSpent" value="42237000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -477,14 +494,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="remove old css" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove old css" />
+    <MESSAGE value="stylus&#10;seek bar init" />
+    <option name="LAST_COMMIT_MESSAGE" value="stylus&#10;seek bar init" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ts/components/pages/main-page-component.tsx" />
     <entry file="file://$PROJECT_DIR$/src/ts/app.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -511,7 +528,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -623,7 +642,7 @@
         <state relative-caret-position="360">
           <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -636,27 +655,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/styl/ui-html5-video.styl">
+    <entry file="file://$PROJECT_DIR$/src/styl/ui-input-range.styl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+        <state relative-caret-position="86">
+          <caret line="74" column="25" lean-forward="false" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/styl/ui-input-range.styl">
+    <entry file="file://$PROJECT_DIR$/src/styl/ui-html5-video.styl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="324">
+          <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/components/ui/UIVideoControlsComponent.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="120" column="39" lean-forward="true" selection-start-line="120" selection-start-column="39" selection-end-line="120" selection-end-column="39" />
-          <folding />
+        <state relative-caret-position="1453">
+          <caret line="155" column="16" lean-forward="false" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
