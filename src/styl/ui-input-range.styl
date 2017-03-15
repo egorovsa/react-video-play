@@ -13,7 +13,7 @@ $thumb-border-width = 2px
 $thumb-border-color = #f1d500
 
 $track-width = 100%
-$track-height = 8px
+
 $track-shadow-size = 1px
 $track-shadow-blur = 1px
 $track-shadow-color = rgba(0, 0, 0, .2)
@@ -32,6 +32,7 @@ track()
 	height $track-height
 	transition all .2s ease
 	width $track-width
+
 
 thumb()
 	shadow($thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color)
@@ -64,7 +65,8 @@ thumb()
 
 		&::-webkit-slider-runnable-track
 			track()
-			//shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color)
+			border-radius 15px
+			shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color)
 			background $track-color
 			//border $track-border-width solid $track-border-color
 			//border-radius $track-radius

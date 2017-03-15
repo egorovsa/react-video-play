@@ -1,6 +1,2 @@
 <?xml version="1.0" ?>
-<svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
-    <path d="M-838-2232H562v3600H-838z" fill="none"/>
-    <path d="M16 10v28l22-14z"/>
-    <path d="M0 0h48v48H0z" fill="none"/>
-</svg>
+<svg fill="#ffffff" height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M128,96v320l256-160L128,96L128,96z"/></g></svg>

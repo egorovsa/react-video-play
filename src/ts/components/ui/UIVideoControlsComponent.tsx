@@ -2,30 +2,74 @@ import * as React from 'react';
 
 export interface Props {
     played: boolean,
+    hide: boolean,
+    mute: boolean,
     duration: number,
     currentTime: number,
-    mute: boolean,
+    progressStartPercent: number,
+    progressEndPercent: number,
     handlerPlayStop: (adv?) => void,
     handlerChangeCurrentTime: (value: number) => void,
-    handlerToggleSound: () => void
+    handlerToggleSound: () => void,
 }
 
 export interface State {
-
+    seekWidth: number
 }
 
 export class UIVideoControlsComponent extends React.Component<Props, State> {
-    state: State = {};
+    state: State = {
+        seekWidth: 0
+    };
 
     static defaultProps: Props = {} as Props;
 
-    componentDidMount() {
+    private seekRange: HTMLInputElement;
 
+    componentDidMount() {
+        this.handlerWindowResize();
+
+        window.addEventListener('resize', this.handlerWindowResize);
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handlerWindowResize);
+    }
+
+    private handlerWindowResize = (): void => {
+        if (this.seekRange) {
+            this.setState({
+                seekWidth: this.seekRange.offsetWidth | this.seekRange.clientWidth
+            } as State);
+        }
+    };
 
     private handlerChangeSeekBar = (e): void => {
         this.props.handlerChangeCurrentTime(e.target.value);
     };
+
+    private drawBufferLine(): JSX.Element {
+        let timeEnd: number = this.props.progressEndPercent;
+        let curTimePercent: number = (this.props.currentTime / this.props.duration) * 100;
+
+        if (timeEnd < curTimePercent) {
+            timeEnd = curTimePercent;
+        }
+
+        let left: number = (this.state.seekWidth / 100) * this.props.progressStartPercent;
+        let right: number = (this.state.seekWidth / 100) * timeEnd;
+        let width: number = right - left;
+
+        return (
+            <div
+                className="seek-block-buffer"
+                style={{
+                    width: width,
+                    left:left
+                }}
+            />
+        )
+    }
 
     private drawSeekBar(): JSX.Element {
         return (
@@ -37,7 +81,10 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
                     step="0.1"
                     value={this.props.currentTime}
                     onChange={this.handlerChangeSeekBar}
+                    ref={(ref:HTMLInputElement)=>{this.seekRange = ref}}
                 />
+
+                {this.drawBufferLine()}
             </div>
         )
     }
@@ -77,7 +124,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 
     public render() {
         return (
-            <div className="ui-video-player-controls">
+            <div className={this.props.hide? "ui-video-player-controls hide":"ui-video-player-controls"}>
                 {this.drawPlayPause()}
                 {this.drawSeekBar()}
                 {this.drawSoundsIcon()}

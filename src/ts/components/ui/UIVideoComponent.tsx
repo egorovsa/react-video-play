@@ -26,7 +26,10 @@ export interface State {
     adv: boolean,
     currentVolume: number,
     duration: number,
-    currentTime: number
+    currentTime: number,
+    progressStartPercent: number,
+    progressEndPercent: number,
+    hideControls: boolean
 }
 
 export class UIVideoComponent extends React.Component<Props, State> {
@@ -34,7 +37,10 @@ export class UIVideoComponent extends React.Component<Props, State> {
         adv: false,
         currentVolume: 0,
         duration: 0,
-        currentTime: 0
+        currentTime: 0,
+        progressStartPercent: 0,
+        progressEndPercent: 0,
+        hideControls: true
     };
 
     static defaultProps: Props = {} as Props;
@@ -46,7 +52,29 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
     componentDidMount() {
         this.events();
+
+        if (this.playerContainer) {
+            this.playerContainer.addEventListener('mousemove', this.handlerMouseMode);
+            this.playerContainer.addEventListener('mouseout', this.handlerMouseLeave);
+        }
     }
+
+    componentWillUnmount() {
+        this.playerContainer.removeEventListener('mousemove', this.handlerMouseMode);
+        this.playerContainer.removeEventListener('mouseout', this.handlerMouseLeave);
+    }
+
+    private handlerMouseMode = (): void => {
+        this.setState({
+            hideControls: false
+        } as State);
+    };
+
+    private handlerMouseLeave = (): void => {
+        this.setState({
+            hideControls: true
+        } as State);
+    };
 
     private events(): void {
         if (this.player) {
@@ -63,6 +91,27 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     duration: this.player.duration
                 } as State);
             });
+            
+            this.player.addEventListener("progress", () => {
+                let currentTime: number = this.player.currentTime;
+                let buffer: TimeRanges = this.player.buffered;
+
+                if (buffer.length > 0 && this.state.duration > 0) {
+                    let currentBuffer: number = 0;
+
+                    for (let i = 0; i < buffer.length; i++) {
+                        if (buffer.start(i) <= currentTime && currentTime <= buffer.end(i)) {
+                            currentBuffer = i;
+                            break;
+                        }
+                    }
+
+                    this.setState({
+                        progressStartPercent: (buffer.start(currentBuffer) / this.state.duration) * 100,
+                        progressEndPercent: (buffer.end(currentBuffer) / this.state.duration) * 100
+                    } as State);
+                }
+            }, false);
         }
     }
 
@@ -108,7 +157,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
     }
 
     private handlerSoundsToggler = (): void => {
-        console.log('handlerSoundsToggler');
         if (this.player.muted) {
             this.player.muted = false;
         } else {
@@ -168,6 +216,9 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     handlerPlayStop={this.handlerPlayStop}
                     handlerChangeCurrentTime={this.handlerSeekBarChange}
                     handlerToggleSound={this.handlerSoundsToggler}
+                    progressStartPercent={this.state.progressStartPercent}
+                    progressEndPercent={this.state.progressEndPercent}
+                    hide={this.state.hideControls}
                 />
             </div>
         );
