@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c2d3434d-ae22-42c7-ab04-379beaec8f5b" name="Default" comment="" />
+    <list default="true" id="c2d3434d-ae22-42c7-ab04-379beaec8f5b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -21,8 +23,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+            <state relative-caret-position="18">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -31,8 +33,8 @@
       <file leaf-file-name="main-layout.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/components/layouts/main-layout.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="24" column="29" lean-forward="false" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+            <state relative-caret-position="360">
+              <caret line="20" column="11" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -40,20 +42,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="30" lean-forward="false" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+            <state relative-caret-position="36">
+              <caret line="2" column="1" lean-forward="false" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UIVideoComponent.tsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UIVideoComponent.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="1188">
               <caret line="66" column="13" lean-forward="false" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
               <folding />
             </state>
@@ -150,10 +152,10 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/ts/app.ts" />
-        <option value="$PROJECT_DIR$/src/css/style.css" />
         <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/ts/components/layouts/main-layout.tsx" />
         <option value="$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx" />
+        <option value="$PROJECT_DIR$/src/css/style.css" />
       </list>
     </option>
   </component>
@@ -409,12 +411,20 @@
       <workItem from="1483724832407" duration="25154000" />
       <workItem from="1484034565682" duration="2493000" />
       <workItem from="1485199037453" duration="382000" />
-      <workItem from="1489556822939" duration="3178000" />
+      <workItem from="1489556822939" duration="3465000" />
     </task>
+    <task id="LOCAL-00001" summary="remove old css">
+      <created>1489566603290</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1489566603295</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31207000" />
+    <option name="totallyTimeSpent" value="31494000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1600" height="900" extended-state="0" />
@@ -444,6 +454,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="remove old css" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove old css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -750,18 +764,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="30" lean-forward="false" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -796,8 +802,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ts/components/layouts/main-layout.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="24" column="29" lean-forward="false" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+        <state relative-caret-position="360">
+          <caret line="20" column="11" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -806,8 +812,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
+        <state relative-caret-position="1188">
           <caret line="66" column="13" lean-forward="false" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="1" lean-forward="false" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
           <folding />
         </state>
       </provider>
