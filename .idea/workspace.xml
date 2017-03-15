@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2d3434d-ae22-42c7-ab04-379beaec8f5b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/typescript-compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/mute.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/pause.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/play.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/sound.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ts/components/img/mute.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ts/components/img/play.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ts/components/img/sound.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styl/ui-html5-video.styl" afterPath="$PROJECT_DIR$/src/styl/ui-html5-video.styl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styl/ui-input-range.styl" afterPath="$PROJECT_DIR$/src/styl/ui-input-range.styl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx" afterPath="$PROJECT_DIR$/src/ts/components/ui/UIVideoComponent.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ts/components/ui/UIVideoControlsComponent.tsx" afterPath="$PROJECT_DIR$/src/ts/components/ui/UIVideoControlsComponent.tsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -403,7 +390,7 @@
       <workItem from="1484034565682" duration="2493000" />
       <workItem from="1485199037453" duration="382000" />
       <workItem from="1489556822939" duration="3465000" />
-      <workItem from="1489570203076" duration="17325000" />
+      <workItem from="1489570203076" duration="17381000" />
     </task>
     <task id="LOCAL-00001" summary="remove old css">
       <created>1489566603290</created>
@@ -426,11 +413,18 @@
       <option name="project" value="LOCAL" />
       <updated>1489584328897</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="sounds init">
+      <created>1489593262149</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1489593262149</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48819000" />
+    <option name="totallyTimeSpent" value="48875000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -477,7 +471,8 @@
     <MESSAGE value="remove old css" />
     <MESSAGE value="stylus&#10;seek bar init" />
     <MESSAGE value="upd" />
-    <option name="LAST_COMMIT_MESSAGE" value="upd" />
+    <MESSAGE value="sounds init" />
+    <option name="LAST_COMMIT_MESSAGE" value="sounds init" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
