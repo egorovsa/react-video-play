@@ -1,0 +1,91 @@
+body {
+    background-color: #242c3e;
+}
+
+header {
+    background: #A31E39;
+    color: #fff;
+    font-size: 25px;
+    overflow: hidden;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.content {
+    padding: 15px;
+    box-sizing: border-box;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+nav {
+    background: #003366;
+    overflow: hidden;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+nav section {
+    font-size: 14px;
+    float: left;
+    margin: 15px 15px 0 0;
+    background: #485C5A;
+    padding: 15px;
+}
+
+nav section a {
+    display: inline-block;
+    background: #D6E4E1;
+    padding: 5px 15px;
+    color: #000;
+    margin-right: 5px;
+}
+
+nav section a:last-child {
+    margin-right: 0;
+}
+
+footer {
+    background: #485C5A;
+    color: #fff;
+    font-size: 18px;
+    height: 100px;
+    padding: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.second.content {
+    background: #999;
+}
+
+.main-layout {
+    background: #B7AFA3;
+    padding: 5px;
+}
+
+.second-layout {
+    background: #6D929B;
+    padding: 20px;
+}
+
+.component-name {
+    background: #333;
+    color: #fff;
+    padding: 10px 15px;
+    display: inline-block;
+    font-size: 12px;
+    margin: 5px 0 ;
+}
+
+.component-name::before {
+    content: 'Component name: ';
+    color: #ddd;
+}
+
+.ui-simple{
+    background: #ddd;
+    padding: 15px;
+    box-sizing: border-box;
+}
