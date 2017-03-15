@@ -1,0 +1,34 @@
+@import "./ui-input-range.styl"
+
+$controls-height = 30px
+
+.ui-video-player-component
+	box-shadow 1px 1px 25px rgba(255, 0, 0, 0.08)
+	position relative
+
+	.ui-video-player-controls
+		background-color rgba(0, 0, 0, 0.7)
+		position absolute
+		width 100%
+		height $controls-height
+		bottom 0px
+		left 0
+		box-sizing border-box
+		padding 0 15px
+
+		.play-block
+			width $controls-height
+			float left
+			display inline-block
+
+		.seek-block
+			width calc(80% - 30px)
+			display inline-block
+
+		.sounds-block
+			width calc(20% - 30px)
+
+		.fullscreen-block
+			width 30px
+
+

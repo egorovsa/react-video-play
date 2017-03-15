@@ -11,13 +11,15 @@ const exorcist = require('exorcist');
 const source = require('vinyl-source-stream');
 const notify = require('gulp-notify');
 const buffer = require('vinyl-buffer');
+const stylus = require('gulp-stylus');
+const sourcemaps = require('gulp-sourcemaps');
+const plumber = require('gulp-plumber');
 
 const expressPort = 3000;
 
 const vendorArray = [
     'react',
     'react-dom',
-    'react-router'
 ];
 
 function handleTSErrors() {
@@ -42,6 +44,16 @@ function startExpress(port) {
     });
 
     server.listen(port);
+}
+
+function stylusCompile() {
+    return gulp.src('src/styl/style.styl')
+        .pipe(plumber())
+        .pipe(sourcemaps.init())
+        .pipe(stylus())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/css'))
+        .pipe(browserSync.stream());
 }
 
 function browserSyncInit() {
@@ -96,19 +108,12 @@ function createHtml() {
         .pipe(browserSync.stream());
 }
 
-function styles() {
-    return gulp.src('src/css/style.css')
-        .pipe(gulp.dest('dist/css'))
-        .pipe(browserSync.stream());
-}
-
-
 gulp.task('html', function () {
     createHtml();
 });
 
 gulp.task('styles', ['html'], function () {
-    styles();
+    return stylusCompile();
 });
 
 gulp.task('vendor', ['styles'], function () {
@@ -135,6 +140,11 @@ gulp.task('default', ['browserSync'], function () {
         bundle();
     });
 
+    gulp.watch([
+        './src/styl/**/*.styl'
+    ], function () {
+        stylusCompile();
+    });
 
     gulp.watch([
         './src/index.html'

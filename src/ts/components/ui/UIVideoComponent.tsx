@@ -22,15 +22,63 @@ export interface Props {
 }
 
 export interface State {
+    fullScreen: boolean,
+    currentSeek: number,
+    currentVolume: number,
+    duration: number,
+    currentTime: number
 }
 
 export class UIVideoComponent extends React.Component<Props, State> {
-    static state: State = {} as State;
+    state: State = {
+        fullScreen: false,
+        currentSeek: 0,
+        currentVolume: 0,
+        duration: 0,
+        currentTime: 0
+    };
 
     static defaultProps: Props = {} as Props;
 
-    private player;
+    private player: HTMLVideoElement;
     private playerContainer;
+
+    componentDidMount() {
+        this.events();
+        this.initControls();
+    }
+
+
+    private events(): void {
+
+        if (this.player) {
+            this.player.addEventListener('playing', () => {
+                setInterval(() => {
+                    this.setState({
+                        currentTime: +this.player.currentTime
+                    } as State);
+                }, 100);
+            });
+
+            this.player.addEventListener('loadeddata', () => {
+                this.setState({
+                    duration: this.player.duration
+                } as State);
+            });
+        }
+
+    }
+
+    private initControls(): void {
+        if (this.player) {
+            this.initFullScreen();
+        }
+    }
+
+    private initFullScreen(): void {
+
+    }
+
 
     private getVideoType(source: VideoSource): string {
         let videoType: string = "video/mp4;";
@@ -57,24 +105,70 @@ export class UIVideoComponent extends React.Component<Props, State> {
         });
     }
 
+    private drawControls(): JSX.Element {
+        return (
+            <div className="ui-video-player-controls">
+                <div className="play-block">&nbsp;</div>
+                {this.drawSeekBar()}
+            </div>
+        )
+    }
+
+    private seekBarChangeHandler = (e): void => {
+        this.player.currentTime = e.target.value;
+
+        this.setState({
+            currentTime: e.target.value
+        } as State);
+    };
+
+    private drawSeekBar(): JSX.Element {
+        return (
+            <div className="seek-block">
+                <input
+                    type="range"
+                    min="0"
+                    max={this.state.duration}
+                    step="0.1"
+                    value={this.state.currentTime}
+                    onChange={this.seekBarChangeHandler}
+                />
+            </div>
+        )
+    }
+
+    private clickPlayStopHandler = (): void => {
+        if (this.player.paused) {
+            this.player.play();
+        } else {
+            this.player.pause();
+        }
+    };
+
+
     public render() {
         return (
             <div
                 className="ui-video-player-component"
+                style={{
+                    width: this.props.width+'px'
+                }}
                 ref={(playerContainer)=>{
                     this.playerContainer = playerContainer;
                 }}
             >
                 <video
-                    width={this.props.width}
+                    width="100%"
                     height={this.props.height?this.props.height:''}
-                    controls
                     ref={(player)=>{
                         this.player = player;
                     }}
+                    onClick={this.clickPlayStopHandler}
                 >
                     {this.getSources()}
                 </video>
+
+                {this.drawControls()}
             </div>
         );
     }
