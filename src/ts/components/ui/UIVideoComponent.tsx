@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
+import {setTimeout} from "timers";
 
 export enum VideoSourceType{
     video_mp4,
@@ -23,24 +24,26 @@ export interface Props {
 }
 
 export interface State {
-    adv: boolean,
     currentVolume: number,
     duration: number,
     currentTime: number,
     progressStartPercent: number,
     progressEndPercent: number,
-    hideControls: boolean
+    adv: boolean,
+    hideControls: boolean,
+    muted: boolean,
 }
 
 export class UIVideoComponent extends React.Component<Props, State> {
     state: State = {
-        adv: false,
         currentVolume: 0,
         duration: 0,
         currentTime: 0,
         progressStartPercent: 0,
         progressEndPercent: 0,
-        hideControls: true
+        adv: false,
+        hideControls: false,
+        muted: false
     };
 
     static defaultProps: Props = {} as Props;
@@ -48,32 +51,41 @@ export class UIVideoComponent extends React.Component<Props, State> {
     private player: HTMLVideoElement;
     private playerContainer: HTMLDivElement;
     private interval: any = null;
+    private hiderTimeout: any = null;
 
 
     componentDidMount() {
         this.events();
 
         if (this.playerContainer) {
-            this.playerContainer.addEventListener('mousemove', this.handlerMouseMode);
-            this.playerContainer.addEventListener('mouseout', this.handlerMouseLeave);
+            this.playerContainer.addEventListener('mouseenter', this.handlerMouseEnter);
+            this.playerContainer.addEventListener('mouseleave', this.handlerMouseLeave);
+            // this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
         }
     }
 
     componentWillUnmount() {
-        this.playerContainer.removeEventListener('mousemove', this.handlerMouseMode);
-        this.playerContainer.removeEventListener('mouseout', this.handlerMouseLeave);
+        this.playerContainer.removeEventListener('mouseenter', this.handlerMouseEnter);
+        this.playerContainer.removeEventListener('mouseleave', this.handlerMouseLeave);
+        // this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
     }
 
-    private handlerMouseMode = (): void => {
+    private handlerMouseMove = (): void => {
+        console.log('move');
+    };
+
+    private handlerMouseEnter = (): void => {
         this.setState({
             hideControls: false
         } as State);
     };
 
-    private handlerMouseLeave = (): void => {
-        this.setState({
-            hideControls: true
-        } as State);
+    private handlerMouseLeave = (event): void => {
+        if (!this.player.paused) {
+            this.setState({
+                hideControls: true
+            } as State);
+        }
     };
 
     private events(): void {
@@ -91,7 +103,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     duration: this.player.duration
                 } as State);
             });
-            
+
             this.player.addEventListener("progress", () => {
                 let currentTime: number = this.player.currentTime;
                 let buffer: TimeRanges = this.player.buffered;
@@ -159,8 +171,16 @@ export class UIVideoComponent extends React.Component<Props, State> {
     private handlerSoundsToggler = (): void => {
         if (this.player.muted) {
             this.player.muted = false;
+
+            this.setState({
+                muted: false
+            } as State);
         } else {
             this.player.muted = true;
+
+            this.setState({
+                muted: true
+            } as State);
         }
     };
 
@@ -206,6 +226,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     onClick={this.handlerPlayStop}
                 >
                     {this.getSources()}
+
                 </video>
 
                 <UIVideoControlsComponent

@@ -8,16 +8,18 @@ $track-height = 8px
 	position relative
 	overflow: hidden
 
+
 	.ui-video-player-controls
 		transition bottom .7s ease
 		background-color rgba(0, 0, 0, 0.7)
 		position absolute
 		width 100%
 		height $controls-height
-		bottom 4px
+		bottom 0px
 		left 0
 		box-sizing border-box
 		padding 0 15px 0 0px
+
 
 		&.hide
 			bottom - $controls-height + 4px
@@ -89,7 +91,6 @@ $track-height = 8px
 			&.mute
 				&:before
 					background-image: url(/img/mute.svg);
-					background-size: 9px;
 					background-position-x: 8px;
 
 		.sound-range

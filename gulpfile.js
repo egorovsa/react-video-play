@@ -109,7 +109,7 @@ function createHtml() {
 }
 
 function images() {
-    return gulp.src(['src/img/**/*','src/img/*'])
+    return gulp.src(['src/img/**/*','src/img/*.**'])
         .pipe(gulp.dest('dist/img'));
 }
 
@@ -162,7 +162,7 @@ gulp.task('default', ['browserSync'], function () {
     });
 
     gulp.watch([
-        './src/img/**/*'
+        './src/img/**/*.**'
     ], function () {
         images();
     });

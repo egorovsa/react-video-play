@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="14px" height="22px" viewBox="0 0 14 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="25px" height="24px" viewBox="0 0 25 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
     <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
-    <title>sound copy</title>
+    <title>1489683220_volume-24</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
+    <defs>
+        <rect id="path-1" x="19.298097" y="7.21966991" width="2" height="10.1568542"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="2" height="10.1568542" fill="#fffff">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="sound-copy" fill-rule="nonzero" fill="#000000">
-            <g id="Layer_1">
-                <path d="M12,0 C10.823,0 10.467,0.684 10.467,0.684 C10.467,0.684 7.406,4.047 5.298,5.531 C4.91,5.778 4.484,6 3.73,6 L2,6 C0.896,6 0,6.896 0,8 L0,14 C0,15.104 0.896,16 2,16 L3.73,16 C4.484,16 4.91,16.222 5.297,16.469 C7.405,17.953 10.466,21.317 10.466,21.317 C10.466,21.317 10.823,22 12,22 C13.104,22 14,21.105 14,20 L14,2 C14,0.895 13.104,0 12,0 Z" id="Shape"></path>
+        <g id="1489683220_volume-24">
+            <g id="Layer_1" fill-rule="nonzero" fill="#ffffff">
+                <polygon id="Shape" points="3.33035714 5.95238095 0 5.95238095 5.98913968e-15 17.8571429 3.33035714 17.6679652 12.5 23.9977271 12.5 0.200075497"></polygon>
             </g>
+            <use id="Rectangle" stroke="#000000" mask="url(#mask-2)" stroke-width="2" fill="#ffffff" transform="translate(20.298097, 12.298097) rotate(45.000000) translate(-20.298097, -12.298097) " xlink:href="#path-1"></use>
         </g>
     </g>
 </svg>
