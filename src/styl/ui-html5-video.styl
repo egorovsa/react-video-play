@@ -1,5 +1,6 @@
 $controls-height = 25px
 $track-height = 8px
+$constols-panel-bg = rgba(0, 0, 0, 0.7)
 
 @import "./ui-input-range.styl"
 
@@ -8,10 +9,9 @@ $track-height = 8px
 	position relative
 	overflow: hidden
 
-
 	.ui-video-player-controls
 		transition bottom .7s ease
-		background-color rgba(0, 0, 0, 0.7)
+		background-color $constols-panel-bg
 		position absolute
 		width 100%
 		height $controls-height
@@ -19,7 +19,6 @@ $track-height = 8px
 		left 0
 		box-sizing border-box
 		padding 0 15px 0 0px
-
 
 		&.hide
 			bottom - $controls-height + 4px

@@ -1,4 +1,6 @@
 import * as React from 'react';
+const Slider = require('rc-slider');
+
 
 export interface Props {
     played: boolean,
@@ -25,11 +27,13 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
     static defaultProps: Props = {} as Props;
 
     private seekRange: HTMLInputElement;
+    private rangeSlider: HTMLDivElement;
 
     componentDidMount() {
         this.handlerWindowResize();
 
         window.addEventListener('resize', this.handlerWindowResize);
+
     }
 
     componentWillUnmount() {
@@ -74,6 +78,8 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
     private drawSeekBar(): JSX.Element {
         return (
             <div className="seek-block">
+                <div ref={(ref)=>{this.rangeSlider = ref}}></div>
+
                 <input
                     type="range"
                     min="0"
@@ -84,7 +90,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
                     ref={(ref:HTMLInputElement)=>{this.seekRange = ref}}
                 />
 
-                {this.drawBufferLine()}
+                {/*{this.drawBufferLine()}*/}
             </div>
         )
     }

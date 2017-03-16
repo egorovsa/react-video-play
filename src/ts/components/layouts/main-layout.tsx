@@ -23,7 +23,9 @@ export class AppComponent extends React.Component<Props, State> {
 
         return (
             <div>
-                <UIVideoComponent width={800} sources={src}/>
+                <div className="container">
+                    <UIVideoComponent width={800} sources={src}/>
+                </div>
             </div>
         );
     }
