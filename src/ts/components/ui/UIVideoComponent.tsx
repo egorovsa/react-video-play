@@ -15,7 +15,7 @@ export interface VideoSource {
 }
 
 export interface Props {
-    width: number,
+    width?: number,
     height?: number,
     controls?: boolean,
     autoPlay?: boolean,
@@ -211,7 +211,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
             <div
                 className="ui-video-player-component"
                 style={{
-                    width: this.props.width+'px'
+                    width: this.props.width?this.props.width+'px':'100%'
                 }}
                 ref={(playerContainer)=>{
                     this.playerContainer = playerContainer;

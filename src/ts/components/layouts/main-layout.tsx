@@ -15,16 +15,26 @@ export class AppComponent extends React.Component<Props, State> {
     //static defaultProps: Props = {} as Props;
 
     public render() {
-        let src: VideoSource[] = [{
-            source: 'http://www.html5videoplayer.net/videos/toystory.mp4',
-            // source: '',
-            type: VideoSourceType.video_mp4
-        }];
+        let src: VideoSource[] = [
+            {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
+                type: VideoSourceType.video_mp4
+            }, {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
+                type: VideoSourceType.video_webm
+            }, {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
+                type: VideoSourceType.videi_ogg
+            }, {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
+                type: VideoSourceType.video_mp4
+            }
+        ];
 
         return (
             <div>
                 <div className="container">
-                    <UIVideoComponent width={800} sources={src}/>
+                    <UIVideoComponent sources={src}/>
                 </div>
             </div>
         );

@@ -1,6 +1,6 @@
-$controls-height = 25px
+$controls-height = 35px
 $track-height = 8px
-$constols-panel-bg = rgba(0, 0, 0, 0.7)
+$controls-panel-bg = rgba(0, 0, 0, 0.7)
 
 @import "./ui-input-range.styl"
 
@@ -11,7 +11,7 @@ $constols-panel-bg = rgba(0, 0, 0, 0.7)
 
 	.ui-video-player-controls
 		transition bottom .7s ease
-		background-color $constols-panel-bg
+		background-color $controls-panel-bg
 		position absolute
 		width 100%
 		height $controls-height
@@ -50,24 +50,26 @@ $constols-panel-bg = rgba(0, 0, 0, 0.7)
 					background-image: url(/img/pause.svg);
 
 		.seek-block
-			width calc(80% - 30px)
+			width calc(80% - 70px)
 			float left
 			display inline-block
 			box-sizing border-box
 			position: relative;
+			height $controls-height
 
 			.seek-block-buffer
 				transition width .5s ease
 				position absolute
-				height $track-height
-				background-color #fff
+				height 3px
+				background-color #52a6ff
 				left 0px
-				top ($controls-height / 2) - ($track-height / 2)
+				top ($controls-height / 2) - 1
 				width 0px
 				pointer-events none
+				z-index 1
 
 		.sound-icon
-			width 30px
+			width 35px
 			height 100%
 			float left
 			display inline-block
@@ -90,7 +92,6 @@ $constols-panel-bg = rgba(0, 0, 0, 0.7)
 			&.mute
 				&:before
 					background-image: url(/img/mute.svg);
-					background-position-x: 8px;
 
 		.sound-range
 			width calc(20% - 30px)
