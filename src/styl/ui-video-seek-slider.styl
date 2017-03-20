@@ -1,5 +1,5 @@
 $track-height-default = 3px
-$progress-color = #ff0000
+$progress-color = #2c62b7
 $track-color = rgba(#ffffff, 0.3)
 $buffered-color = rgba(#fff, 0.2)
 $seek-hover = rgba(#fff, 0.5)
@@ -41,7 +41,7 @@ $seek-hover = rgba(#fff, 0.5)
 				background-color $buffered-color
 				width 100%
 				height 100%
-				transform scaleX(0.8)
+				transform scaleX(0)
 				z-index 1
 				transform-origin 0 0
 
@@ -51,7 +51,7 @@ $seek-hover = rgba(#fff, 0.5)
 				width 100%
 				height 100%
 				z-index 2
-				transform scaleX(0.6)
+				transform scaleX(0)
 				transform-origin 0 0
 				opacity 0
 				transition opacity .4s
@@ -63,7 +63,7 @@ $seek-hover = rgba(#fff, 0.5)
 				height 100%
 				z-index 3
 				left 0
-				transform scaleX(0.13)
+				transform scaleX(0)
 				transform-origin 0 0
 
 		&.active
@@ -78,7 +78,7 @@ $seek-hover = rgba(#fff, 0.5)
 		left -6px
 		top 4px
 		z-index 4
-		transform translateX(100px)
+		transform translateX(0px)
 
 		.handler
 			transition transform .2s

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
-import {setTimeout} from "timers";
 
 export enum VideoSourceType{
     video_mp4,
@@ -27,8 +26,7 @@ export interface State {
     currentVolume: number,
     duration: number,
     currentTime: number,
-    progressStartPercent: number,
-    progressEndPercent: number,
+    progressEnd: number,
     adv: boolean,
     hideControls: boolean,
     muted: boolean,
@@ -39,8 +37,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
         currentVolume: 0,
         duration: 0,
         currentTime: 0,
-        progressStartPercent: 0,
-        progressEndPercent: 0,
+        progressEnd: 0,
         adv: false,
         hideControls: false,
         muted: false
@@ -51,8 +48,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
     private player: HTMLVideoElement;
     private playerContainer: HTMLDivElement;
     private interval: any = null;
-    private hiderTimeout: any = null;
-
 
     componentDidMount() {
         this.events();
@@ -119,8 +114,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     }
 
                     this.setState({
-                        progressStartPercent: (buffer.start(currentBuffer) / this.state.duration) * 100,
-                        progressEndPercent: (buffer.end(currentBuffer) / this.state.duration) * 100
+                        progressEnd: buffer.end(currentBuffer)
                     } as State);
                 }
             }, false);
@@ -237,8 +231,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     handlerPlayStop={this.handlerPlayStop}
                     handlerChangeCurrentTime={this.handlerSeekBarChange}
                     handlerToggleSound={this.handlerSoundsToggler}
-                    progressStartPercent={this.state.progressStartPercent}
-                    progressEndPercent={this.state.progressEndPercent}
+                    progressEnd={this.state.progressEnd}
                     hide={this.state.hideControls}
                 />
             </div>
