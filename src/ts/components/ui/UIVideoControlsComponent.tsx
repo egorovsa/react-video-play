@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {VideoSeekSlider} from 'react-video-seek-slider';
 
 export interface Props {
     played: boolean,
@@ -46,8 +47,8 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
         }
     };
 
-    private handlerChangeSeekBar = (e): void => {
-        this.props.handlerChangeCurrentTime(e.target.value);
+    private handlerChangeSeekBar = (time:number): void => {
+        this.props.handlerChangeCurrentTime(time);
     };
 
     private drawBufferLine(): JSX.Element {
@@ -75,19 +76,12 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 
     private drawSeekBar(): JSX.Element {
         return (
-            <div className="seek-block">
-                <input
-                    type="range"
-                    min="0"
-                    max={this.props.duration}
-                    step="0.1"
-                    value={this.props.currentTime}
-                    onChange={this.handlerChangeSeekBar}
-                    ref={(ref:HTMLInputElement)=>{this.seekRange = ref}}
-                />
-
-                {this.drawBufferLine()}
-            </div>
+            <VideoSeekSlider
+                max={this.props.duration}
+                currentTime={this.props.currentTime}
+                progress={400}
+                onChange={this.handlerChangeSeekBar}
+            />
         )
     }
 
@@ -103,14 +97,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
     private drawSoundBar(): JSX.Element {
         return (
             <div className="sound-range">
-                <input
-                    type="range"
-                    min="0"
-                    max={this.props.duration}
-                    step="0.1"
-                    value={this.props.currentTime}
-                    onChange={this.handlerChangeSeekBar}
-                />
+
             </div>
         )
     }
