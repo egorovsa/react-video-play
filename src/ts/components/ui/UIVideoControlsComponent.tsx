@@ -51,7 +51,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
         }
     };
 
-    private secondsToTime(seconds: number): Time {
+    private secondsToTime(seconds: number): string {
         seconds = Math.round(seconds);
 
         let hours: number = Math.floor(seconds / 3600);
@@ -59,11 +59,13 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
         let minutes: number = Math.floor(divirsForMinutes / 60);
         let sec: number = Math.ceil(divirsForMinutes % 60);
 
-        return {
+        let time: Time = {
             hh: hours.toString(),
             mm: minutes < 10 ? "0" + minutes : minutes.toString(),
             ss: sec < 10 ? "0" + sec : sec.toString()
-        }
+        };
+
+        return time.hh !== "0" ? time.hh + ":" : '' + time.mm + ':' + time.ss;
     }
 
     private handlerChangeSeekBar = (time: number): void => {
@@ -91,14 +93,9 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
     }
 
     private drawTimes(): JSX.Element {
-        let durationTime: Time = this.secondsToTime(this.props.duration);
-        let сurrentTime: Time = this.secondsToTime(this.props.currentTime);
-        let duration: string = durationTime.hh !== "0" ? durationTime.hh + ":" : '' + durationTime.mm + ':' + durationTime.ss;
-        let сurrent: string = сurrentTime.hh !== "0" ? сurrentTime.hh + ":" : '' + сurrentTime.mm + ':' + сurrentTime.ss;
-
         return (
             <div className="controls-time">
-                {сurrent} / {duration}
+                {this.secondsToTime(this.props.currentTime)} / {this.secondsToTime(this.props.duration)}
             </div>
         )
     }
