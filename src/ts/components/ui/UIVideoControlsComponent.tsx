@@ -17,6 +17,8 @@ export interface Props {
     handlerPlayStop: (adv?) => void,
     handlerChangeCurrentTime: (value: number) => void,
     handlerToggleSound: () => void,
+    handlerChangeSoundLevel: (value: number) => void,
+    soundLevel: number
 }
 
 export interface State {
@@ -83,12 +85,36 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
         )
     }
 
+    private drawSoundBlock(): JSX.Element {
+        return (
+            <div className="sound-block">
+                {this.drawSoundsIcon()}
+                {this.drawSoundSlider()}
+            </div>
+        );
+    }
+
     private drawSoundsIcon(): JSX.Element {
         return (
             <div
                 className={this.props.mute ? "sound-icon mute" :"sound-icon" }
                 onClick={this.props.handlerToggleSound}
             />
+        )
+    }
+
+    private drawSoundSlider(): JSX.Element {
+        return (
+            <div
+                className={true ? "sound-slider" :"sound-slider" }
+            >
+                <VideoSeekSlider
+                    max={100}
+                    currentTime={this.props.soundLevel}
+                    progress={0}
+                    onChange={this.props.handlerChangeSoundLevel}
+                />
+            </div>
         )
     }
 
@@ -114,7 +140,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
             <div className={this.props.hide? "ui-video-player-controls hide":"ui-video-player-controls"}>
                 {this.drawSeekBar()}
                 {this.drawPlayPause()}
-                {this.drawSoundsIcon()}
+                {this.drawSoundBlock()}
                 {this.drawTimes()}
                 <div className="overlay"></div>
             </div>

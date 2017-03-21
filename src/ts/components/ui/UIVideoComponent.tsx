@@ -27,6 +27,8 @@ export interface State {
     duration: number,
     currentTime: number,
     progressEnd: number,
+    soundLevel: number,
+    soundLevelSave: number,
     adv: boolean,
     hideControls: boolean,
     muted: boolean,
@@ -38,6 +40,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
         duration: 0,
         currentTime: 0,
         progressEnd: 0,
+        soundLevel: 100,
+        soundLevelSave: 100,
         adv: false,
         hideControls: false,
         muted: false
@@ -162,18 +166,31 @@ export class UIVideoComponent extends React.Component<Props, State> {
         )
     }
 
+    private handlerChangeSoundLevel = (value: number): void => {
+        this.player.volume = value / 100;
+        this.player.muted = false;
+
+        this.setState({
+            soundLevel: value,
+            soundLevelSave: value,
+            muted: false
+        } as State);
+    };
+
     private handlerSoundsToggler = (): void => {
         if (this.player.muted) {
             this.player.muted = false;
 
             this.setState({
-                muted: false
+                muted: false,
+                soundLevel: this.state.soundLevelSave
             } as State);
         } else {
             this.player.muted = true;
 
             this.setState({
-                muted: true
+                muted: true,
+                soundLevel: 0
             } as State);
         }
     };
@@ -225,14 +242,16 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
                 <UIVideoControlsComponent
                     played={this.player? this.player.paused : true}
-                    mute={this.player? this.player.muted:true}
+                    mute={this.player? this.state.muted:true}
                     duration={this.state.duration}
                     currentTime={this.state.currentTime}
                     handlerPlayStop={this.handlerPlayStop}
                     handlerChangeCurrentTime={this.handlerSeekBarChange}
                     handlerToggleSound={this.handlerSoundsToggler}
+                    handlerChangeSoundLevel={this.handlerChangeSoundLevel}
                     progressEnd={this.state.progressEnd}
                     hide={this.state.hideControls}
+                    soundLevel={this.state.soundLevel}
                 />
             </div>
         );
