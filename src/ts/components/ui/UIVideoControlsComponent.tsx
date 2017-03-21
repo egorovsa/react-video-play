@@ -135,6 +135,15 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
         );
     }
 
+    private drawFullScreen(): JSX.Element {
+        return (
+            <div
+                onClick={this.props.handlerPlayStop}
+                className={false ? 'fullscreen opened' : 'fullscreen'}
+            />
+        );
+    }
+
     public render() {
         return (
             <div className={this.props.hide? "ui-video-player-controls hide":"ui-video-player-controls"}>
@@ -142,6 +151,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
                 {this.drawPlayPause()}
                 {this.drawSoundBlock()}
                 {this.drawTimes()}
+                {this.drawFullScreen()}
                 <div className="overlay"></div>
             </div>
         );
