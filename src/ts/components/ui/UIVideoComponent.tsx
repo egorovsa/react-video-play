@@ -35,7 +35,8 @@ export interface State {
     muted: boolean,
     fullScreen: boolean,
     loading: boolean,
-    stalled: boolean
+    stalled: boolean,
+    paused: boolean
 }
 
 export class UIVideoComponent extends React.Component<Props, State> {
@@ -51,7 +52,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
         muted: false,
         fullScreen: false,
         loading: true,
-        stalled: false
+        stalled: false,
+        paused: true
     };
 
     static defaultProps: Props = {} as Props;
@@ -124,22 +126,13 @@ export class UIVideoComponent extends React.Component<Props, State> {
                 } as State);
             });
 
-            this.player.addEventListener('stalled', () => {
-                console.log('stalled');
-                this.setState({
-                    loading: true
-                } as State);
-            });
-
             this.player.addEventListener('canplay', () => {
-                console.log('canplay');
                 this.setState({
                     loading: false
                 } as State);
             });
 
             this.player.addEventListener('waiting', () => {
-                console.log('waiting');
                 this.setState({
                     loading: true
                 } as State);
@@ -245,7 +238,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
             if (adv) {
                 this.setState({
-                    adv: false
+                    adv: false,
+                    paused: false
                 } as State);
             }
         } else {
@@ -255,7 +249,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
             if (adv) {
                 this.setState({
-                    adv: true
+                    adv: true,
+                    paused: true
                 } as State);
             }
         }
@@ -331,6 +326,23 @@ export class UIVideoComponent extends React.Component<Props, State> {
         }
     }
 
+    private drawPlayStopSplash(): JSX.Element {
+        let className: string = "ui-video-player-ps-splash play";
+
+        if (!this.state.paused || this.state.loading) {
+            className += " hide";
+        }
+
+        if (!this.state.adv) {
+            return (
+                <div
+                    onClick={this.handlerPlayStop}
+                    className={className}
+                />
+            );
+        }
+    }
+
     public render() {
         return (
             <div
@@ -344,6 +356,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
             >
                 {this.drawLoading()}
                 {this.drawStalled()}
+                {this.drawPlayStopSplash()}
 
                 <video
                     width="100%"

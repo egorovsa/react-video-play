@@ -23,6 +23,41 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 		background-image: url(/img/ring.svg);
 		z-index 5
 
+	.ui-video-player-ps-splash
+		position absolute
+		width 80px
+		height 80px
+		left 50%
+		top 50%
+		margin-top -40px
+		margin-left -40px
+		background-color rgba(#fff, .3)
+		border-radius 100%
+		z-index 5
+		transform scale(1)
+		transition background-color, opacity  .3s
+
+		&.play
+			cursor pointer
+			background-size: 50px;
+			background-repeat: no-repeat;
+			background-position 19px 16px
+			background-image: url(/img/play.svg);
+			opacity .5
+
+			&.hide
+				//transform scale(.5)
+				cursor default
+				opacity 0
+
+		&:hover
+			&.play
+				background-color rgba(#fff, .5)
+				opacity .7
+
+				&.hide
+					opacity 0
+
 	.ui-video-player-stalled
 		position absolute
 		width 100%
@@ -42,8 +77,6 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 			top 50%
 			margin-top -14px
 
-
-
 	.ui-video-player-adv
 		transition background-color 0.5s
 		position absolute
@@ -51,7 +84,6 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 		height 100%
 		left 0
 		top 0
-		pointer-events none
 		background rgba(#000, 0.7)
 		text-align center
 		z-index 10
@@ -128,6 +160,8 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 			padding 0 15px
 			z-index 1
 			position relative
+			pointer-events none
+			cursor default
 
 		.fullscreen
 			height 100%
