@@ -115,6 +115,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
                     currentTime={this.props.soundLevel}
                     progress={0}
                     onChange={this.props.handlerChangeSoundLevel}
+                    hideHoverTime={true}
                 />
             </div>
         )

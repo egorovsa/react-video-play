@@ -2932,9 +2932,9 @@ react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-video-seek-slider@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-video-seek-slider/-/react-video-seek-slider-1.0.1.tgz#075092c6479fecc9b006ac80ee3a8648049998e4"
+react-video-seek-slider@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-video-seek-slider/-/react-video-seek-slider-1.1.1.tgz#adb7b6381af9784f9e6debf9f8e9f72a45c85dc8"
   dependencies:
     "@types/alt" "^0.16.31"
     "@types/browserify" "^12.0.30"

@@ -168,11 +168,13 @@ export class UIVideoComponent extends React.Component<Props, State> {
     };
 
     private drawAdv(): JSX.Element {
-        return (
-            <div className="ui-video-player-adv">
-
-            </div>
-        )
+        if (this.state.adv) {
+            return (
+                <div className="ui-video-player-adv">
+                    <h1>ADV HERE</h1>
+                </div>
+            )
+        }
     }
 
     private handlerChangeSoundLevel = (value: number): void => {
@@ -227,7 +229,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
     };
 
     private onFullscreenChange = (e): void => {
-
         let fullscreenElement =
             document['fullscreenElement'] ||
             document['mozFullscreenElement'] ||
@@ -318,6 +319,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     fullscreenEnable={this.state.fullScreen}
 
                 />
+
+                {this.drawAdv()}
             </div>
         );
     }
