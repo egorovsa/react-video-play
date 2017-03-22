@@ -61,6 +61,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
     private player: HTMLVideoElement;
     private playerContainer: HTMLDivElement;
     private interval: any = null;
+    private hideControlsTimeout: any = null;
 
     componentDidMount() {
         this.events();
@@ -71,8 +72,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
             this.playerContainer.addEventListener("webkitfullscreenchange", this.onFullscreenChange);
             this.playerContainer.addEventListener("mozfullscreenchange", this.onFullscreenChange);
             this.playerContainer.addEventListener("fullscreenchange", this.onFullscreenChange);
-
-            // this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
+            this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
         }
     }
 
@@ -82,11 +82,23 @@ export class UIVideoComponent extends React.Component<Props, State> {
         this.playerContainer.removeEventListener("webkitfullscreenchange", this.onFullscreenChange);
         this.playerContainer.removeEventListener("mozfullscreenchange", this.onFullscreenChange);
         this.playerContainer.removeEventListener("fullscreenchange", this.onFullscreenChange);
-        // this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
+        this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
     }
 
     private handlerMouseMove = (): void => {
-        console.log('move');
+        this.setState({
+            hideControls: false
+        } as State);
+
+        if (this.hideControlsTimeout) {
+            clearTimeout(this.hideControlsTimeout);
+        }
+
+        if (!this.state.adv && this.state.fullScreen) {
+            this.hideControlsTimeout = setTimeout(() => {
+                this.handlerMouseLeave();
+            }, 3000);
+        }
     };
 
     private handlerMouseEnter = (): void => {
@@ -95,7 +107,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
         } as State);
     };
 
-    private handlerMouseLeave = (event): void => {
+    private handlerMouseLeave = (): void => {
         if (!this.player.paused) {
             this.setState({
                 hideControls: true
@@ -122,7 +134,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
             this.player.addEventListener('ended', () => {
                 this.setState({
-                    adv: true
+                    adv: true,
+                    hideControls: false
                 } as State);
             });
 
@@ -250,7 +263,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
             if (adv) {
                 this.setState({
                     adv: true,
-                    paused: true
+                    paused: true,
+                    hideControls: false
                 } as State);
             }
         }
@@ -292,6 +306,10 @@ export class UIVideoComponent extends React.Component<Props, State> {
         this.setState({
             fullScreen: true
         } as State);
+
+        this.hideControlsTimeout = setTimeout(() => {
+            this.handlerMouseLeave();
+        }, 3000);
     };
 
     private cancelFullscreen(): void {
@@ -344,9 +362,15 @@ export class UIVideoComponent extends React.Component<Props, State> {
     }
 
     public render() {
+        let className: string = "ui-video-player-component";
+
+        if (this.state.fullScreen && this.state.hideControls) {
+            className += " hide-cursor";
+        }
+
         return (
             <div
-                className="ui-video-player-component"
+                className={className}
                 style={{
                     width: this.props.width?this.props.width+'px':'100%'
                 }}
