@@ -32,6 +32,7 @@ export interface State {
     adv: boolean,
     hideControls: boolean,
     muted: boolean,
+    fullScreen: boolean
 }
 
 export class UIVideoComponent extends React.Component<Props, State> {
@@ -44,7 +45,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
         soundLevelSave: 100,
         adv: false,
         hideControls: false,
-        muted: false
+        muted: false,
+        fullScreen: false
     };
 
     static defaultProps: Props = {} as Props;
@@ -59,6 +61,10 @@ export class UIVideoComponent extends React.Component<Props, State> {
         if (this.playerContainer) {
             this.playerContainer.addEventListener('mouseenter', this.handlerMouseEnter);
             this.playerContainer.addEventListener('mouseleave', this.handlerMouseLeave);
+            this.playerContainer.addEventListener("webkitfullscreenchange", this.onFullscreenChange);
+            this.playerContainer.addEventListener("mozfullscreenchange", this.onFullscreenChange);
+            this.playerContainer.addEventListener("fullscreenchange", this.onFullscreenChange);
+
             // this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
         }
     }
@@ -66,6 +72,9 @@ export class UIVideoComponent extends React.Component<Props, State> {
     componentWillUnmount() {
         this.playerContainer.removeEventListener('mouseenter', this.handlerMouseEnter);
         this.playerContainer.removeEventListener('mouseleave', this.handlerMouseLeave);
+        this.playerContainer.removeEventListener("webkitfullscreenchange", this.onFullscreenChange);
+        this.playerContainer.removeEventListener("mozfullscreenchange", this.onFullscreenChange);
+        this.playerContainer.removeEventListener("fullscreenchange", this.onFullscreenChange);
         // this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
     }
 
@@ -217,6 +226,59 @@ export class UIVideoComponent extends React.Component<Props, State> {
         }
     };
 
+    private onFullscreenChange = (e): void => {
+
+        let fullscreenElement =
+            document['fullscreenElement'] ||
+            document['mozFullscreenElement'] ||
+            document['webkitFullscreenElement'];
+
+        let fullscreenEnabled =
+            document['fullscreenEnabled'] ||
+            document['mozFullscreenEnabled'] ||
+            document['webkitFullscreenEnabled'];
+
+        this.setState({
+            fullScreen: fullscreenEnabled && fullscreenElement
+        } as State);
+    };
+
+    private handlerFullscreen = (): void => {
+        if (this.state.fullScreen) {
+            this.cancelFullscreen();
+        } else {
+            this.launchFullScreen(this.playerContainer);
+        }
+    };
+
+    private launchFullScreen = (element): void => {
+        if (element.requestFullScreen) {
+            element.requestFullScreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
+        }
+
+        this.setState({
+            fullScreen: true
+        } as State);
+    };
+
+    private cancelFullscreen(): void {
+        if (document['cancelFullScreen']) {
+            document['cancelFullScreen']();
+        } else if (document['mozCancelFullScreen']) {
+            document['mozCancelFullScreen']();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        }
+
+        this.setState({
+            fullScreen: false
+        } as State);
+    }
+
     public render() {
         return (
             <div
@@ -249,9 +311,12 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     handlerChangeCurrentTime={this.handlerSeekBarChange}
                     handlerToggleSound={this.handlerSoundsToggler}
                     handlerChangeSoundLevel={this.handlerChangeSoundLevel}
+                    handlerFullscreen={this.handlerFullscreen}
                     progressEnd={this.state.progressEnd}
                     hide={this.state.hideControls}
                     soundLevel={this.state.soundLevel}
+                    fullscreenEnable={this.state.fullScreen}
+
                 />
             </div>
         );

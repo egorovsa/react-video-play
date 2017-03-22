@@ -100,18 +100,19 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 				background-repeat: no-repeat;
 				background-position center
 				background-image: url(/img/fs.svg);
+				transform scale(0.8)
 
 			&:hover
 				&:before
-					transform scale(1.2)
+					transform scale(1)
 
 			&.opened
 				&:before
-					transform scale(0.7)
+					transform scale(1)
 
 				&:hover
 					&:before
-						transform scale(0.9)
+						transform scale(0.8)
 
 		.sound-block
 			width 130px

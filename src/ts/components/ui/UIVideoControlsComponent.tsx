@@ -11,14 +11,16 @@ export interface Props {
     played: boolean,
     hide: boolean,
     mute: boolean,
+    fullscreenEnable: boolean,
     duration: number,
     currentTime: number,
     progressEnd: number,
+    soundLevel: number,
     handlerPlayStop: (adv?) => void,
     handlerChangeCurrentTime: (value: number) => void,
     handlerToggleSound: () => void,
     handlerChangeSoundLevel: (value: number) => void,
-    soundLevel: number
+    handlerFullscreen: () => void
 }
 
 export interface State {
@@ -138,8 +140,8 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
     private drawFullScreen(): JSX.Element {
         return (
             <div
-                onClick={this.props.handlerPlayStop}
-                className={false ? 'fullscreen opened' : 'fullscreen'}
+                onClick={this.props.handlerFullscreen}
+                className={this.props.fullscreenEnable ? 'fullscreen opened' : 'fullscreen'}
             />
         );
     }
