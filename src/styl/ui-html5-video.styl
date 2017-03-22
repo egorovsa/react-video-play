@@ -10,6 +10,40 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 	overflow: hidden
 	min-width 370px
 
+	.ui-video-player-loading
+		position absolute
+		width 100%
+		height 100%
+		left 0
+		top 0
+		pointer-events none
+		background-size: 100px;
+		background-repeat: no-repeat;
+		background-position center
+		background-image: url(/img/ring.svg);
+		z-index 5
+
+	.ui-video-player-stalled
+		position absolute
+		width 100%
+		height 100%
+		left 0
+		top 0
+		pointer-events none
+		background-color #000
+		z-index 11
+		color #fff
+		text-align center
+		font-size 14px
+
+		p
+			position absolute
+			width 100%
+			top 50%
+			margin-top -14px
+
+
+
 	.ui-video-player-adv
 		transition background-color 0.5s
 		position absolute
@@ -20,6 +54,7 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 		pointer-events none
 		background rgba(#000, 0.7)
 		text-align center
+		z-index 10
 
 		h1
 			color #fff;
@@ -34,6 +69,7 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 		left 0
 		box-sizing border-box
 		padding 0 15px
+		z-index 15
 
 		.overlay
 			position absolute

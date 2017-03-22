@@ -20,6 +20,7 @@ export interface Props {
     autoPlay?: boolean,
     loop?: boolean,
     sources: VideoSource[]
+    poster?: string
 }
 
 export interface State {
@@ -32,7 +33,9 @@ export interface State {
     adv: boolean,
     hideControls: boolean,
     muted: boolean,
-    fullScreen: boolean
+    fullScreen: boolean,
+    loading: boolean,
+    stalled: boolean
 }
 
 export class UIVideoComponent extends React.Component<Props, State> {
@@ -46,7 +49,9 @@ export class UIVideoComponent extends React.Component<Props, State> {
         adv: false,
         hideControls: false,
         muted: false,
-        fullScreen: false
+        fullScreen: false,
+        loading: true,
+        stalled: false
     };
 
     static defaultProps: Props = {} as Props;
@@ -108,7 +113,35 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
             this.player.addEventListener('loadeddata', () => {
                 this.setState({
-                    duration: this.player.duration
+                    duration: this.player.duration,
+                    loading: false
+                } as State);
+            });
+
+            this.player.addEventListener('ended', () => {
+                this.setState({
+                    adv: true
+                } as State);
+            });
+
+            this.player.addEventListener('stalled', () => {
+                console.log('stalled');
+                this.setState({
+                    loading: true
+                } as State);
+            });
+
+            this.player.addEventListener('canplay', () => {
+                console.log('canplay');
+                this.setState({
+                    loading: false
+                } as State);
+            });
+
+            this.player.addEventListener('waiting', () => {
+                console.log('waiting');
+                this.setState({
+                    loading: true
                 } as State);
             });
 
@@ -280,6 +313,24 @@ export class UIVideoComponent extends React.Component<Props, State> {
         } as State);
     }
 
+    private drawLoading(): JSX.Element {
+        if (this.state.loading) {
+            return (
+                <div className="ui-video-player-loading"/>
+            );
+        }
+    }
+
+    private drawStalled(): JSX.Element {
+        if (this.state.stalled) {
+            return (
+                <div className="ui-video-player-stalled">
+                    <p>Media data is not available</p>
+                </div>
+            );
+        }
+    }
+
     public render() {
         return (
             <div
@@ -291,6 +342,9 @@ export class UIVideoComponent extends React.Component<Props, State> {
                     this.playerContainer = playerContainer;
                 }}
             >
+                {this.drawLoading()}
+                {this.drawStalled()}
+
                 <video
                     width="100%"
                     height={this.props.height?this.props.height:''}
@@ -298,6 +352,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
                         this.player = player;
                     }}
                     onClick={this.handlerPlayStop}
+                    poster={this.props.poster}
                 >
                     {this.getSources()}
 
