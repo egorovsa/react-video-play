@@ -95,11 +95,10 @@ function bundle() {
         .external(vendorArray)
         .bundle()
         .on('error', handleTSErrors)
-        .pipe(exorcist('dist/app.js'))
-        .pipe(source('app.js'))
+		.pipe(exorcist('dist/app.js.map'))
+		.pipe(source('app.js'))
         .pipe(gulp.dest('dist'))
         .pipe(browserSync.stream());
-
 }
 
 function createHtml() {

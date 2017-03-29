@@ -1,419 +1,461 @@
 import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
+const mobile = require('is-mobile');
 
 export enum VideoSourceType{
-    video_mp4,
-    video_webm,
-    videi_ogg
+	video_mp4,
+	video_webm,
+	videi_ogg
 }
 
 export interface VideoSource {
-    source: string,
-    type: VideoSourceType,
-    codecs?: string
+	source: string,
+	type: VideoSourceType,
+	codecs?: string
 }
 
 export interface Props {
-    width?: number,
-    height?: number,
-    controls?: boolean,
-    autoPlay?: boolean,
-    loop?: boolean,
-    sources: VideoSource[]
-    poster?: string
+	width?: number,
+	height?: number,
+	controls?: boolean,
+	autoPlay?: boolean,
+	loop?: boolean,
+	sources: VideoSource[]
+	poster?: string
 }
 
 export interface State {
-    currentVolume: number,
-    duration: number,
-    currentTime: number,
-    progressEnd: number,
-    soundLevel: number,
-    soundLevelSave: number,
-    adv: boolean,
-    hideControls: boolean,
-    muted: boolean,
-    fullScreen: boolean,
-    loading: boolean,
-    stalled: boolean,
-    paused: boolean
+	currentVolume: number,
+	duration: number,
+	currentTime: number,
+	progressEnd: number,
+	soundLevel: number,
+	soundLevelSave: number,
+	adv: boolean,
+	hideControls: boolean,
+	muted: boolean,
+	fullScreen: boolean,
+	loading: boolean,
+	stalled: boolean,
+	paused: boolean
 }
 
 export class UIVideoComponent extends React.Component<Props, State> {
-    state: State = {
-        currentVolume: 0,
-        duration: 0,
-        currentTime: 0,
-        progressEnd: 0,
-        soundLevel: 100,
-        soundLevelSave: 100,
-        adv: false,
-        hideControls: false,
-        muted: false,
-        fullScreen: false,
-        loading: true,
-        stalled: false,
-        paused: true
-    };
+	state: State = {
+		currentVolume: 0,
+		duration: 0,
+		currentTime: 0,
+		progressEnd: 0,
+		soundLevel: 100,
+		soundLevelSave: 100,
+		adv: false,
+		hideControls: false,
+		muted: false,
+		fullScreen: false,
+		loading: true,
+		stalled: false,
+		paused: true
+	};
 
-    static defaultProps: Props = {} as Props;
+	static defaultProps: Props = {} as Props;
 
-    private player: HTMLVideoElement;
-    private playerContainer: HTMLDivElement;
-    private interval: any = null;
-    private hideControlsTimeout: any = null;
+	private player: HTMLVideoElement;
+	private playerContainer: HTMLDivElement;
+	private interval: any = null;
+	private hideControlsTimeoutId: any = null;
 
-    componentDidMount() {
-        this.events();
+	componentDidMount() {
+		this.events();
 
-        if (this.playerContainer) {
-            this.playerContainer.addEventListener('mouseenter', this.handlerMouseEnter);
-            this.playerContainer.addEventListener('mouseleave', this.handlerMouseLeave);
-            this.playerContainer.addEventListener("webkitfullscreenchange", this.onFullscreenChange);
-            this.playerContainer.addEventListener("mozfullscreenchange", this.onFullscreenChange);
-            this.playerContainer.addEventListener("fullscreenchange", this.onFullscreenChange);
-            this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
-        }
-    }
+		if (this.playerContainer) {
+			this.playerContainer.addEventListener('mouseenter', this.handlerMouseEnter);
+			this.playerContainer.addEventListener('mouseleave', this.handlerMouseLeave);
+			this.playerContainer.addEventListener("webkitfullscreenchange", this.onFullscreenChange);
+			this.playerContainer.addEventListener("mozfullscreenchange", this.onFullscreenChange);
+			this.playerContainer.addEventListener("fullscreenchange", this.onFullscreenChange);
+			this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
+		}
+	}
 
-    componentWillUnmount() {
-        this.playerContainer.removeEventListener('mouseenter', this.handlerMouseEnter);
-        this.playerContainer.removeEventListener('mouseleave', this.handlerMouseLeave);
-        this.playerContainer.removeEventListener("webkitfullscreenchange", this.onFullscreenChange);
-        this.playerContainer.removeEventListener("mozfullscreenchange", this.onFullscreenChange);
-        this.playerContainer.removeEventListener("fullscreenchange", this.onFullscreenChange);
-        this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
-    }
+	componentWillUnmount() {
+		this.playerContainer.removeEventListener('mouseenter', this.handlerMouseEnter);
+		this.playerContainer.removeEventListener('mouseleave', this.handlerMouseLeave);
+		this.playerContainer.removeEventListener("webkitfullscreenchange", this.onFullscreenChange);
+		this.playerContainer.removeEventListener("mozfullscreenchange", this.onFullscreenChange);
+		this.playerContainer.removeEventListener("fullscreenchange", this.onFullscreenChange);
+		this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
+	}
 
-    private handlerMouseMove = (): void => {
-        this.setState({
-            hideControls: false
-        } as State);
+	private handlerMouseMove = (): void => {
+		if (!mobile()) {
+			this.controlsHider()
+		}
+	};
 
-        if (this.hideControlsTimeout) {
-            clearTimeout(this.hideControlsTimeout);
-        }
+	private handlerMouseEnter = (): void => {
+		this.setState({
+			hideControls: false
+		} as State);
+	};
 
-        if (!this.state.adv && this.state.fullScreen) {
-            this.hideControlsTimeout = setTimeout(() => {
-                this.handlerMouseLeave();
-            }, 3000);
-        }
-    };
+	private handlerMouseLeave = (): void => {
+		if (!this.player.paused) {
+			this.setState({
+				hideControls: true
+			} as State);
+		}
+	};
 
-    private handlerMouseEnter = (): void => {
-        this.setState({
-            hideControls: false
-        } as State);
-    };
+	private events(): void {
+		if (this.player) {
+			this.player.addEventListener('play', () => {
+				this.interval = setInterval(() => {
+					this.setState({
+						currentTime: +this.player.currentTime
+					} as State);
+				}, 100);
+			});
 
-    private handlerMouseLeave = (): void => {
-        if (!this.player.paused) {
-            this.setState({
-                hideControls: true
-            } as State);
-        }
-    };
+			this.player.addEventListener('loadeddata', () => {
+				this.setState({
+					duration: this.player.duration,
+					loading: false
+				} as State);
+			});
 
-    private events(): void {
-        if (this.player) {
-            this.player.addEventListener('play', () => {
-                this.interval = setInterval(() => {
-                    this.setState({
-                        currentTime: +this.player.currentTime
-                    } as State);
-                }, 100);
-            });
+			this.player.addEventListener('ended', () => {
+				this.setState({
+					adv: true,
+					hideControls: false
+				} as State);
+			});
 
-            this.player.addEventListener('loadeddata', () => {
-                this.setState({
-                    duration: this.player.duration,
-                    loading: false
-                } as State);
-            });
+			this.player.addEventListener('canplay', () => {
+				this.setState({
+					loading: false
+				} as State);
+			});
 
-            this.player.addEventListener('ended', () => {
-                this.setState({
-                    adv: true,
-                    hideControls: false
-                } as State);
-            });
+			this.player.addEventListener('waiting', () => {
+				this.setState({
+					loading: true
+				} as State);
+			});
 
-            this.player.addEventListener('canplay', () => {
-                this.setState({
-                    loading: false
-                } as State);
-            });
+			this.player.addEventListener("progress", () => {
+				let currentTime: number = this.player.currentTime;
+				let buffer: TimeRanges = this.player.buffered;
 
-            this.player.addEventListener('waiting', () => {
-                this.setState({
-                    loading: true
-                } as State);
-            });
+				if (buffer.length > 0 && this.state.duration > 0) {
+					let currentBuffer: number = 0;
 
-            this.player.addEventListener("progress", () => {
-                let currentTime: number = this.player.currentTime;
-                let buffer: TimeRanges = this.player.buffered;
+					for (let i = 0; i < buffer.length; i++) {
+						if (buffer.start(i) <= currentTime && currentTime <= buffer.end(i)) {
+							currentBuffer = i;
+							break;
+						}
+					}
 
-                if (buffer.length > 0 && this.state.duration > 0) {
-                    let currentBuffer: number = 0;
+					this.setState({
+						progressEnd: buffer.end(currentBuffer)
+					} as State);
+				}
+			}, false);
+		}
+	}
 
-                    for (let i = 0; i < buffer.length; i++) {
-                        if (buffer.start(i) <= currentTime && currentTime <= buffer.end(i)) {
-                            currentBuffer = i;
-                            break;
-                        }
-                    }
+	private controlsHider(): void {
+		this.setState({
+			hideControls: false
+		} as State);
 
-                    this.setState({
-                        progressEnd: buffer.end(currentBuffer)
-                    } as State);
-                }
-            }, false);
-        }
-    }
+		if (this.hideControlsTimeoutId) {
+			clearTimeout(this.hideControlsTimeoutId);
+		}
 
-    private getVideoType(source: VideoSource): string {
-        let videoType: string = "video/mp4;";
+		console.log('handlerMouseMove');
+		console.log(!this.state.adv, this.state.fullScreen);
 
-        switch (source.type) {
-            case VideoSourceType.videi_ogg:
-                videoType = 'video/ogg;';
-                break;
-            case VideoSourceType.video_webm:
-                videoType = 'video/webm;';
-                break;
-        }
+		if (!this.state.adv && this.state.fullScreen) {
+			this.hideControlsTimeoutId = setTimeout(() => {
+				this.handlerMouseLeave();
+			}, 3000);
+		}
+	}
 
-        if (source.codecs) {
-            videoType += ' codecs="' + source.codecs + '"';
-        }
+	private getVideoType(source: VideoSource): string {
+		let videoType: string = "video/mp4;";
 
-        return videoType;
-    }
+		switch (source.type) {
+			case VideoSourceType.videi_ogg:
+				videoType = 'video/ogg;';
+				break;
+			case VideoSourceType.video_webm:
+				videoType = 'video/webm;';
+				break;
+		}
 
-    private getSources(): JSX.Element[] {
-        return this.props.sources.map((src: VideoSource, i: number) => {
-            return (<source src={src.source} type={this.getVideoType(src)} key={i}/>)
-        });
-    }
+		if (source.codecs) {
+			videoType += ' codecs="' + source.codecs + '"';
+		}
 
-    private handlerSeekBarChange = (value: number): void => {
-        this.player.currentTime = value;
+		return videoType;
+	}
 
-        this.setState({
-            currentTime: value
-        } as State);
-    };
+	private getSources(): JSX.Element[] {
+		return this.props.sources.map((src: VideoSource, i: number) => {
+			return (<source src={src.source} type={this.getVideoType(src)} key={i}/>)
+		});
+	}
 
-    private drawAdv(): JSX.Element {
-        if (this.state.adv) {
-            return (
-                <div className="ui-video-player-adv">
-                    <h1>ADV HERE</h1>
-                </div>
-            )
-        }
-    }
+	private handlerSeekBarChange = (value: number): void => {
+		this.player.currentTime = value;
 
-    private handlerChangeSoundLevel = (value: number): void => {
-        this.player.volume = value / 100;
-        this.player.muted = false;
+		this.setState({
+			currentTime: value
+		} as State, () => {
+			if (mobile()) {
+				this.controlsHider();
+			}
+		});
+	};
 
-        this.setState({
-            soundLevel: value,
-            soundLevelSave: value,
-            muted: false
-        } as State);
-    };
+	private drawAdv(): JSX.Element {
+		if (this.state.adv) {
+			return (
+				<div className="ui-video-player-adv">
+					<h1>ADV HERE</h1>
+				</div>
+			)
+		}
+	}
 
-    private handlerSoundsToggler = (): void => {
-        if (this.player.muted) {
-            this.player.muted = false;
+	private handlerChangeSoundLevel = (value: number): void => {
+		this.player.volume = value / 100;
+		this.player.muted = false;
 
-            this.setState({
-                muted: false,
-                soundLevel: this.state.soundLevelSave
-            } as State);
-        } else {
-            this.player.muted = true;
+		this.setState({
+			soundLevel: value,
+			soundLevelSave: value,
+			muted: false
+		} as State);
 
-            this.setState({
-                muted: true,
-                soundLevel: 0
-            } as State);
-        }
-    };
+		if (mobile()) {
+			this.controlsHider();
+		}
+	};
 
-    private handlerPlayStop = (adv?): void => {
-        if (this.player.paused) {
-            this.player.play();
+	private handlerSoundsToggler = (): void => {
+		if (this.player.muted) {
+			this.player.muted = false;
 
-            if (adv) {
-                this.setState({
-                    adv: false,
-                    paused: false
-                } as State);
-            }
-        } else {
-            this.player.pause();
+			this.setState({
+				muted: false,
+				soundLevel: this.state.soundLevelSave
+			} as State);
+		} else {
+			this.player.muted = true;
 
-            clearInterval(this.interval);
+			this.setState({
+				muted: true,
+				soundLevel: 0
+			} as State);
+		}
 
-            if (adv) {
-                this.setState({
-                    adv: true,
-                    paused: true,
-                    hideControls: false
-                } as State);
-            }
-        }
-    };
+		if (mobile()) {
+			this.controlsHider();
+		}
+	};
 
-    private onFullscreenChange = (e): void => {
-        let fullscreenElement =
-            document['fullscreenElement'] ||
-            document['mozFullscreenElement'] ||
-            document['webkitFullscreenElement'];
+	private handlerPlayStop = (adv?): void => {
+		if (this.player.paused) {
+			this.player.play();
 
-        let fullscreenEnabled =
-            document['fullscreenEnabled'] ||
-            document['mozFullscreenEnabled'] ||
-            document['webkitFullscreenEnabled'];
+			if (adv) {
+				this.setState({
+					adv: false,
+					paused: false
+				} as State, () => {
+					if (mobile()) {
+						this.controlsHider();
+					}
+				});
+			}
 
-        this.setState({
-            fullScreen: fullscreenEnabled && fullscreenElement
-        } as State);
-    };
 
-    private handlerFullscreen = (): void => {
-        if (this.state.fullScreen) {
-            this.cancelFullscreen();
-        } else {
-            this.launchFullScreen(this.playerContainer);
-        }
-    };
+		} else {
+			this.player.pause();
 
-    private launchFullScreen = (element): void => {
-        if (element.requestFullScreen) {
-            element.requestFullScreen();
-        } else if (element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-        } else if (element.webkitRequestFullScreen) {
-            element.webkitRequestFullScreen();
-        }
+			clearInterval(this.interval);
 
-        this.setState({
-            fullScreen: true
-        } as State);
+			if (adv) {
+				this.setState({
+					adv: true,
+					paused: true,
+					hideControls: false
+				} as State);
+			}
+		}
+	};
 
-        this.hideControlsTimeout = setTimeout(() => {
-            this.handlerMouseLeave();
-        }, 3000);
-    };
+	private handlerVideoClick = (): void => {
+		if (!mobile()) {
+			this.handlerPlayStop();
+		} else {
+			this.setState({
+				hideControls: false
+			} as State);
+		}
+	};
 
-    private cancelFullscreen(): void {
-        if (document['cancelFullScreen']) {
-            document['cancelFullScreen']();
-        } else if (document['mozCancelFullScreen']) {
-            document['mozCancelFullScreen']();
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-        }
+	private onFullscreenChange = (e): void => {
+		let fullscreenElement =
+			document['fullscreenElement'] ||
+			document['mozFullscreenElement'] ||
+			document['webkitFullscreenElement'];
 
-        this.setState({
-            fullScreen: false
-        } as State);
-    }
+		let fullscreenEnabled =
+			document['fullscreenEnabled'] ||
+			document['mozFullscreenEnabled'] ||
+			document['webkitFullscreenEnabled'];
 
-    private drawLoading(): JSX.Element {
-        if (this.state.loading) {
-            return (
-                <div className="ui-video-player-loading"/>
-            );
-        }
-    }
+		this.setState({
+			fullScreen: !!(fullscreenEnabled && fullscreenElement)
+		} as State);
 
-    private drawStalled(): JSX.Element {
-        if (this.state.stalled) {
-            return (
-                <div className="ui-video-player-stalled">
-                    <p>Media data is not available</p>
-                </div>
-            );
-        }
-    }
+		if (mobile()) {
+			this.controlsHider();
+		}
+	};
 
-    private drawPlayStopSplash(): JSX.Element {
-        let className: string = "ui-video-player-ps-splash play";
+	private handlerFullscreen = (): void => {
+		if (this.state.fullScreen) {
+			this.cancelFullscreen();
+		} else {
+			this.launchFullScreen(this.playerContainer);
+		}
+	};
 
-        if (!this.state.paused || this.state.loading) {
-            className += " hide";
-        }
+	private launchFullScreen = (element): void => {
+		console.log('launchFullScreen');
+		if (element.requestFullScreen) {
+			element.requestFullScreen();
+		} else if (element.mozRequestFullScreen) {
+			element.mozRequestFullScreen();
+		} else if (element.webkitRequestFullScreen) {
+			element.webkitRequestFullScreen();
+		}
 
-        if (!this.state.adv) {
-            return (
-                <div
-                    onClick={this.handlerPlayStop}
-                    className={className}
-                />
-            );
-        }
-    }
+		this.setState({
+			fullScreen: true
+		} as State);
 
-    public render() {
-        let className: string = "ui-video-player-component";
+		this.hideControlsTimeoutId = setTimeout(() => {
+			this.handlerMouseLeave();
+		}, 3000);
+	};
 
-        if (this.state.fullScreen && this.state.hideControls) {
-            className += " hide-cursor";
-        }
+	private cancelFullscreen(): void {
+		if (document['cancelFullScreen']) {
+			document['cancelFullScreen']();
+		} else if (document['mozCancelFullScreen']) {
+			document['mozCancelFullScreen']();
+		} else if (document.webkitCancelFullScreen) {
+			document.webkitCancelFullScreen();
+		}
 
-        return (
-            <div
-                className={className}
-                style={{
-                    width: this.props.width?this.props.width+'px':'100%'
-                }}
-                ref={(playerContainer)=>{
-                    this.playerContainer = playerContainer;
-                }}
-            >
-                {this.drawLoading()}
-                {this.drawStalled()}
-                {this.drawPlayStopSplash()}
+		this.setState({
+			fullScreen: false
+		} as State);
+	}
 
-                <video
-                    width="100%"
-                    height={this.props.height?this.props.height:''}
-                    ref={(player)=>{
-                        this.player = player;
-                    }}
-                    onClick={this.handlerPlayStop}
-                    poster={this.props.poster}
-                >
-                    {this.getSources()}
+	private drawLoading(): JSX.Element {
+		if (this.state.loading) {
+			return (
+				<div className="ui-video-player-loading"/>
+			);
+		}
+	}
 
-                </video>
+	private drawStalled(): JSX.Element {
+		if (this.state.stalled) {
+			return (
+				<div className="ui-video-player-stalled">
+					<p>Media data is not available</p>
+				</div>
+			);
+		}
+	}
 
-                <UIVideoControlsComponent
-                    played={this.player? this.player.paused : true}
-                    mute={this.player? this.state.muted:true}
-                    duration={this.state.duration}
-                    currentTime={this.state.currentTime}
-                    handlerPlayStop={this.handlerPlayStop}
-                    handlerChangeCurrentTime={this.handlerSeekBarChange}
-                    handlerToggleSound={this.handlerSoundsToggler}
-                    handlerChangeSoundLevel={this.handlerChangeSoundLevel}
-                    handlerFullscreen={this.handlerFullscreen}
-                    progressEnd={this.state.progressEnd}
-                    hide={this.state.hideControls}
-                    soundLevel={this.state.soundLevel}
-                    fullscreenEnable={this.state.fullScreen}
+	private drawPlayStopSplash(): JSX.Element {
+		let className: string = "ui-video-player-ps-splash play";
 
-                />
+		if (!this.state.paused || this.state.loading) {
+			className += " hide";
+		}
 
-                {this.drawAdv()}
-            </div>
-        );
-    }
+		if (!this.state.adv && this.state.paused) {
+			return (
+				<div
+					onClick={this.handlerPlayStop}
+					className={className}
+				/>
+			);
+		}
+	}
+
+
+	public render() {
+		let className: string = "ui-video-player-component";
+
+		if (this.state.fullScreen && this.state.hideControls) {
+			className += " hide-cursor";
+		}
+
+		return (
+			<div
+				className={className}
+				style={{
+					width: this.props.width ? this.props.width + 'px' : '100%'
+				}}
+				ref={(playerContainer) => {
+					this.playerContainer = playerContainer;
+				}}
+			>
+				{this.drawLoading()}
+				{this.drawStalled()}
+				{this.drawPlayStopSplash()}
+
+				<video
+					width="100%"
+					height={this.props.height ? this.props.height : ''}
+					ref={(player) => {
+						this.player = player;
+					}}
+					onClick={this.handlerVideoClick}
+					poster={this.props.poster}
+				>
+					{this.getSources()}
+				</video>
+
+				<UIVideoControlsComponent
+					played={this.player ? this.player.paused : true}
+					mute={this.player ? this.state.muted : true}
+					duration={this.state.duration}
+					currentTime={this.state.currentTime}
+					handlerPlayStop={this.handlerPlayStop}
+					handlerChangeCurrentTime={this.handlerSeekBarChange}
+					handlerToggleSound={this.handlerSoundsToggler}
+					handlerChangeSoundLevel={this.handlerChangeSoundLevel}
+					handlerFullscreen={this.handlerFullscreen}
+					progressEnd={this.state.progressEnd}
+					hide={this.state.hideControls}
+					soundLevel={this.state.soundLevel}
+					fullscreenEnable={this.state.fullScreen}
+				/>
+
+				{this.drawAdv()}
+			</div>
+		);
+	}
 }

@@ -22,6 +22,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-stylus": "^2.6.0",
+    "is-mobile": "^0.2.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.2",
     "react-video-seek-slider": "^1.1.1",
