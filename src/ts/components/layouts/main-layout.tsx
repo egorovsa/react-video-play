@@ -34,7 +34,10 @@ export class AppComponent extends React.Component<Props, State> {
         return (
             <div>
                 <div className="container">
-                    <UIVideoComponent sources={src}/>
+                    <UIVideoComponent
+                        sources={src}
+                        poster="https://placeholdit.imgix.net/~text?txtsize=42&txt=React-Html5 Video Player&w=900&h=450"
+                    />
                 </div>
             </div>
         );

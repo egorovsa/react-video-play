@@ -57,7 +57,9 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		paused: true
 	};
 
-	static defaultProps: Props = {} as Props;
+	static defaultProps: Props = {
+		controls: true
+	} as Props;
 
 	private player: HTMLVideoElement;
 	private playerContainer: HTMLDivElement;
@@ -404,6 +406,27 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		}
 	}
 
+	private getControls(): JSX.Element {
+		if (this.props.controls) {
+			return (
+				<UIVideoControlsComponent
+					played={this.player ? this.player.paused : true}
+					mute={this.player ? this.state.muted : true}
+					duration={this.state.duration}
+					currentTime={this.state.currentTime}
+					handlerPlayStop={this.handlerPlayStop}
+					handlerChangeCurrentTime={this.handlerSeekBarChange}
+					handlerToggleSound={this.handlerSoundsToggler}
+					handlerChangeSoundLevel={this.handlerChangeSoundLevel}
+					handlerFullscreen={this.handlerFullscreen}
+					progressEnd={this.state.progressEnd}
+					hide={this.state.hideControls}
+					soundLevel={this.state.soundLevel}
+					fullscreenEnable={this.state.fullScreen}
+				/>
+			);
+		}
+	}
 
 	public render() {
 		let className: string = "ui-video-player-component";
@@ -438,22 +461,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 					{this.getSources()}
 				</video>
 
-				<UIVideoControlsComponent
-					played={this.player ? this.player.paused : true}
-					mute={this.player ? this.state.muted : true}
-					duration={this.state.duration}
-					currentTime={this.state.currentTime}
-					handlerPlayStop={this.handlerPlayStop}
-					handlerChangeCurrentTime={this.handlerSeekBarChange}
-					handlerToggleSound={this.handlerSoundsToggler}
-					handlerChangeSoundLevel={this.handlerChangeSoundLevel}
-					handlerFullscreen={this.handlerFullscreen}
-					progressEnd={this.state.progressEnd}
-					hide={this.state.hideControls}
-					soundLevel={this.state.soundLevel}
-					fullscreenEnable={this.state.fullScreen}
-				/>
 
+				{this.getControls()}
 				{this.drawAdv()}
 			</div>
 		);
