@@ -531,9 +531,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		if (this.state.fullScreen && this.state.hideControls) {
 			className += " hide-cursor";
 		}
-
-		console.log((this.state.containerWidth / 100) * 75);
-
+		
 		return (
 			<div
 				className={className}
