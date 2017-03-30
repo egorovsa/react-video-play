@@ -26,35 +26,35 @@ export class UIVideoAdvSlider extends React.Component<Props, State> {
 	static defaultProps: Props = {
 		slides: [
 			{
-				img: "http://lorempixel.com/100/80/people/",
+				img: "http://lorempixel.com/100/75/people/",
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/city/",
+				img: "http://lorempixel.com/100/75/city/",
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/nature/",
+				img: "http://lorempixel.com/100/75/nature/",
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/transport/",
+				img: "http://lorempixel.com/100/75/transport/",
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/business/",
+				img: "http://lorempixel.com/100/75/business/",
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/nightlife/",
+				img: "http://lorempixel.com/100/75/nightlife/",
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/food/",
+				img: "http://lorempixel.com/100/75/food/",
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/cats/",
+				img: "http://lorempixel.com/100/75/cats/",
 				link: "http://video.egorov.pw",
 			},
 		],

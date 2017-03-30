@@ -16,13 +16,15 @@ export interface VideoSource {
 }
 
 export interface Props {
+	sources: VideoSource[]
+	slider?: boolean,
+	poster?: string,
 	width?: number,
 	height?: number,
 	controls?: boolean,
 	autoPlay?: boolean,
 	loop?: boolean,
-	sources: VideoSource[]
-	poster?: string
+
 }
 
 export interface State {
@@ -61,7 +63,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	};
 
 	static defaultProps: Props = {
-		controls: true
+		controls: true,
+		slider: true
 	} as Props;
 
 	private player: HTMLVideoElement;
@@ -247,9 +250,14 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		if (this.state.adv) {
 			return (
 				<div className="ui-video-player-adv">
-					<UIVideoAdvSlider/>
 				</div>
 			)
+		}
+	}
+
+	private drawSlider(): JSX.Element {
+		if (this.state.adv && this.props.slider) {
+			return (<UIVideoAdvSlider/>)
 		}
 	}
 
@@ -475,6 +483,9 @@ export class UIVideoComponent extends React.Component<Props, State> {
 				{this.drawLoading()}
 				{this.drawStalled()}
 				{this.drawPlayStopSplash()}
+				{this.getControls()}
+				{this.drawAdv()}
+				{this.drawSlider()}
 
 				<video
 					width="100%"
@@ -487,10 +498,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
 				>
 					{this.getSources()}
 				</video>
-
-
-				{this.getControls()}
-				{this.drawAdv()}
 			</div>
 		);
 	}
