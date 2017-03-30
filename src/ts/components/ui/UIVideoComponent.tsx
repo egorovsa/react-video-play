@@ -164,6 +164,10 @@ export class UIVideoComponent extends React.Component<Props, State> {
 				} as State);
 			});
 
+			this.player.addEventListener('pause', () => {
+				this.pause(true);
+			});
+
 			this.player.addEventListener("progress", () => {
 				let currentTime: number = this.player.currentTime;
 				let buffer: TimeRanges = this.player.buffered;
@@ -243,7 +247,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		if (this.state.adv) {
 			return (
 				<div className="ui-video-player-adv">
-					<h1>ADV HERE</h1>
 					<UIVideoAdvSlider/>
 				</div>
 			)
@@ -289,34 +292,41 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
 	private handlerPlayStop = (adv?): void => {
 		if (this.player.paused) {
-			this.player.play();
-
-			if (adv) {
-				this.setState({
-					adv: false,
-					paused: false
-				} as State, () => {
-					if (mobile()) {
-						this.controlsHider();
-					}
-				});
-			}
-
-
+			this.play();
 		} else {
-			this.player.pause();
-
-			clearInterval(this.interval);
-
-			if (adv) {
-				this.setState({
-					adv: true,
-					paused: true,
-					hideControls: false
-				} as State);
-			}
+			this.pause(adv);
 		}
 	};
+
+	private play(): void {
+		this.player.play();
+
+		this.setState({
+			adv: false,
+			paused: false
+		} as State, () => {
+			if (mobile()) {
+				this.controlsHider();
+			}
+		});
+	}
+
+	private pause(adv?): void {
+		this.player.pause();
+
+		clearInterval(this.interval);
+
+		this.setState({
+			paused: true,
+			hideControls: false
+		} as State)
+
+		if (adv) {
+			this.setState({
+				adv: true,
+			} as State);
+		}
+	}
 
 	private handlerVideoClick = (): void => {
 		if (!mobile()) {

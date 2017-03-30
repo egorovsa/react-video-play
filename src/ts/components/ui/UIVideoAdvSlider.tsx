@@ -50,11 +50,11 @@ export class UIVideoAdvSlider extends React.Component<Props, State> {
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/people/",
+				img: "http://lorempixel.com/100/80/food/",
 				link: "http://video.egorov.pw",
 			},
 			{
-				img: "http://lorempixel.com/100/80/people/",
+				img: "http://lorempixel.com/100/80/cats/",
 				link: "http://video.egorov.pw",
 			},
 		],
