@@ -18,7 +18,7 @@ export class UIVideoAdvTest extends React.Component<Props, State> {
 			<div
 				className="ui-video-player-adv"
 			>
-				<h1>IT IS ADV COMPONENT</h1>
+				<h1>UIVideoAdvTest</h1>
 			</div>
 		);
 	}
