@@ -21,7 +21,8 @@ export interface Props {
 	handlerChangeCurrentTime: (value: number) => void,
 	handlerToggleSound: () => void,
 	handlerChangeSoundLevel: (value: number) => void,
-	handlerFullscreen: () => void
+	handlerFullscreen: () => void,
+	handlerQuality: () => void,
 }
 
 export interface State {
@@ -150,6 +151,15 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 		);
 	}
 
+	private drawQuality(): JSX.Element {
+		return (
+			<div
+				onClick={this.props.handlerQuality}
+				className="hq"
+			/>
+		);
+	}
+
 	public render() {
 		return (
 			<div className={this.props.hide ? "ui-video-player-controls hide" : "ui-video-player-controls"}>
@@ -159,6 +169,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 					{this.drawSoundBlock()}
 					{this.drawTimes()}
 					{this.drawFullScreen()}
+					{this.drawQuality()}
 				</div>
 
 				<div className="overlay"></div>

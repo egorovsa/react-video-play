@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
 import {UIVideoSlider} from "./UIVideoSliderComponent";
-import {Component, ComponentClass} from "react";
 const mobile = require('is-mobile');
 
 export enum VideoSourceType{
@@ -16,8 +15,13 @@ export interface VideoSource {
 	codecs?: string
 }
 
+export interface Source {
+	name: string,
+	source: VideoSource[]
+}
+
 export interface Props {
-	sources: VideoSource[]
+	sources: Source[]
 	showSlider?: boolean,
 	showAdv?: boolean,
 	poster?: string,
@@ -27,7 +31,6 @@ export interface Props {
 	autoPlay?: boolean,
 	loop?: boolean,
 	advComponent?: JSX.Element
-
 }
 
 export interface State {
@@ -38,13 +41,15 @@ export interface State {
 	progressEnd: number,
 	soundLevel: number,
 	soundLevelSave: number,
+	srcIndex: number,
 	adv: boolean,
 	hideControls: boolean,
 	muted: boolean,
 	fullScreen: boolean,
 	loading: boolean,
 	stalled: boolean,
-	paused: boolean
+	paused: boolean,
+	quality: boolean
 }
 
 export class UIVideoComponent extends React.Component<Props, State> {
@@ -56,13 +61,15 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		progressEnd: 0,
 		soundLevel: 100,
 		soundLevelSave: 100,
+		srcIndex: 0,
 		adv: false,
 		hideControls: false,
 		muted: false,
 		fullScreen: false,
-		loading: true,
+		loading: false,
 		stalled: false,
-		paused: true
+		paused: true,
+		quality: false
 	};
 
 	static defaultProps: Props = {
@@ -75,6 +82,12 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	private playerContainer: HTMLDivElement;
 	private interval: any = null;
 	private hideControlsTimeoutId: any = null;
+
+	private videoTypes: string[] = [
+		'video/mp4',
+		'video/webm',
+		'video/ogg'
+	]
 
 	componentDidMount() {
 		this.events();
@@ -89,6 +102,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 			this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
 		}
 		window.addEventListener('resize', this.handlerWindowResize);
+
+		this.setSource();
 	}
 
 	componentWillUnmount() {
@@ -123,14 +138,15 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
 	private handlerMouseEnter = (): void => {
 		this.setState({
-			hideControls: false
+			hideControls: false,
 		} as State);
 	};
 
 	private handlerMouseLeave = (): void => {
 		if (!this.player.paused) {
 			this.setState({
-				hideControls: true
+				hideControls: true,
+				quality: false
 			} as State);
 		}
 	};
@@ -213,31 +229,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		}
 	}
 
-	private getVideoType(source: VideoSource): string {
-		let videoType: string = "video/mp4;";
-
-		switch (source.type) {
-			case VideoSourceType.videi_ogg:
-				videoType = 'video/ogg;';
-				break;
-			case VideoSourceType.video_webm:
-				videoType = 'video/webm;';
-				break;
-		}
-
-		if (source.codecs) {
-			videoType += ' codecs="' + source.codecs + '"';
-		}
-
-		return videoType;
-	}
-
-	private getSources(): JSX.Element[] {
-		return this.props.sources.map((src: VideoSource, i: number) => {
-			return (<source src={src.source} type={this.getVideoType(src)} key={i}/>)
-		});
-	}
-
 	private handlerSeekBarChange = (value: number): void => {
 		this.player.currentTime = value;
 
@@ -311,6 +302,31 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		}
 	};
 
+	private handlerChangeQualityClick = (index: number): void => {
+		this.setState({
+			srcIndex: index,
+			quality: false
+		} as State, () => {
+			this.setSource(true);
+		});
+	};
+
+	private setSource(play?): void {
+		for (let i = 0; i < this.props.sources[this.state.srcIndex].source.length; i++) {
+			let src: VideoSource = this.props.sources[this.state.srcIndex].source[i];
+			let type: string = this.getVideoTypeByEnum(src.type);
+
+			if (this.player.canPlayType(type)) {
+				this.player.src = src.source;
+
+				if (play) {
+					this.play();
+				}
+				break;
+			}
+		}
+	}
+
 	private play(): void {
 		this.player.play();
 
@@ -351,6 +367,10 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		}
 	};
 
+	private getVideoTypeByEnum(type: VideoSourceType) {
+		return this.videoTypes[type];
+	}
+
 	private onFullscreenChange = (e): void => {
 		let fullscreenElement =
 			document['fullscreenElement'] ||
@@ -376,6 +396,18 @@ export class UIVideoComponent extends React.Component<Props, State> {
 			this.cancelFullscreen();
 		} else {
 			this.launchFullScreen(this.playerContainer);
+		}
+	};
+
+	private handlerQuality = (): void => {
+		if (this.state.quality) {
+			this.setState({
+				quality: false
+			} as State);
+		} else {
+			this.setState({
+				quality: true
+			} as State);
 		}
 	};
 
@@ -432,7 +464,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	private drawPlayStopSplash(): JSX.Element {
 		let className: string = "ui-video-player-ps-splash play";
 
-		if (!this.state.paused || this.state.loading) {
+		if (!this.state.paused) {
 			className += " hide";
 		}
 
@@ -444,6 +476,28 @@ export class UIVideoComponent extends React.Component<Props, State> {
 				/>
 			);
 		}
+	}
+
+	private drawQuality(): JSX.Element {
+		let className = this.state.quality ? "ui-video-player-src " : "ui-video-player-src hide";
+
+		return (
+			<div className={className}>
+				{
+					this.props.sources.map((source: Source, i: number) => {
+						return (
+							<div
+								className="src-one"
+								onClick={this.handlerChangeQualityClick.bind(this, i)}
+								key={i}
+							>
+								{source.name}
+							</div>
+						)
+					})
+				}
+			</div>
+		)
 	}
 
 	private getControls(): JSX.Element {
@@ -459,6 +513,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 					handlerToggleSound={this.handlerSoundsToggler}
 					handlerChangeSoundLevel={this.handlerChangeSoundLevel}
 					handlerFullscreen={this.handlerFullscreen}
+					handlerQuality={this.handlerQuality}
 					progressEnd={this.state.progressEnd}
 					hide={this.state.hideControls}
 					soundLevel={this.state.soundLevel}
@@ -476,6 +531,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		}
 
 		return (
+
 			<div
 				className={className}
 				style={{
@@ -491,6 +547,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 				{this.getControls()}
 				{this.drawAdv()}
 				{this.drawSlider()}
+				{this.drawQuality()}
 
 				<video
 					width="100%"
@@ -500,9 +557,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 					}}
 					onClick={this.handlerVideoClick}
 					poster={this.props.poster}
-				>
-					{this.getSources()}
-				</video>
+				/>
 			</div>
 		);
 	}
