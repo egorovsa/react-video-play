@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
+import {UIVideoAdvSlider} from "./UIVideoAdvSlider";
 const mobile = require('is-mobile');
 
 export enum VideoSourceType{
@@ -25,6 +26,7 @@ export interface Props {
 }
 
 export interface State {
+	containerWidth: number,
 	currentVolume: number,
 	duration: number,
 	currentTime: number,
@@ -42,6 +44,7 @@ export interface State {
 
 export class UIVideoComponent extends React.Component<Props, State> {
 	state: State = {
+		containerWidth: 0,
 		currentVolume: 0,
 		duration: 0,
 		currentTime: 0,
@@ -68,6 +71,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
 	componentDidMount() {
 		this.events();
+		this.handlerWindowResize();
 
 		if (this.playerContainer) {
 			this.playerContainer.addEventListener('mouseenter', this.handlerMouseEnter);
@@ -77,6 +81,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 			this.playerContainer.addEventListener("fullscreenchange", this.onFullscreenChange);
 			this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
 		}
+		window.addEventListener('resize', this.handlerWindowResize);
 	}
 
 	componentWillUnmount() {
@@ -86,7 +91,22 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		this.playerContainer.removeEventListener("mozfullscreenchange", this.onFullscreenChange);
 		this.playerContainer.removeEventListener("fullscreenchange", this.onFullscreenChange);
 		this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
+		window.removeEventListener('resize', this.handlerWindowResize);
 	}
+
+	private handlerWindowResize = (): void => {
+		if (this.props.width) {
+			this.setState({
+				containerWidth: this.props.width
+			} as State);
+		} else {
+			if (this.playerContainer) {
+				this.setState({
+					containerWidth: this.playerContainer.offsetWidth
+				} as State);
+			}
+		}
+	};
 
 	private handlerMouseMove = (): void => {
 		if (!mobile()) {
@@ -175,9 +195,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
 			clearTimeout(this.hideControlsTimeoutId);
 		}
 
-		console.log('handlerMouseMove');
-		console.log(!this.state.adv, this.state.fullScreen);
-
 		if (!this.state.adv && this.state.fullScreen) {
 			this.hideControlsTimeoutId = setTimeout(() => {
 				this.handlerMouseLeave();
@@ -227,6 +244,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 			return (
 				<div className="ui-video-player-adv">
 					<h1>ADV HERE</h1>
+					<UIVideoAdvSlider/>
 				</div>
 			)
 		}
@@ -339,7 +357,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	};
 
 	private launchFullScreen = (element): void => {
-		console.log('launchFullScreen');
 		if (element.requestFullScreen) {
 			element.requestFullScreen();
 		} else if (element.mozRequestFullScreen) {
