@@ -39,10 +39,8 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 	private seekRange: HTMLInputElement;
 
 	componentDidMount() {
-		this.handlerWindowResize();
-
 		window.addEventListener('resize', this.handlerWindowResize);
-
+		this.handlerWindowResize();
 	}
 
 	componentWillUnmount() {

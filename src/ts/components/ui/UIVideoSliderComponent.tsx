@@ -95,8 +95,6 @@ export class UIVideoSlider extends React.Component<Props, State> {
 	};
 
 	private getSlideStyle(): Object {
-
-
 		return {
 			marginLeft: this.props.minSlideSpace / 2,
 			marginRight: this.props.minSlideSpace / 2

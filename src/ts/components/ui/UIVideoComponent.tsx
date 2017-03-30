@@ -87,7 +87,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		'video/mp4',
 		'video/webm',
 		'video/ogg'
-	]
+	];
 
 	componentDidMount() {
 		this.events();
@@ -322,6 +322,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 				if (play) {
 					this.play();
 				}
+
 				break;
 			}
 		}
@@ -531,7 +532,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		}
 
 		return (
-
 			<div
 				className={className}
 				style={{

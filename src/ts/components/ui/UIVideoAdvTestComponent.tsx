@@ -13,12 +13,9 @@ export class UIVideoAdvTest extends React.Component<Props, State> {
 
 	public render() {
 
-
 		return (
-			<div
-				className="ui-video-player-adv"
-			>
-				<h1>UIVideoAdvTest</h1>
+			<div className="ui-video-player-adv">
+				<h1>ADV TEST COMPONENT HERE</h1>
 			</div>
 		);
 	}
