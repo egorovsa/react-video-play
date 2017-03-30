@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
-import {UIVideoAdvSlider} from "./UIVideoAdvSlider";
+import {UIVideoSlider} from "./UIVideoSliderComponent";
+import {Component, ComponentClass} from "react";
 const mobile = require('is-mobile');
 
 export enum VideoSourceType{
@@ -17,13 +18,15 @@ export interface VideoSource {
 
 export interface Props {
 	sources: VideoSource[]
-	slider?: boolean,
+	showSlider?: boolean,
+	showAdv?: boolean,
 	poster?: string,
 	width?: number,
 	height?: number,
 	controls?: boolean,
 	autoPlay?: boolean,
 	loop?: boolean,
+	advComponent?: JSX.Element
 
 }
 
@@ -64,7 +67,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 
 	static defaultProps: Props = {
 		controls: true,
-		slider: true
+		showSlider: true,
+		showAdv: true
 	} as Props;
 
 	private player: HTMLVideoElement;
@@ -247,17 +251,18 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	};
 
 	private drawAdv(): JSX.Element {
-		if (this.state.adv) {
+		if (this.state.adv && this.props.showAdv && this.props.advComponent) {
 			return (
-				<div className="ui-video-player-adv">
-				</div>
+				<span>
+					{this.props.advComponent}
+				</span>
 			)
 		}
 	}
 
 	private drawSlider(): JSX.Element {
-		if (this.state.adv && this.props.slider) {
-			return (<UIVideoAdvSlider/>)
+		if (this.state.adv && this.props.showSlider) {
+			return (<UIVideoSlider/>)
 		}
 	}
 

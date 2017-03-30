@@ -18,7 +18,7 @@ export interface State {
 	containerWidth: number
 }
 
-export class UIVideoAdvSlider extends React.Component<Props, State> {
+export class UIVideoSlider extends React.Component<Props, State> {
 	state: State = {
 		containerWidth: 0
 	};
