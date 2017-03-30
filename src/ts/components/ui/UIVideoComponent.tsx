@@ -101,6 +101,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 			this.playerContainer.addEventListener("fullscreenchange", this.onFullscreenChange);
 			this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
 		}
+
 		window.addEventListener('resize', this.handlerWindowResize);
 
 		this.setSource();
@@ -531,11 +532,14 @@ export class UIVideoComponent extends React.Component<Props, State> {
 			className += " hide-cursor";
 		}
 
+		console.log((this.state.containerWidth / 100) * 75);
+
 		return (
 			<div
 				className={className}
 				style={{
-					width: this.props.width ? this.props.width + 'px' : '100%'
+					width: this.props.width ? this.props.width + 'px' : '100%',
+					minHeight: ((this.state.containerWidth / 100) * 56) + 'px'
 				}}
 				ref={(playerContainer) => {
 					this.playerContainer = playerContainer;

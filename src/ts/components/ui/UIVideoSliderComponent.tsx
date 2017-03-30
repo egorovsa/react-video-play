@@ -67,8 +67,6 @@ export class UIVideoSlider extends React.Component<Props, State> {
 
 	componentDidMount() {
 		if (!this.props.containerWidth) {
-
-			console.log('ik');
 			this.handlerResize();
 
 			window.addEventListener('resize', this.handlerResize)
@@ -129,8 +127,6 @@ export class UIVideoSlider extends React.Component<Props, State> {
 	}
 
 	public render() {
-
-		console.log(this.state.containerWidth);
 		return (
 			<div
 				className="ui-video-adv-slider"
