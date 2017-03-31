@@ -4,6 +4,8 @@
 
 React video player with preview slider and adv like youtube
 
+Demo [react-html5-video](http://video.egorov.pw)
+
 ## How to install
 ```
 npm i react-html5-video --save
