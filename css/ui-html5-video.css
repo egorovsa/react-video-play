@@ -1,0 +1,458 @@
+.ui-video-seek-slider {
+  position: relative;
+}
+.ui-video-seek-slider:focus {
+  outline: none;
+}
+.ui-video-seek-slider .track {
+  padding: 10px 0;
+  cursor: pointer;
+  outline: none;
+}
+.ui-video-seek-slider .track:focus {
+  border: 0;
+  outline: none;
+}
+.ui-video-seek-slider .track .main {
+  width: 100%;
+  height: 3px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 30px;
+  position: absolute;
+  left: 0;
+  top: 8.5px;
+  overflow: hidden;
+  transition: transform 0.4s;
+  outline: none;
+}
+.ui-video-seek-slider .track .main:focus {
+  border: 0;
+  outline: none;
+}
+.ui-video-seek-slider .track .main .buffered {
+  position: absolute;
+  background-color: rgba(255,255,255,0.3);
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  z-index: 2;
+  transform-origin: 0 0;
+}
+.ui-video-seek-slider .track .main .seek-hover {
+  position: absolute;
+  background-color: rgba(255,255,255,0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.ui-video-seek-slider .track .main .connect {
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+}
+.ui-video-seek-slider .track.active .main {
+  transform: scaleY(2);
+}
+.ui-video-seek-slider .thumb {
+  pointer-events: none;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: -6px;
+  top: 4px;
+  z-index: 4;
+  transform: translateX(0px);
+}
+.ui-video-seek-slider .thumb .handler {
+  transition: transform 0.2s;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0;
+  transform: scale(0.4);
+}
+.ui-video-seek-slider .thumb.active .handler {
+  opacity: 1;
+  transform: scale(1);
+}
+.ui-video-seek-slider .hover-time {
+  position: absolute;
+  background-color: rgba(0,0,0,0.3);
+  line-height: 18px;
+  font-size: 16px;
+  color: #ddd;
+  top: -25px;
+  left: 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateX(150px);
+  pointer-events: none;
+}
+.ui-video-seek-slider .hover-time.active {
+  opacity: 1;
+}
+.ui-video-seek-slider:hover .track .main .seek-hover {
+  opacity: 1;
+}
+.ui-video-adv-slider {
+  position: absolute;
+  left: 0;
+  bottom: 35px;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+.ui-video-adv-slider.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.ui-video-adv-slider .ui-video-adv-slider-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.ui-video-adv-slider .ui-video-adv-slider-wrapper .slides-container {
+  width: 2000px;
+  overflow: hidden;
+}
+.ui-video-adv-slider .ui-video-adv-slider-wrapper .slides-container .ui-video-adv-slide {
+  display: inline-block;
+  float: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.ui-video-adv-slider .ui-video-adv-slider-wrapper .slides-container .ui-video-adv-slide > img {
+  width: 100%;
+}
+.ui-video-player-component {
+  background-color: #101010;
+  position: relative;
+  overflow: hidden;
+  min-width: 304px;
+}
+.ui-video-player-component:focus {
+  outline: 0;
+  outline-offset: -1;
+  border: 0;
+}
+.ui-video-player-component.hide-cursor {
+  cursor: none;
+}
+.ui-video-player-component .ui-video-player-loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/img/ring.svg");
+  z-index: 5;
+}
+.ui-video-player-component .ui-video-player-ps-splash {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  left: 50%;
+  top: 50%;
+  margin-top: -40px;
+  margin-left: -40px;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 100%;
+  z-index: 5;
+  transform: scale(1);
+  transition: background-color, opacity 0.3s;
+}
+.ui-video-player-component .ui-video-player-ps-splash.play {
+  cursor: pointer;
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: 19px 16px;
+  background-image: url("/img/play.svg");
+  opacity: 0.8;
+}
+.ui-video-player-component .ui-video-player-ps-splash.play.hide {
+  cursor: default;
+  opacity: 0;
+}
+.ui-video-player-component .ui-video-player-ps-splash:hover.play {
+  background-color: rgba(255,255,255,0.5);
+  opacity: 0.7;
+}
+.ui-video-player-component .ui-video-player-ps-splash:hover.play.hide {
+  opacity: 0;
+}
+.ui-video-player-component .ui-video-player-stalled {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  background-color: #000;
+  z-index: 11;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+}
+.ui-video-player-component .ui-video-player-stalled p {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  margin-top: -14px;
+}
+.ui-video-player-component .adv-main-container.hide {
+  display: none;
+}
+.ui-video-player-component .ui-video-player-adv {
+  transition: background-color 0.5s;
+  position: absolute;
+  width: calc(100% - 100px);
+  height: calc(100% - 100px);
+  left: 50px;
+  top: 10px;
+  background: rgba(0,0,0,0.7);
+  text-align: center;
+  z-index: 10;
+}
+.ui-video-player-component .ui-video-player-adv h1 {
+  color: #fff;
+  font-size: 20px;
+}
+.ui-video-player-component .ui-video-player-controls {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  z-index: 15;
+}
+.ui-video-player-component .ui-video-player-controls.hide .controllers-block {
+  transform: translateY(50px);
+  opacity: 0;
+}
+.ui-video-player-component .ui-video-player-controls.hide .overlay {
+  opacity: 0;
+}
+.ui-video-player-component .ui-video-player-controls .overlay {
+  transition: opacity 0.5s;
+  position: absolute;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+  width: 100%;
+  height: 70px;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block {
+  transition: transform 0.3s ease-in-out, opacity 0.1s;
+  padding: 0 15px;
+  position: relative;
+  box-sizing: border-box;
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .ui-video-seek-slider {
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  width: calc(100% - 30px);
+  z-index: 100;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .play-pause-block {
+  width: 50px;
+  float: left;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  height: 100%;
+  text-align: center;
+  z-index: 1;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .play-pause-block:before {
+  transition: background-image 0.3s ease;
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-size: 28px;
+  background-repeat: no-repeat;
+  background-position: center;
+  left: 0;
+  top: 0;
+  background-image: url("/img/play.svg");
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .play-pause-block.played:before {
+  background-image: url("/img/pause.svg");
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .controls-time {
+  height: 100%;
+  line-height: 40px;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  float: left;
+  display: inline-block;
+  padding: 0 15px;
+  z-index: 1;
+  position: relative;
+  pointer-events: none;
+  cursor: default;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .fullscreen {
+  height: 100%;
+  float: right;
+  display: inline-block;
+  width: 40px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .fullscreen:before {
+  transition: transform 0.3s ease;
+  content: '';
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-size: 28px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/img/fs.svg");
+  transform: scale(0.8);
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .hq {
+  height: 100%;
+  float: right;
+  display: inline-block;
+  width: 40px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .hq:before {
+  transition: transform 0.3s ease;
+  content: '';
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-size: 28px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/img/hq.svg");
+  transform: scale(0.8);
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .hq:hover:before {
+  transform: scale(1);
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .hq.opened:before {
+  transform: scale(1);
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .hq.opened:hover:before {
+  transform: scale(0.8);
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .sound-block {
+  width: 130px;
+  height: 100%;
+  float: left;
+  display: inline-block;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .sound-block .sound-slider {
+  width: 100px;
+  height: 100%;
+  float: leftf;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .sound-block .sound-slider .ui-video-seek-slider {
+  position: relative;
+  top: 0;
+  margin-top: 10px;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .sound-block .sound-slider .ui-video-seek-slider .connect {
+  background-color: #fff;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .sound-block .sound-slider .ui-video-seek-slider .thumb .handler {
+  background-color: #fff;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .sound-block .sound-icon {
+  width: 30px;
+  height: 100%;
+  float: left;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .sound-block .sound-icon:before {
+  transition: background-image 0.3s ease;
+  content: '';
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-size: 19px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/img/sound.svg");
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .sound-block .sound-icon.mute:before {
+  background-image: url("/img/mute.svg");
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .fullscreen-block {
+  width: 30px;
+}
+.ui-video-player-component .ui-video-player-src {
+  width: 80px;
+  background: rgba(0,0,0,0.7);
+  box-sizing: border-box;
+  padding: 10px 15px;
+  right: 35px;
+  bottom: 50px;
+  position: absolute;
+  z-index: 200;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.ui-video-player-component .ui-video-player-src.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.ui-video-player-component .ui-video-player-src .src-one {
+  color: rgba(255,255,255,0.8);
+  box-sizing: border-box;
+  padding: 5px 0;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+.ui-video-player-component .ui-video-player-src .src-one:hover {
+  color: #fff;
+}

@@ -18,152 +18,159 @@ const plumber = require('gulp-plumber');
 const expressPort = 3000;
 
 const vendorArray = [
-    'react',
-    'react-dom',
+	'react',
+	'react-dom',
 ];
 
 function handleTSErrors() {
-    var args = Array.prototype.slice.call(arguments);
+	var args = Array.prototype.slice.call(arguments);
 
-    notify.onError({
-        title: "TypeScript Error",
-        message: "<%= error.message %>"
-    }).apply(this, args);
+	notify.onError({
+		title: "TypeScript Error",
+		message: "<%= error.message %>"
+	}).apply(this, args);
 
-    this.emit('end');
+	this.emit('end');
 }
 
 function startExpress(port) {
-    var server = express();
+	var server = express();
 
-    server.use('/', express.static('dist'));
+	server.use('/', express.static('dist'));
 
-    server.get('*', function (req, res) {
-        res.set('content-type', 'text/html');
-        res.send(fs.readFileSync('dist/index.html', 'utf8'));
-    });
+	server.get('*', function (req, res) {
+		res.set('content-type', 'text/html');
+		res.send(fs.readFileSync('dist/index.html', 'utf8'));
+	});
 
-    server.listen(port);
+	server.listen(port);
 }
 
 function stylusCompile() {
-    return gulp.src('src/styl/style.styl')
-        .pipe(plumber())
-        .pipe(sourcemaps.init())
-        .pipe(stylus())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/css'))
-        .pipe(browserSync.stream());
+	return gulp.src('src/styl/style.styl')
+		.pipe(plumber())
+		.pipe(sourcemaps.init())
+		.pipe(stylus())
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('dist/css'))
+		.pipe(browserSync.stream());
 }
 
 function browserSyncInit() {
-    return browserSync.init({
-        codeSync: true,
-        open: false,
-        proxy: 'http://localhost:' + (expressPort + 1)
-    });
+	return browserSync.init({
+		codeSync: true,
+		open: false,
+		proxy: 'http://localhost:' + (expressPort + 1)
+	});
 }
 
 function vendor() {
-    var vendor = browserify({
-        debug: true
-    });
+	var vendor = browserify({
+		debug: true
+	});
 
-    vendorArray.forEach(function (lib) {
-        vendor.require(lib);
-    });
+	vendorArray.forEach(function (lib) {
+		vendor.require(lib);
+	});
 
-    return vendor.bundle()
-        .on('error', handleTSErrors)
-        .pipe(source('vendor.js'))
-        .pipe(buffer())
-        .pipe(gulp.dest('./dist'));
+	return vendor.bundle()
+		.on('error', handleTSErrors)
+		.pipe(source('vendor.js'))
+		.pipe(buffer())
+		.pipe(gulp.dest('./dist'));
 }
 
 var bundler = null;
 
 function bundle() {
-    var bundler = bundler || browserify({
-            entries: ['./src/ts/app.ts'],
-            extensions: ['.ts', '.tsx'],
-            debug: true
+	var bundler = bundler || browserify({
+			entries: ['./src/ts/app.ts'],
+			extensions: ['.ts', '.tsx'],
+			debug: true
 
-        })
-            .plugin(tsify, {target: 'es5'});
+		})
+			.plugin(tsify, {target: 'es5'});
 
-    return bundler
-        .external(vendorArray)
-        .bundle()
-        .on('error', handleTSErrors)
+	return bundler
+		.external(vendorArray)
+		.bundle()
+		.on('error', handleTSErrors)
 		.pipe(exorcist('dist/app.js.map'))
 		.pipe(source('app.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(browserSync.stream());
+		.pipe(gulp.dest('dist'))
+		.pipe(browserSync.stream());
 }
 
 function createHtml() {
-    return gulp.src('src/index.html')
-        .pipe(gulp.dest('dist'))
-        .pipe(browserSync.stream());
+	return gulp.src('src/index.html')
+		.pipe(gulp.dest('dist'))
+		.pipe(browserSync.stream());
 }
 
 function images() {
-    return gulp.src(['src/img/**/*','src/img/*.**'])
-        .pipe(gulp.dest('dist/img'));
+	return gulp.src(['src/img/**/*', 'src/img/*.**'])
+		.pipe(gulp.dest('dist/img'));
 }
 
 gulp.task('html', function () {
-    createHtml();
+	createHtml();
 });
 
 gulp.task('styles', ['html'], function () {
-    return stylusCompile();
+	return stylusCompile();
+});
+
+gulp.task('stylesProduction', function () {
+	return gulp.src('src/styl/ui-html5-video.styl')
+		.pipe(plumber())
+		.pipe(stylus())
+		.pipe(gulp.dest('css'));
 });
 
 gulp.task('images', ['styles'], function () {
-    return images();
+	return images();
 });
 
 gulp.task('vendor', ['images'], function () {
-    return vendor();
+	return vendor();
 });
 
 gulp.task('bundler', ['vendor'], function () {
-    return bundle();
+	return bundle();
 });
 
 gulp.task('browserSync', ['bundler'], function () {
-    browserSyncInit()
+	browserSyncInit()
 });
 
 gulp.task('default', ['browserSync'], function () {
-    startExpress(expressPort + 1);
+	startExpress(expressPort + 1);
 
-    gulp.watch([
-        './src/ts/*.ts',
-        './src/ts/**/*.ts',
-        './src/ts/**/*.tsx',
-        '!./src/ts/server.ts'
-    ], function () {
-        bundle();
-    });
+	gulp.watch([
+		'./src/ts/*.ts',
+		'./src/ts/**/*.ts',
+		'./src/ts/**/*.tsx',
+		'!./src/ts/server.ts'
+	], function () {
+		bundle();
+	});
 
-    gulp.watch([
-        './src/styl/**/*.styl'
-    ], function () {
-        stylusCompile();
-    });
+	gulp.watch([
+		'./src/styl/**/*.styl'
+	], function () {
+		stylusCompile();
+	});
 
-    gulp.watch([
-        './src/index.html'
-    ], function () {
-        createHtml();
-    });
+	gulp.watch([
+		'./src/index.html'
+	], function () {
+		createHtml();
+	});
 
-    gulp.watch([
-        './src/img/**/*.**'
-    ], function () {
-        images();
-    });
+	gulp.watch([
+		'./src/img/**/*.**'
+	], function () {
+		images();
+	});
 
 });

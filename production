@@ -1,0 +1,13 @@
+#!/bin/sh
+cd "$(dirname "$0")"
+rm -rf lib/
+rm -rf css/
+mkdir lib
+mkdir css
+yarn
+gulp stylesProduction
+tsc ./src/ts/components/ui/ReactHtml5Video.tsx -d --jsx react --outDir ./lib
+
+
+
+

@@ -96,13 +96,14 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 		width calc(100% - 100px)
 		height calc(100% - 100px)
 		left 50px
-		top 50px
+		top 10px
 		background rgba(#000, 0.7)
 		text-align center
 		z-index 10
 
 		h1
 			color #fff;
+			font-size 20px
 
 	.ui-video-player-controls
 		position absolute
@@ -171,11 +172,11 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 					background-position center
 					left 0
 					top 0
-					background-image: url(/img/play.svg);
+					background-image: url('/img/play.svg');
 
 				&.played
 					&:before
-						background-image: url(/img/pause.svg);
+						background-image: url('/img/pause.svg');
 
 			.controls-time
 				height 100%
@@ -210,7 +211,7 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 					background-size: 28px;
 					background-repeat: no-repeat;
 					background-position center
-					background-image: url(/img/fs.svg);
+					background-image: url('/img/fs.svg');
 					transform scale(0.8)
 
 			.hq
@@ -233,7 +234,7 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 					background-size: 28px;
 					background-repeat: no-repeat;
 					background-position center
-					background-image: url(/img/hq.svg);
+					background-image: url('/img/hq.svg');
 					transform scale(0.8)
 
 				&:hover
@@ -295,11 +296,11 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 						background-size: 19px;
 						background-repeat: no-repeat;
 						background-position center
-						background-image: url(/img/sound.svg);
+						background-image: url('/img/sound.svg');
 
 					&.mute
 						&:before
-							background-image: url(/img/mute.svg);
+							background-image: url('/img/mute.svg');
 
 			.fullscreen-block
 				width 30px

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Source, UIVideoComponent, VideoSource, VideoSourceType} from "../ui/UIVideoComponent";
+import {Source, ReactHtml5Video,  VideoSourceType} from "../ui/ReactHtml5Video";
 import {UIVideoAdvTest} from "../ui/UIVideoAdvTestComponent";
 
 export interface Props {
@@ -81,7 +81,7 @@ export class AppComponent extends React.Component<Props, State> {
 		return (
 			<div>
 				<div className="container">
-					<UIVideoComponent
+					<ReactHtml5Video
 						sources={src}
 						poster="http://lorempixel.com/900/450/people/"
 						advComponent={<UIVideoAdvTest/>}
