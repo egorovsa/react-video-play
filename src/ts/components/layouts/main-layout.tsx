@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Source, ReactHtml5Video, VideoSourceType} from "../ui/ReactHtml5Video";
+import {Source, ReactHtml5Video} from "../ui/ReactHtml5Video";
 import {UIVideoAdvTest} from "../ui/UIVideoAdvTestComponent";
 import {VideoSliderSlide} from "../ui/UIVideoSliderComponent";
 
@@ -22,58 +22,58 @@ export class AppComponent extends React.Component<Props, State> {
 				name: '1080p',
 				source: [{
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-					type: VideoSourceType.video_mp4
+					type: 0
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-					type: VideoSourceType.video_webm
+					type: 1
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-					type: VideoSourceType.videi_ogg
+					type: 2
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
-					type: VideoSourceType.video_mp4
+					type: 0
 				}]
 			}, {
 				name: '720p',
 				source: [{
 					source: 'http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4',
-					type: VideoSourceType.video_mp4
+					type: 0
 				}, {
 					source: 'http://www.quirksmode.org/html5/videos/big_buck_bunny.webm',
-					type: VideoSourceType.video_webm
+					type: 1
 				}, {
 					source: 'http://www.quirksmode.org/html5/videos/big_buck_bunny.ogv',
-					type: VideoSourceType.videi_ogg
+					type: 2
 				}]
 			}, {
 				name: '480p',
 				source: [{
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-					type: VideoSourceType.video_mp4
+					type: 0
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-					type: VideoSourceType.video_webm
+					type: 1
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-					type: VideoSourceType.videi_ogg
+					type: 2
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
-					type: VideoSourceType.video_mp4
+					type: 0
 				}]
 			}, {
 				name: '240p',
 				source: [{
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-					type: VideoSourceType.video_mp4
+					type: 0
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-					type: VideoSourceType.video_webm
+					type: 1
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-					type: VideoSourceType.videi_ogg
+					type: 2
 				}, {
 					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
-					type: VideoSourceType.video_mp4
+					type: 0
 				}]
 			}
 

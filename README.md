@@ -37,14 +37,8 @@ import {ReactHtml5Video} from 'react-html5-video';
 
     export interface VideoSource {
         source: string,
-        type: VideoSourceType,
+        type: number,
         codecs?: string
-    }
-
-    export enum VideoSourceType{
-    	video_mp4,
-    	video_webm,
-    	videi_ogg
     }
 ```
 
@@ -56,33 +50,32 @@ import {ReactHtml5Video} from 'react-html5-video';
             name: '1080p',
             source: [{
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-                type: VideoSourceType.video_mp4 // for ES5 just type:0
+                type: 0 //video/mp4
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-                type: VideoSourceType.video_webm // for ES5 just type:1
+                type: 1 //video/webm
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-                type: VideoSourceType.videi_ogg // for ES5 just type:2
+                type: 2 //video/ogg
             }]
         }, {
             name: '720p',
             source: [{
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-                type: VideoSourceType.video_mp4 // for ES5 just type:0
+                type:0
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-                type: VideoSourceType.video_webm // for ES5 just type:1
+                type: 1
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-                type: VideoSourceType.videi_ogg  // for ES5 just type:2
+                type: 2
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
-                type: VideoSourceType.video_mp4 // for ES5 just type:0
+                type: 0
             }]
          }
     ];
 ```
-
 
 + `enableSlider` (boolean, default: false) - enable preview slider
 + `hideSliderInMobile` (boolean, default: true) - hide slider in mobile devices

@@ -8,15 +8,9 @@ export interface VideoSliderSlide {
 	link: string;
 }
 
-export enum VideoSourceType{
-	video_mp4,
-	video_webm,
-	videi_ogg
-}
-
 export interface VideoSource {
 	source: string,
-	type: VideoSourceType,
+	type: number,
 	codecs?: string
 }
 
@@ -414,7 +408,7 @@ export class ReactHtml5Video extends React.Component<Props, State> {
 		}
 	};
 
-	private getVideoTypeByEnum(type: VideoSourceType) {
+	private getVideoTypeByEnum(type: number) {
 		return this.videoTypes[type];
 	}
 

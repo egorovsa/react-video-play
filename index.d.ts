@@ -4,14 +4,9 @@ export interface VideoSliderSlide {
     img: string;
     link: string;
 }
-export declare enum VideoSourceType {
-    video_mp4 = 0,
-    video_webm = 1,
-    videi_ogg = 2,
-}
 export interface VideoSource {
     source: string;
-    type: VideoSourceType;
+    type: number;
     codecs?: string;
 }
 export interface Source {
