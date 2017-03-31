@@ -4,6 +4,12 @@
 	"main": "index.js",
 	"license": "MIT",
 	"devDependencies": {
+		"@types/alt": "^0.16.31",
+		"@types/browserify": "^12.0.30",
+		"@types/es6-shim": "^0.31.32",
+		"@types/node": "^6.0.58",
+		"@types/react": "^0.0.0",
+		"@types/react-dom": "^0.14.20",
 		"express": "^4.14.0",
 		"gulp": "^3.9.1",
 		"gulp-notify": "^2.2.0",
@@ -22,12 +28,6 @@
 		"vinyl-source-stream": "^1.1.0"
 	},
 	"dependencies": {
-		"@types/alt": "^0.16.31",
-		"@types/browserify": "^12.0.30",
-		"@types/es6-shim": "^0.31.32",
-		"@types/node": "^6.0.58",
-		"@types/react": "^0.0.0",
-		"@types/react-dom": "^0.14.20",
 		"is-mobile": "^0.2.2",
 		"react": "^15.4.1",
 		"react-dom": "^15.4.2",
