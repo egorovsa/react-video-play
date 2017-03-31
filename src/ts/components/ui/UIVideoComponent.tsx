@@ -127,8 +127,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	};
 
 	private hadlerKeys = (e): void => {
-		console.log(e.keyCode);
-
 		if (document.activeElement === this.playerContainer) {
 			let volume: number = 0;
 
@@ -280,18 +278,20 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	};
 
 	private drawAdv(): JSX.Element {
-		if (this.state.adv && this.props.showAdv && this.props.advComponent) {
+		if (this.props.showAdv && this.props.advComponent) {
 			return (
-				<span>
+				<div className={this.state.adv ? "adv-main-container" : "adv-main-container hide"}>
 					{this.props.advComponent}
-				</span>
+				</div>
 			)
 		}
 	}
 
 	private drawSlider(): JSX.Element {
-		if (this.state.adv && this.props.showSlider) {
-			return (<UIVideoSlider/>)
+		if (this.props.showSlider) {
+			return (
+				<UIVideoSlider show={this.state.adv}/>
+			)
 		}
 	}
 

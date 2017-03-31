@@ -11,6 +11,11 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 	overflow: hidden
 	min-width 304px
 
+	&:focus
+		outline 0
+		outline-offset -1
+		border 0
+
 	&.hide-cursor
 		cursor none
 
@@ -80,6 +85,10 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 			width 100%
 			top 50%
 			margin-top -14px
+
+	.adv-main-container
+		&.hide
+			display none
 
 	.ui-video-player-adv
 		transition background-color 0.5s

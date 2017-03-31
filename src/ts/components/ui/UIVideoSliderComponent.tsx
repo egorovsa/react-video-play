@@ -11,7 +11,8 @@ export interface Props {
 	containerWidth?: number,
 	minSlides?: number,
 	sliderWidth?: number,
-	minSlideSpace?: number
+	minSlideSpace?: number,
+	show: boolean
 }
 
 export interface State {
@@ -60,7 +61,8 @@ export class UIVideoSlider extends React.Component<Props, State> {
 		],
 		minSlides: 3,
 		sliderWidth: 100,
-		minSlideSpace: 20
+		minSlideSpace: 20,
+		show: false
 	} as Props;
 
 	private slider: HTMLDivElement;
@@ -129,7 +131,7 @@ export class UIVideoSlider extends React.Component<Props, State> {
 	public render() {
 		return (
 			<div
-				className="ui-video-adv-slider"
+				className={this.props.show ? "ui-video-adv-slider" : "ui-video-adv-slider hide"}
 				style={{width: this.props.containerWidth ? this.props.containerWidth : '100%'}}
 				ref={(ref) => {
 					this.slider = ref
