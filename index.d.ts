@@ -1,6 +1,10 @@
 /// <reference types="react" />
 import * as React from 'react';
 import { VideoSliderSlide } from "./UIVideoSliderComponent";
+export interface VideoSliderSlide {
+    img: string;
+    link: string;
+}
 export declare enum VideoSourceType {
     video_mp4 = 0,
     video_webm = 1,

@@ -3,6 +3,11 @@ import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
 import {UIVideoSlider, VideoSliderSlide} from "./UIVideoSliderComponent";
 const mobile = require('is-mobile');
 
+export interface VideoSliderSlide {
+	img: string;
+	link: string;
+}
+
 export enum VideoSourceType{
 	video_mp4,
 	video_webm,
