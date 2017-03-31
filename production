@@ -2,6 +2,7 @@
 cd "$(dirname "$0")"
 rm -rf lib/
 rm -rf css/
+rm -rf index.d.ts
 mkdir lib
 mkdir css
 yarn
