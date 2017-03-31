@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
-import {UIVideoSlider} from "./UIVideoSliderComponent";
+import {UIVideoSlider, VideoSliderSlide} from "./UIVideoSliderComponent";
 const mobile = require('is-mobile');
 
 export enum VideoSourceType{
@@ -21,17 +21,18 @@ export interface Source {
 }
 
 export interface Props {
-	sources: Source[]
-	showSlider?: boolean,
-	showAdv?: boolean,
+	sources: Source[],
+	enableSlider?: boolean,
+	sliderSlides?: VideoSliderSlide[],
+	hideSliderInMobile?: boolean,
+	enableAdv?: boolean,
+	advComponent?: JSX.Element
 	poster?: string,
 	width?: number,
 	height?: number,
 	controls?: boolean,
 	autoPlay?: boolean,
 	loop?: boolean,
-	hideSliderInMobile?: boolean,
-	advComponent?: JSX.Element
 }
 
 export interface State {
@@ -75,8 +76,8 @@ export class ReactHtml5Video extends React.Component<Props, State> {
 
 	static defaultProps: Props = {
 		controls: true,
-		showSlider: true,
-		showAdv: true,
+		enableSlider: false,
+		enableAdv: true,
 		hideSliderInMobile: true
 	} as Props;
 
@@ -280,7 +281,7 @@ export class ReactHtml5Video extends React.Component<Props, State> {
 	};
 
 	private drawAdv(): JSX.Element {
-		if (this.props.showAdv && this.props.advComponent) {
+		if (this.props.enableAdv && this.props.advComponent) {
 			return (
 				<div className={this.state.adv ? "adv-main-container" : "adv-main-container hide"}>
 					{this.props.advComponent}
@@ -290,9 +291,9 @@ export class ReactHtml5Video extends React.Component<Props, State> {
 	}
 
 	private drawSlider(): JSX.Element {
-		if (this.props.showSlider && !(mobile() && this.props.hideSliderInMobile)) {
+		if (this.props.enableSlider && this.props.sliderSlides && !(mobile() && this.props.hideSliderInMobile)) {
 			return (
-				<UIVideoSlider show={this.state.adv}/>
+				<UIVideoSlider show={this.state.adv} slides={this.props.sliderSlides}/>
 			)
 		}
 	}

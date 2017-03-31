@@ -1,13 +1,13 @@
 import * as React from 'react';
 const mobile = require('is-mobile');
 
-export interface AdvSlide {
+export interface VideoSliderSlide {
 	img: string,
 	link: string
 }
 
 export interface Props {
-	slides?: AdvSlide[],
+	slides: VideoSliderSlide[],
 	containerWidth?: number,
 	minSlides?: number,
 	sliderWidth?: number,
@@ -25,40 +25,6 @@ export class UIVideoSlider extends React.Component<Props, State> {
 	};
 
 	static defaultProps: Props = {
-		slides: [
-			{
-				img: "http://lorempixel.com/100/75/people/",
-				link: "http://video.egorov.pw",
-			},
-			{
-				img: "http://lorempixel.com/100/75/city/",
-				link: "http://video.egorov.pw",
-			},
-			{
-				img: "http://lorempixel.com/100/75/nature/",
-				link: "http://video.egorov.pw",
-			},
-			{
-				img: "http://lorempixel.com/100/75/transport/",
-				link: "http://video.egorov.pw",
-			},
-			{
-				img: "http://lorempixel.com/100/75/business/",
-				link: "http://video.egorov.pw",
-			},
-			{
-				img: "http://lorempixel.com/100/75/nightlife/",
-				link: "http://video.egorov.pw",
-			},
-			{
-				img: "http://lorempixel.com/100/75/food/",
-				link: "http://video.egorov.pw",
-			},
-			{
-				img: "http://lorempixel.com/100/75/cats/",
-				link: "http://video.egorov.pw",
-			},
-		],
 		minSlides: 3,
 		sliderWidth: 100,
 		minSlideSpace: 20,
@@ -106,7 +72,7 @@ export class UIVideoSlider extends React.Component<Props, State> {
 	}
 
 	private drawSlides(): JSX.Element[] {
-		return this.props.slides.map((slide: AdvSlide, i: number) => {
+		return this.props.slides.map((slide: VideoSliderSlide, i: number) => {
 			return (
 				<div key={i} className="ui-video-adv-slide" style={this.getSlideStyle()}>
 					<a href={slide.link}>

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Source, ReactHtml5Video,  VideoSourceType} from "../ui/ReactHtml5Video";
+import {Source, ReactHtml5Video, VideoSourceType} from "../ui/ReactHtml5Video";
 import {UIVideoAdvTest} from "../ui/UIVideoAdvTestComponent";
+import {VideoSliderSlide} from "../ui/UIVideoSliderComponent";
 
 export interface Props {
 
@@ -78,6 +79,41 @@ export class AppComponent extends React.Component<Props, State> {
 
 		];
 
+		let slides: VideoSliderSlide[] = [
+			{
+				img: "http://lorempixel.com/100/75/people/",
+				link: "http://video.egorov.pw",
+			},
+			{
+				img: "http://lorempixel.com/100/75/city/",
+				link: "http://video.egorov.pw",
+			},
+			{
+				img: "http://lorempixel.com/100/75/nature/",
+				link: "http://video.egorov.pw",
+			},
+			{
+				img: "http://lorempixel.com/100/75/transport/",
+				link: "http://video.egorov.pw",
+			},
+			{
+				img: "http://lorempixel.com/100/75/business/",
+				link: "http://video.egorov.pw",
+			},
+			{
+				img: "http://lorempixel.com/100/75/nightlife/",
+				link: "http://video.egorov.pw",
+			},
+			{
+				img: "http://lorempixel.com/100/75/food/",
+				link: "http://video.egorov.pw",
+			},
+			{
+				img: "http://lorempixel.com/100/75/cats/",
+				link: "http://video.egorov.pw",
+			},
+		];
+
 		return (
 			<div>
 				<div className="container">
@@ -85,6 +121,8 @@ export class AppComponent extends React.Component<Props, State> {
 						sources={src}
 						poster="http://lorempixel.com/900/450/people/"
 						advComponent={<UIVideoAdvTest/>}
+						enableSlider={true}
+						sliderSlides={slides}
 					/>
 				</div>
 			</div>
