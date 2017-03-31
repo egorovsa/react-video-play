@@ -30,6 +30,7 @@ export interface Props {
 	controls?: boolean,
 	autoPlay?: boolean,
 	loop?: boolean,
+	hideSliderInMobile?: boolean,
 	advComponent?: JSX.Element
 }
 
@@ -75,7 +76,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	static defaultProps: Props = {
 		controls: true,
 		showSlider: true,
-		showAdv: true
+		showAdv: true,
+		hideSliderInMobile: true
 	} as Props;
 
 	private player: HTMLVideoElement;
@@ -288,7 +290,7 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	}
 
 	private drawSlider(): JSX.Element {
-		if (this.props.showSlider) {
+		if (this.props.showSlider && !(mobile() && this.props.hideSliderInMobile)) {
 			return (
 				<UIVideoSlider show={this.state.adv}/>
 			)
