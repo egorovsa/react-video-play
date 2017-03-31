@@ -298,8 +298,6 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	}
 
 	private handlerChangeSoundLevel = (value: number): void => {
-		console.log(value);
-
 		this.player.volume = value / 100;
 		this.player.muted = false;
 
