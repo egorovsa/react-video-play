@@ -50,36 +50,36 @@ import {ReactHtml5Video} from 'react-html5-video';
 #### Source example
 
 ```typescript
-   		let src: Source[] = [
-   			{
-   				name: '1080p',
-   				source: [{
-   					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-   					type: VideoSourceType.video_mp4 // for ES5 just type:0
-   				}, {
-   					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-   					type: VideoSourceType.video_webm // for ES5 just type:1
-   				}, {
-   					source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-   					type: VideoSourceType.videi_ogg // for ES5 just type:2
-   				}]
-   			}, {
-                name: '720p',
-                source: [{
-                    source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-                    type: VideoSourceType.video_mp4 // for ES5 just type:0
-                }, {
-                    source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-                    type: VideoSourceType.video_webm // for ES5 just type:1
-                }, {
-                    source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-                    type: VideoSourceType.videi_ogg  // for ES5 just type:2
-                }, {
-                    source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
-                    type: VideoSourceType.video_mp4 // for ES5 just type:0
-                }]
-            }
-   		];
+    let src: Source[] = [
+        {
+            name: '1080p',
+            source: [{
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
+                type: VideoSourceType.video_mp4 // for ES5 just type:0
+            }, {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
+                type: VideoSourceType.video_webm // for ES5 just type:1
+            }, {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
+                type: VideoSourceType.videi_ogg // for ES5 just type:2
+            }]
+        }, {
+            name: '720p',
+            source: [{
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
+                type: VideoSourceType.video_mp4 // for ES5 just type:0
+            }, {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
+                type: VideoSourceType.video_webm // for ES5 just type:1
+            }, {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
+                type: VideoSourceType.videi_ogg  // for ES5 just type:2
+            }, {
+                source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
+                type: VideoSourceType.video_mp4 // for ES5 just type:0
+            }]
+         }
+    ];
 ```
 
 + `enableSlider` (boolean, default: false) - enable preview slider
