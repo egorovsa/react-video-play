@@ -1,11 +1,11 @@
 /// <reference types="react" />
 import * as React from 'react';
-export interface AdvSlide {
+export interface VideoSliderSlide {
     img: string;
     link: string;
 }
 export interface Props {
-    slides?: AdvSlide[];
+    slides: VideoSliderSlide[];
     containerWidth?: number;
     minSlides?: number;
     sliderWidth?: number;

@@ -7,6 +7,8 @@ mkdir css
 yarn
 gulp stylesProduction
 tsc ./src/ts/components/ui/ReactHtml5Video.tsx -d --jsx react --outDir ./lib
+cd lib
+mv ReactHtml5Video.d.ts index.d.ts
 
 
 

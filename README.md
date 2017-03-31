@@ -82,7 +82,9 @@ import {ReactHtml5Video} from 'react-html5-video';
     ];
 ```
 
+
 + `enableSlider` (boolean, default: false) - enable preview slider
++ `hideSliderInMobile` (boolean, default: true) - hide slider in mobile devices
 + `sliderSlides` (VideoSliderSlide[], required if enableSlider installed true) - slides
 
 ```typescript
@@ -106,3 +108,23 @@ import {ReactHtml5Video} from 'react-html5-video';
         }
     ]
 ```
+
++ `enableAdv` (boolean, default: true) - enable ADV, it will be shown whenever player pause
++ `advComponent` (JSX.Element, required if enableAdv installed true) - React component for ADV
++ `poster` (string, default: none) - show preview video image
++ `width` (number, default: none) - video container width
++ `height` (number, default: none) - video container height
++ `controls` (boolean, default: true) - controls
+
+
+## For development
+just use:
+
++ $ yarn or $ npm i
++ $ gulp
+
+open your browser http://localhost:3000
+
+## For Build
+
+$ ./production
