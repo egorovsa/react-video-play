@@ -26,7 +26,6 @@ import {ReactHtml5Video} from 'react-html5-video';
     />
 ```
 
-
 ## Options
 + `sources` (Source[], required) - video source
 
