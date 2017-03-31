@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
-import {UIVideoSlider, VideoSliderSlide} from "./UIVideoSliderComponent";
+import {UIVideoSlider} from "./UIVideoSliderComponent";
 const mobile = require('is-mobile');
 
 export interface VideoSliderSlide {
