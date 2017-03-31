@@ -25,12 +25,12 @@
 		"browsersync": "^0.0.1-security",
 		"buffer": "^5.0.2",
 		"exorcist": "^0.4.0",
+		"react": "^15.4.1",
+		"react-dom": "^15.4.2",
 		"vinyl-source-stream": "^1.1.0"
 	},
 	"dependencies": {
 		"is-mobile": "^0.2.2",
-		"react": "^15.4.1",
-		"react-dom": "^15.4.2",
 		"react-video-seek-slider": "^1.1.1"
 	},
 	"repository": {
