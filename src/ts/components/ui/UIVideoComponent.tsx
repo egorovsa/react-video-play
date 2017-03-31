@@ -100,8 +100,10 @@ export class UIVideoComponent extends React.Component<Props, State> {
 			this.playerContainer.addEventListener("mozfullscreenchange", this.onFullscreenChange);
 			this.playerContainer.addEventListener("fullscreenchange", this.onFullscreenChange);
 			this.playerContainer.addEventListener('mousemove', this.handlerMouseMove);
+			this.playerContainer.addEventListener('click', this.setFocusToPlayerContainer);
 		}
 
+		window.addEventListener('keydown', this.hadlerKeys);
 		window.addEventListener('resize', this.handlerWindowResize);
 
 		this.setSource();
@@ -114,8 +116,43 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		this.playerContainer.removeEventListener("mozfullscreenchange", this.onFullscreenChange);
 		this.playerContainer.removeEventListener("fullscreenchange", this.onFullscreenChange);
 		this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
+		this.playerContainer.removeEventListener('click', this.setFocusToPlayerContainer);
+
+		window.removeEventListener('keydown', this.hadlerKeys);
 		window.removeEventListener('resize', this.handlerWindowResize);
 	}
+
+	private setFocusToPlayerContainer = (): void => {
+		this.playerContainer.focus();
+	};
+
+	private hadlerKeys = (e): void => {
+		console.log(e.keyCode);
+
+		if (document.activeElement === this.playerContainer) {
+			let volume: number = 0;
+
+			switch (e.keyCode) {
+				case 32:
+					this.handlerPlayStop(true);
+					break;
+				case 37:
+					this.handlerSeekBarChange(this.player.currentTime - 1);
+					break;
+				case 39:
+					this.handlerSeekBarChange(this.player.currentTime + 0.5);
+					break;
+				case 38:
+					volume = this.player.volume + 0.1 > 1 ? 1 : this.player.volume + 0.1;
+					this.handlerChangeSoundLevel(volume * 100);
+					break;
+				case 40:
+					volume = this.player.volume - 0.1 < 0 ? 0 : this.player.volume - 0.1;
+					this.handlerChangeSoundLevel(volume * 100);
+					break;
+			}
+		}
+	};
 
 	private handlerWindowResize = (): void => {
 		if (this.props.width) {
@@ -259,6 +296,8 @@ export class UIVideoComponent extends React.Component<Props, State> {
 	}
 
 	private handlerChangeSoundLevel = (value: number): void => {
+		console.log(value);
+
 		this.player.volume = value / 100;
 		this.player.muted = false;
 
@@ -531,9 +570,10 @@ export class UIVideoComponent extends React.Component<Props, State> {
 		if (this.state.fullScreen && this.state.hideControls) {
 			className += " hide-cursor";
 		}
-		
+
 		return (
 			<div
+				tabIndex={0}
 				className={className}
 				style={{
 					width: this.props.width ? this.props.width + 'px' : '100%',
