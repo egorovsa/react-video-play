@@ -1,3 +1,3 @@
-const ReactHtml5Video = require('./lib/ReactHtml5Video');
-module.exports = ReactHtml5Video.ReactHtml5Video;
-module.exports.ReactHtml5Video = ReactHtml5Video.ReactHtml5Video;
+const ReactVideoPlay = require('./lib/ReactVideoPlay');
+module.exports = ReactVideoPlay.ReactVideoPlay;
+module.exports.ReactVideoPlay = ReactVideoPlay.ReactVideoPlay;
