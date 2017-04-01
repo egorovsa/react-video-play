@@ -53,6 +53,11 @@ var ReactHtml5Video =  require('react-html5-video');
     }
 ```
 
+Where type is number index as
++ `0` - video/mp4
++ `1` - video/webm
++ `2` - video/ogg
+
 #### Source example
 
 ```typescript
