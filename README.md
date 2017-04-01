@@ -1,8 +1,9 @@
 # react-video-play
 
+React video player for TypeScript and JavaScript like youtube
+
 ![react-stores](https://github.com/egorovsa/react-video-play/blob/master/screenshot.png?raw=true)
 
-React video player with preview slider and adv like youtube
 
 Demo [react-video-play](http://video.egorov.pw)
 
