@@ -25,6 +25,8 @@ or
 var ReactVideoPlay =  require('react-video-play');
 ```
 
+Also use css and images. There is a public folder in node_modules/react-video-play
+
 ## How to use
 
 ```typescript

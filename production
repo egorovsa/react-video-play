@@ -1,10 +1,13 @@
 #!/bin/sh
 cd "$(dirname "$0")"
 rm -rf lib/
-rm -rf css/
+rm -rf public/
 rm -rf index.d.ts
 mkdir lib
-mkdir css
+mkdir public
+mkdir public/css
+mkdir public/img
+cp -R ./src/img ./public
 yarn
 gulp stylesProduction
 tsc ./src/ts/components/ui/ReactVideoPlay.tsx -d --jsx react --target ES5 --outDir ./lib
