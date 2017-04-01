@@ -45,7 +45,7 @@ export interface State {
     paused: boolean;
     quality: boolean;
 }
-export declare class ReactHtml5Video extends React.Component<Props, State> {
+export declare class ReactVideoPlay extends React.Component<Props, State> {
     state: State;
     static defaultProps: Props;
     private player;

@@ -1,0 +1,135 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@4.1.2
+3 info using node@v7.7.3
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/admin/Work/React-html5-video',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/admin/.npm/react-html5-video/1.0.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/admin/.npm correctMkdir not in flight; initializing
+10 info lifecycle react-html5-video@1.0.0~prepublish: react-html5-video@1.0.0
+11 silly lifecycle react-html5-video@1.0.0~prepublish: no script for prepublish, continuing
+12 info lifecycle react-html5-video@1.0.0~prepare: react-html5-video@1.0.0
+13 silly lifecycle react-html5-video@1.0.0~prepare: no script for prepare, continuing
+14 verbose tar pack [ '/Users/admin/.npm/react-html5-video/1.0.0/package.tgz',
+14 verbose tar pack   '/Users/admin/Work/React-html5-video' ]
+15 verbose tarball /Users/admin/.npm/react-html5-video/1.0.0/package.tgz
+16 verbose folder /Users/admin/Work/React-html5-video
+17 verbose addLocalTarball adding from inside cache /Users/admin/.npm/react-html5-video/1.0.0/package.tgz
+18 verbose correctMkdir /Users/admin/.npm correctMkdir not in flight; initializing
+19 silly cache afterAdd react-html5-video@1.0.0
+20 verbose afterAdd /Users/admin/.npm/react-html5-video/1.0.0/package/package.json not in flight; writing
+21 verbose correctMkdir /Users/admin/.npm correctMkdir not in flight; initializing
+22 verbose afterAdd /Users/admin/.npm/react-html5-video/1.0.0/package/package.json written
+23 silly publish { name: 'react-html5-video',
+23 silly publish   version: '1.0.0',
+23 silly publish   main: 'index.js',
+23 silly publish   license: 'MIT',
+23 silly publish   devDependencies:
+23 silly publish    { '@types/alt': '^0.16.31',
+23 silly publish      '@types/browserify': '^12.0.30',
+23 silly publish      '@types/es6-shim': '^0.31.32',
+23 silly publish      '@types/node': '^6.0.58',
+23 silly publish      '@types/react': '^0.0.0',
+23 silly publish      '@types/react-dom': '^0.14.20',
+23 silly publish      express: '^4.14.0',
+23 silly publish      gulp: '^3.9.1',
+23 silly publish      'gulp-notify': '^2.2.0',
+23 silly publish      'gulp-plumber': '^1.1.0',
+23 silly publish      'gulp-sourcemaps': '^2.4.1',
+23 silly publish      'gulp-stylus': '^2.6.0',
+23 silly publish      tsify: '^3.0.0',
+23 silly publish      typescript: '^2.1.4',
+23 silly publish      'vinyl-buffer': '^1.0.0',
+23 silly publish      alt: '^0.18.6',
+23 silly publish      'browser-sync': '^2.18.6',
+23 silly publish      browserify: '^13.3.0',
+23 silly publish      browsersync: '^0.0.1-security',
+23 silly publish      buffer: '^5.0.2',
+23 silly publish      exorcist: '^0.4.0',
+23 silly publish      react: '^15.4.1',
+23 silly publish      'react-dom': '^15.4.2',
+23 silly publish      'vinyl-source-stream': '^1.1.0' },
+23 silly publish   dependencies: { 'is-mobile': '^0.2.2', 'react-video-seek-slider': '^1.1.1' },
+23 silly publish   repository:
+23 silly publish    { type: 'git',
+23 silly publish      url: 'git+https://github.com/egorovsa/React-html5-video.git' },
+23 silly publish   readme: '# react-html5-video\n\n![react-stores](https://github.com/egorovsa/React-html5-video/blob/master/screenshot.png?raw=true)\n\nReact video player with preview slider and adv like youtube\n\nDemo [react-html5-video](http://video.egorov.pw)\n\n## How to install\n```\nnpm i react-html5-video --save\n```\n\n## How to import\n\nFor TypeScript usage there is a index.d.ts in node_modules folder\n```typescript\nimport {ReactHtml5Video} from \'react-html5-video\';\n```\n\nor\n\n```javascript\nvar ReactHtml5Video =  require(\'react-html5-video\');\n```\n\n## How to use\n\n```typescript\n//JSX\n    <ReactHtml5Video\n        sources={src}\n        poster="http://lorempixel.com/900/450/people/"\n        advComponent={<UIVideoAdvTest/>}\n        enableSlider={true}\n        sliderSlides={slides}\n    />\n```\n\n## Options\n+ `sources` (Source[], required) - video source\n\n```typescript\n    export interface Source {\n    \tname: string,\n    \tsource: VideoSource[]\n    }\n\n    export interface VideoSource {\n        source: string,\n        type: number,\n        codecs?: string\n    }\n```\n\nWhere type is number index as\n+ `0` - video/mp4\n+ `1` - video/webm\n+ `2` - video/ogg\n\n#### Source example\n\n```typescript\n    let src: Source[] = [\n        {\n            name: \'1080p\',\n            source: [{\n                source: \'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4\',\n                type: 0 //video/mp4\n            }, {\n                source: \'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm\',\n                type: 1 //video/webm\n            }, {\n                source: \'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv\',\n                type: 2 //video/ogg\n            }]\n        }, {\n            name: \'720p\',\n            source: [{\n                source: \'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4\',\n                type:0\n            }, {\n                source: \'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm\',\n                type: 1\n            }, {\n                source: \'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv\',\n                type: 2\n            }, {\n                source: \'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v\',\n                type: 0\n            }]\n         }\n    ];\n```\n\n+ `enableSlider` (boolean, default: false) - enable preview slider\n+ `hideSliderInMobile` (boolean, default: true) - hide slider in mobile devices\n+ `sliderSlides` (VideoSliderSlide[], required if enableSlider installed true) - slides\n\n```typescript\n    export interface VideoSliderSlide {\n    \timg: string,\n    \tlink: string\n    }\n```\n\n#### sliderSlides example\n\n```typescript\n    slides: [\n        {\n            img: "http://lorempixel.com/100/75/people/",\n            link: "http://video.egorov.pw",\n        },\n        {\n            img: "http://lorempixel.com/100/75/city/",\n            link: "http://video.egorov.pw",\n        }\n    ]\n```\n\n+ `enableAdv` (boolean, default: true) - enable ADV, it will be shown whenever player pause\n+ `advComponent` (JSX.Element, required if enableAdv installed true) - React component for ADV\n+ `poster` (string, default: none) - show preview video image\n+ `width` (number, default: none) - video container width\n+ `height` (number, default: none) - video container height\n+ `controls` (boolean, default: true) - controls\n\n\n## For development\njust use:\n\n+ $ yarn or $ npm i\n+ $ gulp\n\nopen your browser http://localhost:3000\n\n## For Build\n\n$ ./production',
+23 silly publish   readmeFilename: 'README.md',
+23 silly publish   gitHead: '96c5fa3516d7ce580231c02dc8e66c0d6101bc78',
+23 silly publish   description: '![react-stores](https://github.com/egorovsa/React-html5-video/blob/master/screenshot.png?raw=true)',
+23 silly publish   bugs: { url: 'https://github.com/egorovsa/React-html5-video/issues' },
+23 silly publish   homepage: 'https://github.com/egorovsa/React-html5-video#readme',
+23 silly publish   _id: 'react-html5-video@1.0.0',
+23 silly publish   scripts: {},
+23 silly publish   _shasum: '5a6b292d25e1fb855d378d5e7f7bce4aa9072017',
+23 silly publish   _from: '.' }
+24 info lifecycle react-html5-video@1.0.0~prepublishOnly: react-html5-video@1.0.0
+25 silly lifecycle react-html5-video@1.0.0~prepublishOnly: no script for prepublishOnly, continuing
+26 verbose getPublishConfig undefined
+27 silly mapToRegistry name react-html5-video
+28 silly mapToRegistry using default registry
+29 silly mapToRegistry registry https://registry.npmjs.org/
+30 silly mapToRegistry data Result {
+30 silly mapToRegistry   raw: 'react-html5-video',
+30 silly mapToRegistry   scope: null,
+30 silly mapToRegistry   escapedName: 'react-html5-video',
+30 silly mapToRegistry   name: 'react-html5-video',
+30 silly mapToRegistry   rawSpec: '',
+30 silly mapToRegistry   spec: 'latest',
+30 silly mapToRegistry   type: 'tag' }
+31 silly mapToRegistry uri https://registry.npmjs.org/react-html5-video
+32 verbose publish registryBase https://registry.npmjs.org/
+33 silly publish uploading /Users/admin/.npm/react-html5-video/1.0.0/package.tgz
+34 verbose request uri https://registry.npmjs.org/react-html5-video
+35 verbose request sending authorization for write operation
+36 info attempt registry request try #1 at 11:21:39 AM
+37 verbose request using bearer token for auth
+38 verbose request id 288e0c78210af179
+39 http request PUT https://registry.npmjs.org/react-html5-video
+40 http 403 https://registry.npmjs.org/react-html5-video
+41 verbose headers { 'content-type': 'application/json',
+41 verbose headers   'cache-control': 'max-age=300',
+41 verbose headers   'content-length': '111',
+41 verbose headers   'accept-ranges': 'bytes',
+41 verbose headers   date: 'Sat, 01 Apr 2017 08:22:31 GMT',
+41 verbose headers   via: '1.1 varnish',
+41 verbose headers   connection: 'keep-alive',
+41 verbose headers   'x-served-by': 'cache-hhn1549-HHN',
+41 verbose headers   'x-cache': 'MISS',
+41 verbose headers   'x-cache-hits': '0',
+41 verbose headers   'x-timer': 'S1491034900.260510,VS0,VE51242',
+41 verbose headers   vary: 'Accept-Encoding' }
+42 verbose request invalidating /Users/admin/.npm/registry.npmjs.org/react-html5-video on PUT
+43 error publish Failed PUT 403
+44 verbose stack Error: you do not have permission to publish "react-html5-video". Are you logged in as the correct user? : react-html5-video
+44 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:304:12)
+44 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:292:14)
+44 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:212:14)
+44 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:186:22)
+44 verbose stack     at emitTwo (events.js:106:13)
+44 verbose stack     at Request.emit (events.js:194:7)
+44 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1081:10)
+44 verbose stack     at emitOne (events.js:96:13)
+44 verbose stack     at Request.emit (events.js:191:7)
+44 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1001:12)
+45 verbose statusCode 403
+46 verbose pkgid react-html5-video
+47 verbose cwd /Users/admin/Work/React-html5-video
+48 error Darwin 15.6.0
+49 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+50 error node v7.7.3
+51 error npm  v4.1.2
+52 error code E403
+53 error you do not have permission to publish "react-html5-video". Are you logged in as the correct user? : react-html5-video
+54 error If you need help, you may report this error at:
+54 error     <https://github.com/npm/npm/issues>
+55 verbose exit [ 1, true ]

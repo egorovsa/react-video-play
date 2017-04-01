@@ -121,7 +121,7 @@ gulp.task('styles', ['html'], function () {
 });
 
 gulp.task('stylesProduction', function () {
-	return gulp.src('src/styl/react-html5-video.styl')
+	return gulp.src('src/styl/react-video-play.styl')
 		.pipe(plumber())
 		.pipe(stylus())
 		.pipe(gulp.dest('css'));

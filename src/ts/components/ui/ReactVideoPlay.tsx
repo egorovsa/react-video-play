@@ -53,7 +53,7 @@ export interface State {
 	quality: boolean
 }
 
-export class ReactHtml5Video extends React.Component<Props, State> {
+export class ReactVideoPlay extends React.Component<Props, State> {
 	state: State = {
 		containerWidth: 0,
 		currentVolume: 0,
