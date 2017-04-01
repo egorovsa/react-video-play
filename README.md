@@ -1,34 +1,34 @@
-# react-html5-video
+# react-video-play
 
-![react-stores](https://github.com/egorovsa/React-html5-video/blob/master/screenshot.png?raw=true)
+![react-stores](https://github.com/egorovsa/react-video-play/blob/master/screenshot.png?raw=true)
 
 React video player with preview slider and adv like youtube
 
-Demo [react-html5-video](http://video.egorov.pw)
+Demo [react-video-play](http://video.egorov.pw)
 
 ## How to install
 ```
-npm i react-html5-video --save
+npm i react-video-play --save
 ```
 
 ## How to import
 
 For TypeScript usage there is a index.d.ts in node_modules folder
 ```typescript
-import {ReactHtml5Video} from 'react-html5-video';
+import {ReactVideoPlay} from 'react-video-play';
 ```
 
 or
 
 ```javascript
-var ReactHtml5Video =  require('react-html5-video');
+var ReactVideoPlay =  require('react-video-play');
 ```
 
 ## How to use
 
 ```typescript
 //JSX
-    <ReactHtml5Video
+    <ReactVideoPlay
         sources={src}
         poster="http://lorempixel.com/900/450/people/"
         advComponent={<UIVideoAdvTest/>}
