@@ -11,11 +11,22 @@ Demo [react-html5-video](http://video.egorov.pw)
 npm i react-html5-video --save
 ```
 
+## How to import
+
+For TypeScript usage there is a index.d.ts in node_modules folder
+```typescript
+import {ReactHtml5Video} from 'react-html5-video';
+```
+
+or
+
+```javascript
+var ReactHtml5Video =  require('react-html5-video');
+```
+
 ## How to use
 
 ```typescript
-import {ReactHtml5Video} from 'react-html5-video';
-
 //JSX
     <ReactHtml5Video
         sources={src}
