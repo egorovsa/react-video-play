@@ -14,7 +14,7 @@ npm i react-video-play --save
 
 ## How to import
 
-For TypeScript usage there is a index.d.ts in node_modules folder
+For TypeScript usage there is an index.d.ts in node_modules folder
 ```typescript
 import {ReactVideoPlay} from 'react-video-play';
 ```
