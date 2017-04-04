@@ -37,6 +37,9 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
         advComponent={<UIVideoAdvTest/>}
         enableSlider={true}
         sliderSlides={slides}
+        autoplay={true}
+        muted={true}
+
     />
 ```
 
@@ -46,6 +49,7 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 ```typescript
     export interface Source {
     	name: string,
+    	default?: boolean,
     	source: VideoSource[]
     }
 
@@ -128,6 +132,8 @@ Where type is number index as
 + `width` (number, default: none) - video container width
 + `height` (number, default: none) - video container height
 + `controls` (boolean, default: true) - controls
++ `autoplay` (boolean, default: false) - autoplay video after start
++ `muted` (boolean, default: false) - muted by default
 
 
 ## For development

@@ -16,7 +16,8 @@ export interface VideoSource {
 
 export interface Source {
 	name: string,
-	source: VideoSource[]
+	source: VideoSource[],
+	default?: boolean
 }
 
 export interface Props {
@@ -30,8 +31,9 @@ export interface Props {
 	width?: number,
 	height?: number,
 	controls?: boolean,
-	autoPlay?: boolean,
+	autoplay?: boolean,
 	loop?: boolean,
+	muted?: boolean
 }
 
 export interface State {
@@ -70,14 +72,17 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		loading: false,
 		stalled: false,
 		paused: true,
-		quality: false
+		quality: false,
 	};
 
 	static defaultProps: Props = {
+		sources: [],
 		controls: true,
 		enableSlider: false,
 		enableAdv: true,
-		hideSliderInMobile: true
+		hideSliderInMobile: true,
+		muted: false,
+		autoplay: false
 	} as Props;
 
 	private player: HTMLVideoElement;
@@ -105,10 +110,24 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			this.playerContainer.addEventListener('click', this.setFocusToPlayerContainer);
 		}
 
-		window.addEventListener('keydown', this.hadlerKeys);
+		window.addEventListener('keydown', this.handlerKeys);
 		window.addEventListener('resize', this.handlerWindowResize);
 
-		this.setSource();
+		let defaultSourceIndex: number = this.getDefaultSourceIndex();
+
+		if (defaultSourceIndex !== this.state.srcIndex) {
+			this.setState({
+				srcIndex: defaultSourceIndex
+			} as State, () => {
+				this.setSource(this.props.autoplay);
+			});
+		} else {
+			this.setSource(this.props.autoplay);
+		}
+
+		if (this.props.muted) {
+			this.handlerSoundsToggler()
+		}
 	}
 
 	componentWillUnmount() {
@@ -120,15 +139,27 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		this.playerContainer.removeEventListener('mousemove', this.handlerMouseMove);
 		this.playerContainer.removeEventListener('click', this.setFocusToPlayerContainer);
 
-		window.removeEventListener('keydown', this.hadlerKeys);
+		window.removeEventListener('keydown', this.handlerKeys);
 		window.removeEventListener('resize', this.handlerWindowResize);
+	}
+
+	private getDefaultSourceIndex(): number {
+		let defaultStatusSourceIndex: number = this.state.srcIndex;
+
+		this.props.sources.map((src: Source, i: number) => {
+			if (src.default && src.default === true) {
+				defaultStatusSourceIndex = i;
+			}
+		});
+
+		return defaultStatusSourceIndex;
 	}
 
 	private setFocusToPlayerContainer = (): void => {
 		this.playerContainer.focus();
 	};
 
-	private hadlerKeys = (e): void => {
+	private handlerKeys = (e): void => {
 		if (document.activeElement === this.playerContainer) {
 			let volume: number = 0;
 

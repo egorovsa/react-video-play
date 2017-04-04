@@ -35,6 +35,7 @@ export class AppComponent extends React.Component<Props, State> {
 				}]
 			}, {
 				name: '720p',
+				default: true,
 				source: [{
 					source: 'http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4',
 					type: 0
@@ -123,6 +124,8 @@ export class AppComponent extends React.Component<Props, State> {
 						advComponent={<UIVideoAdvTest/>}
 						enableSlider={true}
 						sliderSlides={slides}
+					    muted={true}
+					    autoplay={true}
 					/>
 				</div>
 			</div>
