@@ -12,6 +12,7 @@ export interface VideoSource {
 export interface Source {
     name: string;
     source: VideoSource[];
+    default?: boolean;
 }
 export interface Props {
     sources: Source[];
@@ -24,8 +25,9 @@ export interface Props {
     width?: number;
     height?: number;
     controls?: boolean;
-    autoPlay?: boolean;
+    autoplay?: boolean;
     loop?: boolean;
+    muted?: boolean;
 }
 export interface State {
     containerWidth: number;
@@ -55,8 +57,9 @@ export declare class ReactVideoPlay extends React.Component<Props, State> {
     private videoTypes;
     componentDidMount(): void;
     componentWillUnmount(): void;
+    private getDefaultSourceIndex();
     private setFocusToPlayerContainer;
-    private hadlerKeys;
+    private handlerKeys;
     private handlerWindowResize;
     private handlerMouseMove;
     private handlerMouseEnter;
