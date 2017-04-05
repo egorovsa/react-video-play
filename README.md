@@ -4,7 +4,6 @@ React video player for TypeScript and JavaScript like youtube
 
 ![react-stores](https://github.com/egorovsa/react-video-play/blob/master/screenshot.png?raw=true)
 
-
 Demo [react-video-play](http://video.egorov.pw)
 
 ## How to install
@@ -16,13 +15,14 @@ npm i react-video-play --save
 
 For TypeScript usage there is an index.d.ts in node_modules folder
 ```typescript
-import {ReactVideoPlay} from 'react-video-play';
+import {ReactVideoPlay, VideoSourceType} from 'react-video-play';
 ```
 
 or
 
 ```javascript
 var ReactVideoPlay =  require('react-video-play');
+var VideoSourceType =  require('react-video-play').VideoSourceType;
 ```
 
 Also use css and images. There is a public folder in node_modules/react-video-play
@@ -39,7 +39,6 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
         sliderSlides={slides}
         autoplay={true}
         muted={true}
-
     />
 ```
 
@@ -53,17 +52,18 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
     	source: VideoSource[]
     }
 
+    export enum VideoSourceType{
+        video_mp4,
+        video_webm,
+        video_ogg
+    }
+
     export interface VideoSource {
         source: string,
-        type: number,
+        type: VideoSourceType,
         codecs?: string
     }
 ```
-
-Where type is number index as
-+ `0` - video/mp4
-+ `1` - video/webm
-+ `2` - video/ogg
 
 #### Source example
 
@@ -73,28 +73,29 @@ Where type is number index as
             name: '1080p',
             source: [{
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-                type: 0 //video/mp4
+                type: VideoSourceType.video_mp4
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-                type: 1 //video/webm
+                type: VideoSourceType.video_webm
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-                type: 2 //video/ogg
+                type: VideoSourceType.video_ogg
             }]
         }, {
             name: '720p',
+            default: true,
             source: [{
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-                type:0
+                type: VideoSourceType.video_mp4
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-                type: 1
+                type: VideoSourceType.video_webm
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-                type: 2
+                type: VideoSourceType.video_ogg
             }, {
                 source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
-                type: 0
+                type: VideoSourceType.video_mp4
             }]
          }
     ];
