@@ -380,15 +380,17 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	};
 
 	private handlerChangeQualityClick = (index: number): void => {
+		let curtime: number = this.player.currentTime;
+		
 		this.setState({
 			srcIndex: index,
 			quality: false
 		} as State, () => {
-			this.setSource(true);
+			this.setSource(true, curtime);
 		});
 	};
 
-	private setSource(play?): void {
+	private setSource(play?: boolean, currentTime?: number): void {
 		for (let i = 0; i < this.props.sources[this.state.srcIndex].source.length; i++) {
 			let src: VideoSource = this.props.sources[this.state.srcIndex].source[i];
 			let type: string = this.getVideoTypeByEnum(src.type);
@@ -397,6 +399,10 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 				this.player.src = src.source;
 
 				if (play) {
+					if (currentTime) {
+						this.player.currentTime = currentTime;
+					}
+
 					this.play();
 				}
 
