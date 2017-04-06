@@ -78,7 +78,7 @@ export declare class ReactVideoPlay extends React.Component<Props, State> {
     private handlerSoundsToggler;
     private handlerPlayStop;
     private handlerChangeQualityClick;
-    private setSource(play?);
+    private setSource(play?, currentTime?);
     private play();
     private pause(adv?);
     private handlerVideoClick;

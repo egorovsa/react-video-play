@@ -381,7 +381,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 
 	private handlerChangeQualityClick = (index: number): void => {
 		let curtime: number = this.player.currentTime;
-		
+
 		this.setState({
 			srcIndex: index,
 			quality: false
