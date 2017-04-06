@@ -142,8 +142,24 @@
 .ui-video-player-component {
   background-color: #101010;
   position: relative;
-  overflow: hidden;
   min-width: 304px;
+}
+.ui-video-player-component .ui-video-player-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+}
+.ui-video-player-component .ambiLight {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: blur(60px);
+  filter: blur(60px);
+  opacity: 0.75;
+  z-index: -1;
 }
 .ui-video-player-component:focus {
   outline: 0;
@@ -343,6 +359,23 @@
   background-image: url("/img/fs.svg");
   transform: scale(0.8);
 }
+.ui-video-player-component .ui-video-player-controls .controllers-block .hq-text {
+  transition: transform 0.3s ease;
+  height: 100%;
+  float: right;
+  display: inline-block;
+  min-width: 40px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 100;
+  line-height: 40px;
+  transform: scale(0.8);
+}
+.ui-video-player-component .ui-video-player-controls .controllers-block .hq-text:hover {
+  transform: scale(1);
+}
 .ui-video-player-component .ui-video-player-controls .controllers-block .hq {
   height: 100%;
   float: right;
@@ -433,7 +466,7 @@
   width: 80px;
   background: rgba(0,0,0,0.7);
   box-sizing: border-box;
-  padding: 10px 15px;
+  padding: 10px 0;
   right: 35px;
   bottom: 50px;
   position: absolute;
@@ -448,11 +481,14 @@
 .ui-video-player-component .ui-video-player-src .src-one {
   color: rgba(255,255,255,0.8);
   box-sizing: border-box;
-  padding: 5px 0;
+  padding: 5px 15px;
   text-align: center;
   font-size: 12px;
   cursor: pointer;
 }
 .ui-video-player-component .ui-video-player-src .src-one:hover {
   color: #fff;
+}
+.ui-video-player-component .ui-video-player-src .src-one.active {
+  color: #4bbf76;
 }

@@ -34,6 +34,7 @@ export interface Props {
     loop?: boolean;
     muted?: boolean;
     showSourceName?: boolean;
+    ambiLight?: boolean;
 }
 export interface State {
     containerWidth: number;
@@ -57,12 +58,15 @@ export declare class ReactVideoPlay extends React.Component<Props, State> {
     state: State;
     static defaultProps: Props;
     private player;
+    private canvas;
     private playerContainer;
     private interval;
+    private intervalAmbient;
     private hideControlsTimeoutId;
     private videoTypes;
     componentDidMount(): void;
     componentWillUnmount(): void;
+    private playAmbient(stop?);
     private getDefaultSourceIndex();
     private setFocusToPlayerContainer;
     private handlerKeys;
@@ -94,5 +98,6 @@ export declare class ReactVideoPlay extends React.Component<Props, State> {
     private drawPlayStopSplash();
     private drawQuality();
     private getControls();
+    private drawAmbiLight();
     render(): JSX.Element;
 }
