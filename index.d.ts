@@ -33,6 +33,7 @@ export interface Props {
     autoplay?: boolean;
     loop?: boolean;
     muted?: boolean;
+    showSourceName?: boolean;
 }
 export interface State {
     containerWidth: number;

@@ -15,6 +15,8 @@ export interface Props {
     handlerChangeSoundLevel: (value: number) => void;
     handlerFullscreen: () => void;
     handlerQuality: () => void;
+    showSourceName?: boolean;
+    sourceName?: string;
 }
 export interface State {
     seekWidth: number;

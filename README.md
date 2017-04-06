@@ -135,6 +135,7 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 + `controls` (boolean, default: true) - controls
 + `autoplay` (boolean, default: false) - autoplay video after start
 + `muted` (boolean, default: false) - muted by default
++ `showSourceName` (boolean, default: false) - prefer source name to HQ icon
 
 
 ## For development

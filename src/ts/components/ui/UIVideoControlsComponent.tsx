@@ -23,6 +23,8 @@ export interface Props {
 	handlerChangeSoundLevel: (value: number) => void,
 	handlerFullscreen: () => void,
 	handlerQuality: () => void,
+	showSourceName?: boolean,
+	sourceName?: string
 }
 
 export interface State {
@@ -150,12 +152,23 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 	}
 
 	private drawQuality(): JSX.Element {
-		return (
-			<div
-				onClick={this.props.handlerQuality}
-				className="hq"
-			/>
-		);
+		if (this.props.showSourceName) {
+			return (
+				<div
+					onClick={this.props.handlerQuality}
+					className="hq-text"
+				>
+					{this.props.sourceName}
+				</div>
+			);
+		} else {
+			return (
+				<div
+					onClick={this.props.handlerQuality}
+					className="hq"
+				/>
+			);
+		}
 	}
 
 	public render() {

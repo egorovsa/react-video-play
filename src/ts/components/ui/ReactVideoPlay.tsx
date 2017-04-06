@@ -39,7 +39,8 @@ export interface Props {
 	controls?: boolean,
 	autoplay?: boolean,
 	loop?: boolean,
-	muted?: boolean
+	muted?: boolean,
+	showSourceName?: boolean
 }
 
 export interface State {
@@ -88,7 +89,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		enableAdv: true,
 		hideSliderInMobile: true,
 		muted: false,
-		autoplay: false
+		autoplay: false,
+		showSourceName: false
 	} as Props;
 
 	private player: HTMLVideoElement;
@@ -386,7 +388,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			srcIndex: index,
 			quality: false
 		} as State, () => {
-			this.setSource(true, curtime);
+			this.setSource(!this.state.paused, curtime);
 		});
 	};
 
@@ -399,11 +401,11 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 				this.player.src = src.source;
 
 				if (play) {
-					if (currentTime) {
-						this.player.currentTime = currentTime;
-					}
-
 					this.play();
+				}
+
+				if (currentTime) {
+					this.player.currentTime = currentTime;
 				}
 
 				break;
@@ -571,7 +573,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 					this.props.sources.map((source: Source, i: number) => {
 						return (
 							<div
-								className="src-one"
+								className={i===this.state.srcIndex ? "src-one active" : "src-one"}
 								onClick={this.handlerChangeQualityClick.bind(this, i)}
 								key={i}
 							>
@@ -602,6 +604,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 					hide={this.state.hideControls}
 					soundLevel={this.state.soundLevel}
 					fullscreenEnable={this.state.fullScreen}
+					showSourceName={this.props.showSourceName}
+					sourceName={this.props.sources[this.state.srcIndex].name}
 				/>
 			);
 		}
