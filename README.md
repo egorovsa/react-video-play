@@ -136,6 +136,7 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 + `autoplay` (boolean, default: false) - autoplay video after start
 + `muted` (boolean, default: false) - muted by default
 + `showSourceName` (boolean, default: false) - prefer source name to HQ icon
++ `ambiLight` (boolean, default: false) - switch on Philips ambilight
 
 
 ## For development

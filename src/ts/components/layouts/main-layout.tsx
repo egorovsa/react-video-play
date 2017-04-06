@@ -129,6 +129,8 @@ export class AppComponent extends React.Component<Props, State> {
 						sliderSlides={slides}
 						muted={true}
 						autoplay={true}
+						showSourceName={true}
+						ambiLight={true}
 					/>
 				</div>
 			</div>

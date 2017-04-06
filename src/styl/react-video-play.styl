@@ -8,8 +8,24 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 .ui-video-player-component
 	background-color #101010
 	position relative
-	overflow: hidden
 	min-width 304px
+
+	.ui-video-player-wrapper
+		position absolute
+		width 100%
+		height 100%
+		overflow hidden
+		left 0
+		top 0
+
+	.ambiLight
+		position absolute
+		width 100%
+		height 100%
+		-webkit-filter: blur(60px);
+		filter: blur(60px);
+		opacity: 0.75;
+		z-index: -1;
 
 	&:focus
 		outline 0
@@ -214,6 +230,23 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 					background-image: url('/img/fs.svg');
 					transform scale(0.8)
 
+			.hq-text
+				transition transform .3s ease
+				height: 100%;
+				float: right;
+				display: inline-block;
+				min-width: 40px;
+				position: relative;
+				z-index: 1;
+				cursor: pointer;
+				color: #fff;
+				font-weight: 100;
+				line-height: $controls-height
+				transform scale(0.8)
+
+				&:hover
+					transform scale(1)
+
 			.hq
 				height 100%
 				float right
@@ -309,7 +342,7 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 		width 80px
 		background rgba(#000, 0.7)
 		box-sizing border-box
-		padding 10px 15px
+		padding 10px 0
 		right 35px
 		bottom $controls-height + 10
 		position absolute
@@ -324,13 +357,16 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 		.src-one
 			color rgba(#fff, 0.8)
 			box-sizing border-box
-			padding 5px 0
+			padding 5px 15px
 			text-align center
 			font-size 12px
 			cursor pointer
 
 			&:hover
 				color rgba(#fff)
+
+			&.active
+				color: #4bbf76;
 
 
 
