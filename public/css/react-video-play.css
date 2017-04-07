@@ -261,6 +261,9 @@
   box-sizing: border-box;
   z-index: 15;
 }
+.ui-video-player-component .ui-video-player-controls.hide {
+  pointer-events: none;
+}
 .ui-video-player-component .ui-video-player-controls.hide .controllers-block {
   transform: translateY(50px);
   opacity: 0;
