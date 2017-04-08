@@ -29,7 +29,7 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 
 ## How to use
 
-```typescript
+```typescript jsx
 //JSX
     <ReactVideoPlay
         sources={src}
@@ -137,7 +137,7 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 + `muted` (boolean, default: false) - muted by default
 + `showSourceName` (boolean, default: false) - prefer source name to HQ icon
 + `ambiLight` (boolean, default: false) - switch on Philips ambilight
-
++ `loaderColor` (string, default: "#fff") - default loader color
 
 ## For development
 just use:

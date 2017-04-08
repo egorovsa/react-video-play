@@ -14,6 +14,7 @@ const buffer = require('vinyl-buffer');
 const stylus = require('gulp-stylus');
 const sourcemaps = require('gulp-sourcemaps');
 const plumber = require('gulp-plumber');
+const nib = require('nib');
 
 const expressPort = 3000;
 
@@ -50,7 +51,13 @@ function stylusCompile() {
 	return gulp.src('src/styl/style.styl')
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
-		.pipe(stylus())
+		.pipe(stylus(
+			{
+				use: [
+					nib()
+				]
+			}
+		))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('dist/css'))
 		.pipe(browserSync.stream());
@@ -123,7 +130,13 @@ gulp.task('styles', ['html'], function () {
 gulp.task('stylesProduction', function () {
 	return gulp.src('src/styl/react-video-play.styl')
 		.pipe(plumber())
-		.pipe(stylus())
+		.pipe(stylus(
+			{
+				use: [
+					nib()
+				]
+			}
+		))
 		.pipe(gulp.dest('public/css'));
 });
 

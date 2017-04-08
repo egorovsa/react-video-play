@@ -131,6 +131,7 @@ export class AppComponent extends React.Component<Props, State> {
 						autoplay={true}
 						showSourceName={true}
 						ambiLight={true}
+						loaderColor="#fff"
 					/>
 				</div>
 			</div>

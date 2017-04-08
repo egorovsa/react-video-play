@@ -35,6 +35,7 @@ export interface Props {
     muted?: boolean;
     showSourceName?: boolean;
     ambiLight?: boolean;
+    loaderColor?: string;
 }
 export interface State {
     containerWidth: number;
