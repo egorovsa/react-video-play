@@ -311,7 +311,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		}
 	}
 
-	private controlsHider(): void {
+	private controlsHider(timeout: number = 3000): void {
 		this.setState({
 			hideControls: false
 		} as State);
@@ -323,7 +323,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		if (!this.state.adv && this.state.fullScreen) {
 			this.hideControlsTimeoutId = setTimeout(() => {
 				this.handlerMouseLeave();
-			}, 3000);
+			}, timeout);
 		}
 	}
 
@@ -474,6 +474,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			this.setState({
 				hideControls: false
 			} as State);
+
+			this.controlsHider(6000)
 		}
 	};
 
@@ -515,6 +517,8 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 				quality: false
 			} as State);
 		} else {
+			clearTimeout(this.hideControlsTimeoutId);
+
 			this.setState({
 				quality: true
 			} as State);
