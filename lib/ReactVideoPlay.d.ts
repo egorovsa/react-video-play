@@ -76,7 +76,7 @@ export declare class ReactVideoPlay extends React.Component<Props, State> {
     private handlerMouseEnter;
     private handlerMouseLeave;
     private events();
-    private controlsHider();
+    private controlsHider(timeout?);
     private handlerSeekBarChange;
     private drawAdv();
     private drawSlider();
