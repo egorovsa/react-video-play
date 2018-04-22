@@ -2,6 +2,7 @@ import * as React from 'react';
 import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
 import {UIVideoSlider} from "./UIVideoSliderComponent";
 import {UIVideoLoader} from "./UIVideoLoaderComponent";
+
 const mobile = require('is-mobile');
 
 export interface VideoSliderSlide {
@@ -9,10 +10,10 @@ export interface VideoSliderSlide {
 	link: string;
 }
 
-export enum VideoSourceType{
-	video_mp4,
-	video_webm,
-	video_ogg
+export enum VideoSourceType {
+	video_mp4 = 'video/mp4',
+	video_webm = 'video/webm',
+	video_ogg = 'video/ogg'
 }
 
 export interface VideoSource {
@@ -104,12 +105,6 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	private interval: any = null;
 	private intervalAmbient: any = null;
 	private hideControlsTimeoutId: any = null;
-
-	private videoTypes: string[] = [
-		'video/mp4',
-		'video/webm',
-		'video/ogg'
-	];
 
 	componentDidMount() {
 		this.events();
@@ -418,7 +413,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	private setSource(play?: boolean, currentTime?: number): void {
 		for (let i = 0; i < this.props.sources[this.state.srcIndex].source.length; i++) {
 			let src: VideoSource = this.props.sources[this.state.srcIndex].source[i];
-			let type: string = this.getVideoTypeByEnum(src.type);
+			let type: string = src.type;
 
 			if (this.player.canPlayType(type)) {
 				this.player.src = src.source;
@@ -478,10 +473,6 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			this.controlsHider(6000)
 		}
 	};
-
-	private getVideoTypeByEnum(type: number) {
-		return this.videoTypes[type];
-	}
 
 	private onFullscreenChange = (e): void => {
 		let fullscreenElement =
@@ -694,7 +685,9 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 						}}
 						onClick={this.handlerVideoClick}
 						poster={this.props.poster}
-					/>
+					>
+						{this.props.children}
+					</video>
 				</div>
 			</div>
 		);

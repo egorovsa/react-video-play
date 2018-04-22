@@ -1,10 +1,7 @@
 import * as React from 'react';
-import {Source, ReactVideoPlay, VideoSourceType} from "../ui/ReactVideoPlay";
-import {UIVideoAdvTest} from "../ui/UIVideoAdvTestComponent";
-import {VideoSliderSlide} from "../ui/UIVideoSliderComponent";
-
-// const ReactVideoPlay = require('./../../../../index');
-// const VideoSourceType = require('./../../../../index').VideoSourceType;
+import {Source, ReactVideoPlay, VideoSourceType} from "./components/ReactVideoPlay";
+import {UIVideoAdvTest} from "./UIVideoAdvTestComponent";
+import {VideoSliderSlide} from "./components/UIVideoSliderComponent";
 
 export interface Props {
 
@@ -130,7 +127,7 @@ export class AppComponent extends React.Component<Props, State> {
 						muted={true}
 						autoplay={true}
 						showSourceName={true}
-						ambiLight={true}
+						ambiLight={false}
 						loaderColor="#fff"
 					/>
 				</div>
