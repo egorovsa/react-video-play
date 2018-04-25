@@ -2,9 +2,212 @@ $controls-height = 40px
 $track-height = 8px
 $controls-panel-bg = rgba(0, 0, 0, 0.7)
 
-@import "./ui-video-seek-slider.styl"
-@import "./ui-video-adv-slider.styl"
-@import "./ui-video-loader.styl"
+$track-height-default = 3px
+$progress-color = #ffffff
+$track-color = rgba(#ffffff, 0.2)
+$buffered-color = rgba(#fff, 0.3)
+$seek-hover = rgba(#fff, 0.5)
+
+.ui-video-seek-slider
+	position relative
+
+	&:focus
+		outline none
+
+	.track
+		padding 10px 0
+		cursor pointer
+		outline none
+
+		&:focus
+			border 0
+			outline none
+
+		.main
+			width 100%
+			height $track-height-default
+			background-color $track-color
+			border-radius 30px
+			position absolute
+			left 0
+			top 10 - ($track-height-default / 2)
+			overflow hidden
+			transition transform .4s
+			outline none
+
+			&:focus
+				border 0
+				outline none
+
+			.buffered
+				position absolute
+				background-color $buffered-color
+				width 100%
+				height 100%
+				transform scaleX(0)
+				z-index 2
+				transform-origin 0 0
+
+			.seek-hover
+				position absolute
+				background-color $seek-hover
+				width 100%
+				height 100%
+				z-index 1
+				transform scaleX(0)
+				transform-origin 0 0
+				opacity 0
+				transition opacity .4s
+
+			.connect
+				position absolute
+				background-color $progress-color
+				width 100%
+				height 100%
+				z-index 3
+				left 0
+				transform scaleX(0)
+				transform-origin 0 0
+
+		&.active
+			.main
+				transform scaleY(2)
+
+	.thumb
+		pointer-events none
+		position absolute
+		width 12px
+		height 12px
+		left -6px
+		top 4px
+		z-index 4
+		transform translateX(0px)
+
+		.handler
+			transition transform .2s
+			border-radius 100%
+			width 100%
+			height 100%
+			background-color $progress-color
+			opacity 0
+			transform scale(0.4)
+
+		&.active
+			.handler
+				opacity 1
+				transform scale(1)
+
+	.hover-time
+		//transition opacity 0.2s
+		position absolute
+		background-color rgba(#000, 0.3)
+		line-height 18px
+		font-size 16px
+		color #ddd
+		top -25px
+		left 0
+		padding 5px 10px
+		border-radius 5px
+		box-shadow 0 0 5px rgba(#000, 0.3)
+		opacity 0
+		transform translateX(150px)
+		pointer-events none
+
+		&.active
+			opacity 1
+
+	&:hover
+		.track
+			.main
+				.seek-hover
+					opacity 1
+
+.ui-video-adv-slider
+	position absolute
+	left 0
+	bottom 35px
+	overflow hidden
+	padding 10px
+	box-sizing border-box
+	z-index 10
+
+	&.hide
+		opacity 0
+		pointer-events none
+
+	.ui-video-adv-slider-wrapper
+		width 100%
+		height 100%
+		overflow hidden
+		margin 0 auto
+
+		.slides-container
+			width 2000px
+			overflow hidden
+
+			.ui-video-adv-slide
+				display inline-block
+				float left
+				margin-top 10px
+				margin-bottom 10px
+				box-sizing border-box
+
+				& > img
+					width 100%
+
+$width = 80px;
+
+.ui-video-loader
+	position absolute
+	left 50%
+	top 50%
+	margin-left -($width/ 2)
+	margin-top -($width/ 2)
+	width $width
+
+	&:before
+		content ''
+		display block
+		padding-top 100%
+
+	.ui-video-loader-circular
+		animation rotate 2s linear infinite
+		height 100%
+		transform-origin center center
+		width 100%
+		position absolute
+		top 0
+		bottom 0
+		left 0
+		right 0
+		margin auto
+
+	.ui-video-loader-path
+		stroke-dasharray 1, 200
+		stroke-dashoffset 0
+		animation dash 1.5s ease-in-out infinite
+		stroke-linecap round
+
+@keyframes rotate {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes dash {
+	0% {
+		stroke-dasharray: 1, 200;
+		stroke-dashoffset: 0;
+	}
+	50% {
+		stroke-dasharray: 89, 200;
+		stroke-dashoffset: -35px;
+	}
+	100% {
+		stroke-dasharray: 89, 200;
+		stroke-dashoffset: -124px;
+	}
+}
 
 .ui-video-player-component
 	background-color #101010
@@ -72,7 +275,7 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 			opacity .8
 
 			&.hide
-			//transform scale(.5)
+				//transform scale(.5)
 				cursor default
 				opacity 0
 
@@ -370,6 +573,3 @@ $controls-panel-bg = rgba(0, 0, 0, 0.7)
 
 			&.active
 				color: #4bbf76;
-
-
-

@@ -4,7 +4,10 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"dev": "webpack-dev-server"
+		"dev": "webpack-dev-server",
+		"stylus": "stylus --compress < ./src/styl/react-video-play.styl > ./public/css/react-video-play.css ",
+		"ts": "tsc ./src/ts/index.tsx -d --target ES5 --jsx react --outDir ./lib",
+		"production": "rm -rf ./lib && npm run ts && npm run stylus && cp ./lib/index.d.ts ./index.d.ts"
 	},
 	"devDependencies": {
 		"@types/node": "^9.6.6",

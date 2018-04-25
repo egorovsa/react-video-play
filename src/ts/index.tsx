@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {UIVideoControlsComponent} from "./UIVideoControlsComponent";
-import {UIVideoSlider} from "./UIVideoSliderComponent";
-import {UIVideoLoader} from "./UIVideoLoaderComponent";
+import {UIVideoSlider} from "./components/UIVideoSliderComponent";
+import {UIVideoLoader} from "./components/UIVideoLoaderComponent";
+import {UIVideoControlsComponent} from "./components/UIVideoControlsComponent";
+import Timer = NodeJS.Timer;
 
 const mobile = require('is-mobile');
 
@@ -400,13 +401,13 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	};
 
 	private handlerChangeQualityClick = (index: number): void => {
-		let curtime: number = this.player.currentTime;
+		let currentTime: number = this.player.currentTime;
 
 		this.setState({
 			srcIndex: index,
 			quality: false
 		} as State, () => {
-			this.setSource(!this.state.paused, curtime);
+			this.setSource(!this.state.paused, currentTime);
 		});
 	};
 
@@ -453,7 +454,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		this.setState({
 			paused: true,
 			hideControls: false
-		} as State)
+		} as State);
 
 		if (adv) {
 			this.setState({
@@ -474,7 +475,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		}
 	};
 
-	private onFullscreenChange = (e): void => {
+	private onFullscreenChange = (): void => {
 		let fullscreenElement =
 			document['fullscreenElement'] ||
 			document['mozFullscreenElement'] ||
@@ -593,7 +594,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 						return (
 							<div
 								className={i === this.state.srcIndex ? "src-one active" : "src-one"}
-								onClick={this.handlerChangeQualityClick.bind(this, i)}
+								onClick={() => this.handlerChangeQualityClick(i)}
 								key={i}
 							>
 								{source.name}

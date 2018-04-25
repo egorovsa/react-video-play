@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Source, ReactVideoPlay, VideoSourceType} from "./components/ReactVideoPlay";
+import {Source, ReactVideoPlay, VideoSourceType} from "./index";
 import {UIVideoAdvTest} from "./UIVideoAdvTestComponent";
 import {VideoSliderSlide} from "./components/UIVideoSliderComponent";
 
