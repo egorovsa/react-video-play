@@ -1,9 +1,6 @@
-//TODO uncomment if is-mobile module approwed pull-request with ts declarations
-// import {isMobile} from 'is-mobile';
-const isMobile = require('is-mobile');
-
 import * as React from 'react';
 import {VideoSeekSlider} from 'react-video-seek-slider';
+import {isMobile} from 'is-mobile';
 
 interface Time {
 	hh: string,

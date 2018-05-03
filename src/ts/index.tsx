@@ -1,11 +1,8 @@
-const isMobile = require('is-mobile');
-
-//TODO uncomment if is-mobile module approwed pull-request with ts declarations
-// import {isMobile} from 'is-mobile';
 import * as React from 'react';
 import {UIVideoSlider} from "./components/UIVideoSliderComponent";
 import {UIVideoLoader} from "./components/UIVideoLoaderComponent";
 import {UIVideoControlsComponent} from "./components/UIVideoControlsComponent";
+import {isMobile} from 'is-mobile';
 
 
 export interface VideoSliderSlide {
