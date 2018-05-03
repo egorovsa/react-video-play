@@ -1,10 +1,12 @@
+const isMobile = require('is-mobile');
+
+//TODO uncomment if is-mobile module approwed pull-request with ts declarations
+// import {isMobile} from 'is-mobile';
 import * as React from 'react';
 import {UIVideoSlider} from "./components/UIVideoSliderComponent";
 import {UIVideoLoader} from "./components/UIVideoLoaderComponent";
 import {UIVideoControlsComponent} from "./components/UIVideoControlsComponent";
-import Timer = NodeJS.Timer;
 
-const mobile = require('is-mobile');
 
 export interface VideoSliderSlide {
 	img: string;
@@ -225,7 +227,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	};
 
 	private handlerMouseMove = (): void => {
-		if (!mobile()) {
+		if (!isMobile()) {
 			this.controlsHider()
 		}
 	};
@@ -329,7 +331,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 		this.setState({
 			currentTime: value
 		} as State, () => {
-			if (mobile()) {
+			if (isMobile()) {
 				this.controlsHider();
 			}
 		});
@@ -346,7 +348,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	}
 
 	private drawSlider(): JSX.Element {
-		if (this.props.enableSlider && this.props.sliderSlides && !(mobile() && this.props.hideSliderInMobile)) {
+		if (this.props.enableSlider && this.props.sliderSlides && !(isMobile() && this.props.hideSliderInMobile)) {
 			return (
 				<UIVideoSlider show={this.state.adv} slides={this.props.sliderSlides}/>
 			)
@@ -363,7 +365,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			muted: false
 		} as State);
 
-		if (mobile()) {
+		if (isMobile()) {
 			this.controlsHider();
 		}
 	};
@@ -385,7 +387,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			} as State);
 		}
 
-		if (mobile()) {
+		if (isMobile()) {
 			this.controlsHider();
 		}
 	};
@@ -440,7 +442,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			adv: false,
 			paused: false
 		} as State, () => {
-			if (mobile()) {
+			if (isMobile()) {
 				this.controlsHider();
 			}
 		});
@@ -464,7 +466,7 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 	}
 
 	private handlerVideoClick = (): void => {
-		if (!mobile()) {
+		if (!isMobile()) {
 			this.handlerPlayStop();
 		} else {
 			this.setState({
@@ -490,9 +492,11 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 			fullScreen: !!(fullscreenEnabled && fullscreenElement)
 		} as State);
 
-		if (mobile()) {
+		if (isMobile()) {
 			this.controlsHider();
 		}
+
+		this.handlerWindowResize()
 	};
 
 	private handlerFullscreen = (): void => {
@@ -614,18 +618,18 @@ export class ReactVideoPlay extends React.Component<Props, State> {
 					mute={this.player ? this.state.muted : true}
 					duration={this.state.duration}
 					currentTime={this.state.currentTime}
-					handlerPlayStop={this.handlerPlayStop}
-					handlerChangeCurrentTime={this.handlerSeekBarChange}
-					handlerToggleSound={this.handlerSoundsToggler}
-					handlerChangeSoundLevel={this.handlerChangeSoundLevel}
-					handlerFullscreen={this.handlerFullscreen}
-					handlerQuality={this.handlerQuality}
 					progressEnd={this.state.progressEnd}
 					hide={this.state.hideControls}
 					soundLevel={this.state.soundLevel}
 					fullscreenEnable={this.state.fullScreen}
 					showSourceName={this.props.showSourceName}
 					sourceName={this.props.sources[this.state.srcIndex].name}
+					handlerPlayStop={this.handlerPlayStop}
+					handlerChangeCurrentTime={this.handlerSeekBarChange}
+					handlerToggleSound={this.handlerSoundsToggler}
+					handlerChangeSoundLevel={this.handlerChangeSoundLevel}
+					handlerFullscreen={this.handlerFullscreen}
+					handlerQuality={this.handlerQuality}
 				/>
 			);
 		}

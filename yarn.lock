@@ -6,9 +6,9 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@types/node@^9.6.6":
-  version "9.6.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.6.tgz#439b91f9caf3983cad2eef1e11f6bedcbf9431d2"
+"@types/node@^10.0.3":
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.3.tgz#1f89840c7aac2406cc43a2ecad98fc02a8e130e4"
 
 "@types/react@^16.3.12":
   version "16.3.12"
@@ -4610,9 +4610,9 @@ react-dom@^16.3.2:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-video-seek-slider@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-video-seek-slider/-/react-video-seek-slider-2.0.1.tgz#685330d8f9af510558f7b18db26f5f1e8495e8ac"
+react-video-seek-slider@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-video-seek-slider/-/react-video-seek-slider-2.1.1.tgz#cfc6c86e1b0a5d5a327968720495d529dd19343a"
   dependencies:
     react "^16.3.2"
     react-dom "^16.3.2"

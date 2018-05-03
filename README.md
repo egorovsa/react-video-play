@@ -2,7 +2,7 @@
 
 React video player for TypeScript and JavaScript like youtube
 
-![react-stores](https://github.com/egorovsa/react-video-play/blob/master/screenshot.png?raw=true)
+![react-video-play](https://github.com/egorovsa/react-video-play/blob/master/screenshot.png?raw=true)
 
 Demo [react-video-play](http://video.egorov.pw)
 
@@ -25,12 +25,18 @@ var ReactVideoPlay =  require('react-video-play');
 var VideoSourceType =  require('react-video-play').VideoSourceType;
 ```
 
-Also use css and images. There is a public folder in node_modules/react-video-play
-
 ## How to use
 
+### CSS
+
+Use css and images. There is a public folder in node_modules/react-video-play
+```
+node_modules/react-video-play/public/css/react-video-play.css
+```
+
+### TSX / JSX
+
 ```typescript jsx
-//JSX
     <ReactVideoPlay
         sources={src}
         poster="http://lorempixel.com/900/450/people/"
@@ -43,22 +49,22 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 ```
 
 ## Options
-+ `sources` (Source[], required) - video source
++ `sources` (Source[], required) - video source's interfaces for TypeScript implementations
 
 ```typescript
-    export interface Source {
+    interface Source {
     	name: string,
     	default?: boolean,
     	source: VideoSource[]
     }
 
-    export enum VideoSourceType{
+    enum VideoSourceType{
         video_mp4,
         video_webm,
         video_ogg
     }
 
-    export interface VideoSource {
+    interface VideoSource {
         source: string,
         type: VideoSourceType,
         codecs?: string
@@ -68,7 +74,10 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 #### Source example
 
 ```typescript
-    let src: Source[] = [
+    import {VideoSourceType} from 'react-video-play';
+    // or const VideoSourceType =  require('react-video-play').VideoSourceType;
+
+    let src = [
         {
             name: '1080p',
             source: [{
@@ -106,7 +115,7 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 + `sliderSlides` (VideoSliderSlide[], required if enableSlider installed true) - slides
 
 ```typescript
-    export interface VideoSliderSlide {
+    interface VideoSliderSlide {
     	img: string,
     	link: string
     }
@@ -142,11 +151,15 @@ Also use css and images. There is a public folder in node_modules/react-video-pl
 ## For development
 just use:
 
-+ $ yarn or $ npm i
-+ $ gulp
+```
+$ yarn or $ npm i
+$ npm run dev
+```
 
 open your browser http://localhost:3000
 
 ## For Build
 
-$ ./production
+`
+$ npm run production
+`

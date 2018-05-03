@@ -1,5 +1,4 @@
 import * as React from 'react';
-const mobile = require('is-mobile');
 
 export interface VideoSliderSlide {
 	img: string,

@@ -1,5 +1,8 @@
+//TODO uncomment if is-mobile module approwed pull-request with ts declarations
+// import {isMobile} from 'is-mobile';
+const isMobile = require('is-mobile');
+
 import * as React from 'react';
-const mobile = require('is-mobile');
 import {VideoSeekSlider} from 'react-video-seek-slider';
 
 interface Time {
@@ -85,6 +88,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 				currentTime={this.props.currentTime}
 				progress={this.props.progressEnd}
 				onChange={this.handlerChangeSeekBar}
+				limitTimeTooltipBySides={true}
 			/>
 		)
 	}
@@ -101,7 +105,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 	private drawSoundsIcon(): JSX.Element {
 		return (
 			<div
-				className={this.props.mute ? "sound-icon mute" : "sound-icon" }
+				className={this.props.mute ? "sound-icon mute" : "sound-icon"}
 				onClick={this.props.handlerToggleSound}
 			/>
 		)
@@ -109,9 +113,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 
 	private drawSoundSlider(): JSX.Element {
 		return (
-			<div
-				className={true ? "sound-slider" : "sound-slider" }
-			>
+			<div className={true ? "sound-slider" : "sound-slider"}>
 				<VideoSeekSlider
 					max={100}
 					currentTime={this.props.soundLevel}
@@ -124,7 +126,7 @@ export class UIVideoControlsComponent extends React.Component<Props, State> {
 	}
 
 	private drawTimes(): JSX.Element {
-		if (!mobile()) {
+		if (!isMobile()) {
 			return (
 				<div className="controls-time">
 					{this.secondsToTime(this.props.currentTime)} / {this.secondsToTime(this.props.duration)}

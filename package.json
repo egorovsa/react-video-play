@@ -1,16 +1,16 @@
 {
 	"name": "react-video-play",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
 		"dev": "webpack-dev-server",
 		"stylus": "stylus --compress < ./src/styl/react-video-play.styl > ./public/css/react-video-play.css ",
-		"ts": "tsc ./src/ts/index.tsx -d --target ES5 --jsx react --outDir ./lib",
+		"ts": "tsc ./src/ts/index.tsx -d --target ES5 --jsx react --lib es5,es6,dom --outDir ./lib",
 		"production": "rm -rf ./lib && npm run ts && npm run stylus && cp ./lib/index.d.ts ./index.d.ts"
 	},
 	"devDependencies": {
-		"@types/node": "^9.6.6",
+		"@types/node": "^10.0.3",
 		"@types/react": "^16.3.12",
 		"awesome-typescript-loader": "^5.0.0",
 		"copy-webpack-plugin": "^4.5.1",
@@ -28,7 +28,7 @@
 		"is-mobile": "^0.2.2",
 		"react": "^16.3.2",
 		"react-dom": "^16.3.2",
-		"react-video-seek-slider": "^2.0.1"
+		"react-video-seek-slider": "^2.1.1"
 	},
 	"repository": {
 		"type": "git",
